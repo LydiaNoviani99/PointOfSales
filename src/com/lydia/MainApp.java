@@ -8,7 +8,7 @@ package com.lydia;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -22,7 +22,7 @@ public class MainApp extends Application {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.
                 getResource("view/i_Login.fxml"));
-        AnchorPane pane = loader.load();
+        BorderPane pane = loader.load();
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Sistem Point Of Sales (POS)");

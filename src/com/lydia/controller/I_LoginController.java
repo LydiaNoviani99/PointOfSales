@@ -7,7 +7,6 @@ package com.lydia.controller;
 
 import com.lydia.MainApp;
 import com.lydia.dao.UserDaoImpl;
-import com.lydia.entity.Role;
 import com.lydia.entity.User;
 import java.io.IOException;
 import java.net.URL;
@@ -58,7 +57,7 @@ public class I_LoginController implements Initializable {
             alert.showAndWait();
 
             FXMLLoader loader = new FXMLLoader();
-            Role userRole = user.getUsername_access();
+//            Role userRole = user.getUsername_access();
 
             //Antara owner atau kasir
             loader.setLocation(MainApp.class.getResource("view/i_Login.fxml"));
@@ -83,7 +82,6 @@ public class I_LoginController implements Initializable {
         if (userDao == null) {
             userDao = new UserDaoImpl();
         }
-
         return getUserDao();
     }
 
