@@ -19,10 +19,11 @@ public class User {
     int no_Hp;
     String username_access;
     String password_access;
+    int Role_id_Role;
 
     public User(String kd_Pegawai, String nm_Pegawai, char jenis_kelamin,
             String alamat, String agama, int no_Hp, String username_access,
-            String password_access) {
+            String password_access, int Role_id_Role) {
         this.kd_Pegawai = kd_Pegawai;
         this.nm_Pegawai = nm_Pegawai;
         this.jenis_kelamin = jenis_kelamin;
@@ -31,6 +32,7 @@ public class User {
         this.no_Hp = no_Hp;
         this.username_access = username_access;
         this.password_access = password_access;
+        this.Role_id_Role = Role_id_Role;
     }
 
     public String getKd_Pegawai() {
@@ -95,6 +97,14 @@ public class User {
 
     public void setPassword_access(String password_access) {
         this.password_access = password_access;
+    }
+
+    public int getRole_id_Role() {
+        return Role_id_Role;
+    }
+
+    public void setRole_id_Role(int Role_id_Role) {
+        this.Role_id_Role = Role_id_Role;
     }
 
 }
