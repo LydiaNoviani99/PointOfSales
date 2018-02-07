@@ -19,7 +19,7 @@ import javafx.scene.layout.BorderPane;
 /**
  * FXML Controller class
  *
- * @author USER
+ * @author Lydia (1672014)
  */
 public class I_KaryawanController implements Initializable {
 

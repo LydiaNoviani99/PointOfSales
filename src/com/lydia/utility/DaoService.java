@@ -5,10 +5,23 @@
  */
 package com.lydia.utility;
 
+import java.util.List;
+
 /**
  *
- * @author USER
+ * @author Lydia (1672014)
+ * @param <E>
  */
-public interface DaoService {
+public interface DaoService<E> {
+
+    int addData(E object);
+
+    int deleteData(E object);
+
+    int updateData(E object);
+
+    List<E> showAllData();
+
+    E getData(E id);
 
 }

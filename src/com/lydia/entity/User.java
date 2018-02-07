@@ -7,13 +7,13 @@ package com.lydia.entity;
 
 /**
  *
- * @author USER
+ * @author Lydia (1672014)
  */
 public class User {
 
     String kd_Pegawai;
     String nm_Pegawai;
-    char jenis_kelamin;
+    String jenis_kelamin;
     String alamat;
     String agama;
     int no_Hp;
@@ -21,7 +21,7 @@ public class User {
     String password_access;
     int Role_id_Role;
 
-    public User(String kd_Pegawai, String nm_Pegawai, char jenis_kelamin,
+    public User(String kd_Pegawai, String nm_Pegawai, String jenis_kelamin,
             String alamat, String agama, int no_Hp, String username_access,
             String password_access, int Role_id_Role) {
         this.kd_Pegawai = kd_Pegawai;
@@ -33,6 +33,10 @@ public class User {
         this.username_access = username_access;
         this.password_access = password_access;
         this.Role_id_Role = Role_id_Role;
+    }
+
+    public User() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getKd_Pegawai() {
@@ -51,11 +55,11 @@ public class User {
         this.nm_Pegawai = nm_Pegawai;
     }
 
-    public char getJenis_kelamin() {
+    public String getJenis_kelamin() {
         return jenis_kelamin;
     }
 
-    public void setJenis_kelamin(char jenis_kelamin) {
+    public void setJenis_kelamin(String jenis_kelamin) {
         this.jenis_kelamin = jenis_kelamin;
     }
 

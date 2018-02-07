@@ -7,7 +7,7 @@ package com.lydia.entity;
 
 /**
  *
- * @author USER
+ * @author Lydia (1672014)
  */
 public class Role {
 

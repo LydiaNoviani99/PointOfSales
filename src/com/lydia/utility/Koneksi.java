@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author USER
+ * @author Lydia (1672014)
  */
 public class Koneksi {
 

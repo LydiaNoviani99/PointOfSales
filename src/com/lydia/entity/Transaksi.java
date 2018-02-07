@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  *
- * @author USER
+ * @author Lydia (1672014)
  */
 public class Transaksi {
 

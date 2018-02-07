@@ -7,11 +7,15 @@ package com.lydia.dao;
 
 import com.lydia.entity.Role;
 import com.lydia.utility.DaoService;
+import com.lydia.utility.Koneksi;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
  *
- * @author USER
+ * @author Lydia (1672014)
  */
 public class RoleDaoImpl implements DaoService<Role> {
 
@@ -22,7 +26,27 @@ public class RoleDaoImpl implements DaoService<Role> {
 
     @Override
     public int deleteData(Role object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int result = 0;
+        try {
+            try (Connection connection = Koneksi.createConnection()) {
+                connection.setAutoCommit(false);
+                String query
+                        = "INSERT INTO barang(id_Role, ket_Role) VALUES (?,?)";
+                PreparedStatement ps = connection.prepareStatement(query);
+                ps.setInt(1, object.getId_Role());
+                ps.setString(2, object.getKet_Role());
+
+                if (ps.executeUpdate() != 0) {
+                    connection.commit();
+                    result = 1;
+                } else {
+                    connection.rollback();
+                }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex);
+        }
+        return result;
     }
 
     @Override
@@ -32,6 +56,11 @@ public class RoleDaoImpl implements DaoService<Role> {
 
     @Override
     public List<Role> showAllData() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Role getData(Role id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
