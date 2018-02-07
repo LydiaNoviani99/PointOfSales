@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="775.0" style="-fx-background-color: #ffbdbd;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lydia.controller.I_KaryawanController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="775.0" style="-fx-background-color: #ffff99;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lydia.controller.I_KaryawanController">
    <center>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -20,6 +20,15 @@
               <rowConstraints>
                 <RowConstraints maxHeight="201.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="446.0" minHeight="10.0" prefHeight="435.0" vgrow="SOMETIMES" />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
               </rowConstraints>
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -51,7 +60,6 @@
                               <TableColumn prefWidth="27.0" text="Alamat" />
                               <TableColumn prefWidth="23.0" text="No_HP" />
                               <TableColumn prefWidth="19.0" text="Username" />
-                              <TableColumn prefWidth="19.0" text="Pasword" />
                               <TableColumn prefWidth="19.0" text="Divisi" />
                           </columns>
                            <columnResizePolicy>
@@ -226,6 +234,15 @@
                               </HBox>
                            </children>
                         </GridPane>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="47.0" prefWidth="284.0" GridPane.columnIndex="2">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#btnBackAction" text="Back">
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                        </Button>
                      </children>
                   </HBox>
                </children>

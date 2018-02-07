@@ -14,6 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
@@ -46,6 +47,8 @@ public class I_KaryawanController implements Initializable {
     private ComboBox<?> comboDivisi;
     @FXML
     private TextField txtPasswordAccess;
+    @FXML
+    private BorderPane borderPane;
 
     /**
      * Initializes the controller class.
@@ -69,6 +72,10 @@ public class I_KaryawanController implements Initializable {
 
     @FXML
     private void btnHapusUserAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnBackAction(ActionEvent event) {
     }
 
 }

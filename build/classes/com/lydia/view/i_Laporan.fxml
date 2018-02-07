@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="775.0" style="-fx-background-color: #ffbdbd;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="775.0" style="-fx-background-color: #ffbdbd;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lydia.view.I_LaporanController">
    <center>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -36,7 +36,7 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <ComboBox prefHeight="25.0" prefWidth="136.0" />
+                              <ComboBox fx:id="comboTahun" prefHeight="25.0" prefWidth="136.0" />
                            </children>
                         </HBox>
                      </children>
@@ -52,7 +52,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="5" GridPane.rowIndex="2">
                      <children>
-                        <TableView prefHeight="236.0" prefWidth="750.0">
+                        <TableView fx:id="tableLaporanPenjualan" prefHeight="236.0" prefWidth="750.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="Tgl" />
                             <TableColumn prefWidth="75.0" text="No_Transaksi" />
@@ -70,7 +70,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="5" GridPane.rowIndex="4">
                      <children>
-                        <TableView prefHeight="236.0" prefWidth="750.0">
+                        <TableView fx:id="tableLaporanPenjualanTertinggi" prefHeight="236.0" prefWidth="750.0">
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
@@ -103,7 +103,7 @@
    <bottom>
       <HBox prefHeight="30.0" prefWidth="775.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="42.0" prefWidth="781.0" text="2018 @Copyright Lydia Noviani Kusumo - 1672014" />
+            <Label alignment="CENTER" prefHeight="42.0" prefWidth="780.0" text="2018 @Copyright Lydia Noviani Kusumo - 1672014" />
          </children>
       </HBox>
    </bottom>

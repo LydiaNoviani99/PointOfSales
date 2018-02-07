@@ -9,7 +9,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lydia.controller.I_HomeController">
    <center>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -26,7 +25,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="263.0" fitWidth="232.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imgLogo" fitHeight="263.0" fitWidth="232.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../assets/cart.png" />
                            </image>
@@ -60,49 +59,44 @@
       </HBox>
    </center>
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
+      <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu fx:id="menuFile" mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Tampilan Awal" />
-                  <MenuItem mnemonicParsing="false" text="Log Out" />
-                  <MenuItem mnemonicParsing="false" text="Exit" />
+                  <MenuItem fx:id="menuLogout" mnemonicParsing="false" text="Log Out" />
+                  <MenuItem fx:id="menuExit" mnemonicParsing="false" text="Exit" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Data Barang">
+          <Menu fx:id="menuDataBarang" mnemonicParsing="false" text="Data Barang">
             <items>
-              <MenuItem mnemonicParsing="false" text="Kelola Data Barang" />
-                  <MenuItem mnemonicParsing="false" text="Cetak" />
+              <MenuItem fx:id="menuKelolaDataBarang" mnemonicParsing="false" text="Kelola Data Barang" />
+                  <MenuItem fx:id="menuCetakBarang" mnemonicParsing="false" text="Cetak" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Data Pegawai">
+          <Menu fx:id="menuDataUser" mnemonicParsing="false" text="Data User">
             <items>
-              <MenuItem mnemonicParsing="false" text="Kelola Data Pegawai" />
-                  <MenuItem mnemonicParsing="false" text="Cetak" />
+              <MenuItem fx:id="menuKelolaDataUser" mnemonicParsing="false" text="Kelola Data Pegawai" />
+                  <MenuItem fx:id="menuCetakUser" mnemonicParsing="false" text="Cetak" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Transaksi">
+            <Menu fx:id="menuTransaksi" mnemonicParsing="false" text="Transaksi">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Kelola Data Transaksi" />
-                  <MenuItem mnemonicParsing="false" text="Cetak" />
+                  <MenuItem fx:id="menuKelolaDataTransaksi" mnemonicParsing="false" text="Kelola Data Transaksi" />
+                  <MenuItem fx:id="menuCetakTransaksi" mnemonicParsing="false" text="Cetak" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Laporan">
+            <Menu fx:id="menuLaporan" mnemonicParsing="false" text="Laporan">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Laporan Penjualan" />
+                  <MenuItem fx:id="menuLaporanPenjualan" mnemonicParsing="false" text="Laporan Penjualan" />
                </items>
             </Menu>
         </menus>
       </MenuBar>
    </top>
    <bottom>
-      <HBox prefHeight="35.0" prefWidth="775.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="35.0" prefWidth="780.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="35.0" prefWidth="779.0">
-               <children>
-                  <Label text="2018 @Copyright Lydia Noviani Kusumo - 1672014" />
-               </children>
-            </HBox>
+            <Label text="2018 @Copyright Lydia Noviani Kusumo - 1672014" />
          </children>
       </HBox>
    </bottom>

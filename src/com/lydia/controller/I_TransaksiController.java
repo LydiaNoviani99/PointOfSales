@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
@@ -42,6 +43,8 @@ public class I_TransaksiController implements Initializable {
     private TextField txtBayar;
     @FXML
     private TextField txtTotalBelanja;
+    @FXML
+    private BorderPane borderPane;
 
     /**
      * Initializes the controller class.
@@ -61,6 +64,10 @@ public class I_TransaksiController implements Initializable {
 
     @FXML
     private void btnCariTransaksiAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnBackAction(ActionEvent event) {
     }
 
 }

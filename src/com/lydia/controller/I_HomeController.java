@@ -13,6 +13,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
@@ -53,6 +54,8 @@ public class I_HomeController implements Initializable {
     private MenuItem menuLaporanPenjualan;
     @FXML
     private ImageView imgLogo;
+    @FXML
+    private BorderPane borderPane;
 
     /**
      * Initializes the controller class.

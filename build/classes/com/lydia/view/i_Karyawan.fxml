@@ -26,7 +26,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="47.0" prefWidth="286.0">
                            <children>
-                              <TextField prefHeight="25.0" prefWidth="297.0" />
+                              <TextField fx:id="txtCariUser" prefHeight="25.0" prefWidth="297.0" />
                            </children>
                         </HBox>
                      </children>
@@ -35,14 +35,14 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="230.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Cari" />
+                              <Button mnemonicParsing="false" onAction="#btnCariUserAction" prefHeight="25.0" prefWidth="89.0" text="Cari" />
                            </children>
                         </HBox>
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="10">
                      <children>
-                        <TableView prefHeight="336.0" prefWidth="551.0">
+                        <TableView fx:id="tableUser" prefHeight="336.0" prefWidth="551.0">
                           <columns>
                             <TableColumn prefWidth="13.0" text="Kd_Pegawai" />
                             <TableColumn prefWidth="33.0" text="Nm_Pegawai" />
@@ -85,22 +85,22 @@
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Label text="Kode Barang" />
+                                    <Label text="Kode Pegawai" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                  <children>
-                                    <TextField prefHeight="25.0" prefWidth="250.0" />
+                                    <TextField fx:id="txtKodePegawai" prefHeight="25.0" prefWidth="250.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
-                                    <Label text="Nama Barang" />
+                                    <Label text="Nama Pegawai" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <TextField prefHeight="25.0" prefWidth="250.0" />
+                                    <TextField fx:id="txtNamaPegawai" prefHeight="25.0" prefWidth="250.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -121,12 +121,12 @@
                                        <children>
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <RadioButton mnemonicParsing="false" text="Perempuan" />
+                                                <RadioButton fx:id="radioPerempuan" mnemonicParsing="false" text="Perempuan" />
                                              </children>
                                           </HBox>
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                              <children>
-                                                <RadioButton mnemonicParsing="false" text="Laki-Laki" />
+                                                <RadioButton fx:id="radioLakiLaki" mnemonicParsing="false" text="Laki-Laki" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -140,7 +140,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
-                                    <TextField prefHeight="25.0" prefWidth="250.0" />
+                                    <TextField fx:id="txtAgama" prefHeight="25.0" prefWidth="250.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
@@ -150,7 +150,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                  <children>
-                                    <TextField prefHeight="25.0" prefWidth="250.0" />
+                                    <TextField fx:id="txtAlamat" prefHeight="25.0" prefWidth="250.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
@@ -160,7 +160,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <children>
-                                    <TextField prefHeight="25.0" prefWidth="250.0" />
+                                    <TextField fx:id="txtNoHp" prefHeight="25.0" prefWidth="250.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
@@ -170,7 +170,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                  <children>
-                                    <TextField prefHeight="25.0" prefWidth="250.0" />
+                                    <TextField fx:id="txtUsernameAccess" prefHeight="25.0" prefWidth="250.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="8">
@@ -180,7 +180,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
                                  <children>
-                                    <ComboBox prefWidth="250.0" />
+                                    <ComboBox fx:id="comboDivisi" prefWidth="250.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
@@ -190,7 +190,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                  <children>
-                                    <TextField prefHeight="25.0" prefWidth="250.0" />
+                                    <TextField fx:id="txtPasswordAccess" prefHeight="25.0" prefWidth="250.0" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
@@ -207,17 +207,17 @@
                                        <children>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Simpan" />
+                                                <Button mnemonicParsing="false" onAction="#btnSimpanUserAcction" prefHeight="25.0" prefWidth="65.0" text="Simpan" />
                                              </children>
                                           </HBox>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                              <children>
-                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Ubah" />
+                                                <Button mnemonicParsing="false" onAction="#btnUbahUserAction" prefHeight="25.0" prefWidth="65.0" text="Ubah" />
                                              </children>
                                           </HBox>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
                                              <children>
-                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Hapus" />
+                                                <Button mnemonicParsing="false" onAction="#btnHapusUserAction" prefHeight="25.0" prefWidth="65.0" text="Hapus" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -234,9 +234,9 @@
       </HBox>
    </center>
    <bottom>
-      <HBox prefHeight="30.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="30.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="45.0" prefWidth="610.0" text="2018 @Copyright Lydia Noviani Kusumo - 1672014" />
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="780.0" text="2018 @Copyright Lydia Noviani Kusumo - 1672014" />
          </children>
       </HBox>
    </bottom>

@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
@@ -24,6 +25,8 @@ public class I_LoginController implements Initializable {
     private TextField txtUsername;
     @FXML
     private PasswordField txtPassword;
+    @FXML
+    private BorderPane borderPane;
 
     /**
      * Initializes the controller class.
@@ -35,6 +38,7 @@ public class I_LoginController implements Initializable {
 
     @FXML
     private void btnLoginAction(ActionEvent event) {
+
     }
 
 }

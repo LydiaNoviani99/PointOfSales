@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
@@ -37,6 +38,8 @@ public class I_BarangController implements Initializable {
     private TextField txtHargaJual;
     @FXML
     private ComboBox<?> comboKategoriBarang;
+    @FXML
+    private BorderPane borderPane;
 
     /**
      * Initializes the controller class.
@@ -60,6 +63,10 @@ public class I_BarangController implements Initializable {
 
     @FXML
     private void btnHapusBarangAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnBackAction(ActionEvent event) {
     }
 
 }
