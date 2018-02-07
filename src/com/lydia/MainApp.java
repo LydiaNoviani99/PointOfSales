@@ -21,7 +21,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.
-                getResource("view/interface_Login.fxml"));
+                getResource("view/i_Login.fxml"));
         AnchorPane pane = loader.load();
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
