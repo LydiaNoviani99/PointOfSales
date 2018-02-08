@@ -51,7 +51,12 @@ public class I_LoginController implements Initializable {
         User user = new User();
         user.setUsername_access(txtUsername.getText());
         user.setPassword_access(txtPassword.getText());
-        if (getUserDao().getData(user) != null) {
+        if (txtUsername.getText().trim().isEmpty() || txtPassword.getText().
+                trim().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Please fill all field");
+            alert.showAndWait();
+        } else if (getUserDao().getData(user) != null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Login berhasil");
             alert.showAndWait();
@@ -82,7 +87,7 @@ public class I_LoginController implements Initializable {
         if (userDao == null) {
             userDao = new UserDaoImpl();
         }
-        return getUserDao();
+        return userDao;
     }
 
     private ObservableList<User> users;
