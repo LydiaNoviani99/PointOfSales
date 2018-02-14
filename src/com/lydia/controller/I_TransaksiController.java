@@ -24,8 +24,6 @@ public class I_TransaksiController implements Initializable {
     @FXML
     private TableView<?> tableTransaksi;
     @FXML
-    private TextField txtCariTransaksi;
-    @FXML
     private TextField txtTglTransaksi;
     @FXML
     private TextField txtNoTransaksi;
@@ -45,6 +43,8 @@ public class I_TransaksiController implements Initializable {
     private TextField txtTotalBelanja;
     @FXML
     private BorderPane borderPane;
+    @FXML
+    private TextField txtNamaKasir;
 
     /**
      * Initializes the controller class.
@@ -60,10 +60,6 @@ public class I_TransaksiController implements Initializable {
 
     @FXML
     private void btnHapusTransaksiAction(ActionEvent event) {
-    }
-
-    @FXML
-    private void btnCariTransaksiAction(ActionEvent event) {
     }
 
     @FXML

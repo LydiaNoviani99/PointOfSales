@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,20 +23,15 @@ public class RoleDaoImpl implements DaoService<Role> {
 
     @Override
     public int addData(Role object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int deleteData(Role object) {
         int result = 0;
         try {
             try (Connection connection = Koneksi.createConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "INSERT INTO barang(id_Role, ket_Role) VALUES (?,?)";
+                        = "INSERT INTO role(id_Role, ket_Role) VALUES (?,?)";
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setInt(1, object.getId_Role());
-                ps.setString(2, object.getKet_Role());
+                ps.setString(2, object.getKet_String());
 
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
@@ -42,11 +39,19 @@ public class RoleDaoImpl implements DaoService<Role> {
                 } else {
                     connection.rollback();
                 }
+            } catch (SQLException ex) {
+                Logger.getLogger(RoleDaoImpl.class.getName()).
+                        log(Level.SEVERE, null, ex);
             }
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         }
         return result;
+    }
+
+    @Override
+    public int deleteData(Role object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

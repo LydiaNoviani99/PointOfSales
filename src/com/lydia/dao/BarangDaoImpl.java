@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,14 +28,13 @@ public class BarangDaoImpl implements DaoService<Barang> {
             try (Connection connection = Koneksi.createConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "INSERT INTO barang(kd_Barang, nm_Barang, jml, hrg_Beli, hrg_Jual, kategori) VALUES (?,?,?,?,?,?)";
+                        = "INSERT INTO barang(kd_Barang, nm_Barang, hrg_Beli, hrg_Jual, kategori_id_Kategori) VALUES (?,?,?,?,?)";
                 PreparedStatement ps = connection.prepareStatement(query);
-                ps.setString(1, object.getKd_Barang());
+                ps.setInt(1, object.getKd_Barang());
                 ps.setString(2, object.getNm_Barang());
-                ps.setInt(2, object.getJml());
                 ps.setDouble(3, object.getHrg_Beli());
                 ps.setDouble(4, object.getHrg_Jual());
-                ps.setString(5, object.getKategori());
+                ps.setInt(5, object.getKategori_id_Kategori());
 
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
@@ -41,8 +42,11 @@ public class BarangDaoImpl implements DaoService<Barang> {
                 } else {
                     connection.rollback();
                 }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(BarangDaoImpl.class.getName()).
+                        log(Level.SEVERE, null, ex);
             }
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println(ex);
         }
         return result;
@@ -50,12 +54,6 @@ public class BarangDaoImpl implements DaoService<Barang> {
 
     @Override
     public int deleteData(Barang object) {
-//        int result = 0;
-//        try{
-//            try(Connection connection = Koneksi.createConnection()){
-//                connection.setAutoCommit(false);
-//                String query = "DELETE FROM barang WHERE kd_Barang=?";
-//
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

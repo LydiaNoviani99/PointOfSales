@@ -9,10 +9,12 @@ import com.lydia.entity.Transaksi;
 import com.lydia.utility.DaoService;
 import com.lydia.utility.Koneksi;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,21 +24,18 @@ public class TransaksiDaoImpl implements DaoService<Transaksi> {
 
     @Override
     public int addData(Transaksi object) {
+        Timestamp t = new Timestamp(System.currentTimeMillis());
         int result = 0;
         try {
             try (Connection connection = Koneksi.createConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "INSERT INTO barang(no_Transaksi, tgl_Transaksi, kd_Barang, nm_Barang, jml, harga_satuan, total, User_kd_Pegawai) VALUES (?,?,?,?,?,?,?,?)";
+                        = "INSERT INTO transaksi(id_Transaksi, tgl_Transaksi, user_kd_Pegawai) VALUES (?,?,?)";
+
                 PreparedStatement ps = connection.prepareStatement(query);
-                ps.setInt(1, object.getNo_Transaksi());
-                ps.setDate(2, (Date) object.getTgl_TransaksiDate());
-                ps.setString(3, object.getKd_Barang());
-                ps.setString(4, object.getNm_Barang());
-                ps.setInt(5, object.getJml());
-                ps.setDouble(6, object.getHarga_satuan());
-                ps.setDouble(7, object.getTotal());
-                ps.setString(8, object.getUser_kd_Pegawai());
+                ps.setInt(1, object.getId_Transaksi());
+                ps.setTimestamp(2, t);
+                ps.setInt(3, object.getUser_kd_Pegawai());
 
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
@@ -44,8 +43,11 @@ public class TransaksiDaoImpl implements DaoService<Transaksi> {
                 } else {
                     connection.rollback();
                 }
+            } catch (SQLException ex) {
+                Logger.getLogger(TransaksiDaoImpl.class.getName()).
+                        log(Level.SEVERE, null, ex);
             }
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         }
         return result;

@@ -22,6 +22,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -37,6 +38,19 @@ public class I_LoginController implements Initializable {
     private PasswordField txtPassword;
     @FXML
     private BorderPane bpLogin;
+    private Stage i_homeController;
+    private I_HomeController i_HomeController;
+
+    public I_HomeController getI_HomeController() {
+        if (i_HomeController == null) {
+            i_HomeController = new I_HomeController();
+        }
+        return i_HomeController;
+    }
+
+    public void setI_HomeController(I_HomeController i_HomeController) {
+        this.i_HomeController = i_HomeController;
+    }
 
     /**
      * Initializes the controller class.
@@ -60,21 +74,32 @@ public class I_LoginController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Login berhasil");
             alert.showAndWait();
-
-            FXMLLoader loader = new FXMLLoader();
-//            Role userRole = user.getUsername_access();
-
-            //Antara owner atau kasir
-            loader.setLocation(MainApp.class.getResource("view/i_Login.fxml"));
-            BorderPane pane = loader.load();
-            Scene scene = new Scene(pane);
-            Stage secondStage = new Stage();
-            secondStage.setScene(scene);
-            secondStage.setTitle("Main Form");
-            secondStage.show();
-
+            try {
+                if (i_homeController == null) {
+                    i_homeController = new Stage();
+                    i_homeController.setTitle("Home Controller");
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(MainApp.class.getResource(
+                            "view/i_Home.fxml"));
+                    BorderPane root = loader.load();
+                    Scene scene = new Scene(root);
+                    I_HomeController i_HomeController = loader.
+                            getController();
+                    i_HomeController.setLoginController(this);
+                    i_homeController.setScene(scene);
+                    i_homeController.initOwner(bpLogin.getScene().getWindow());
+                    i_homeController.initModality(Modality.WINDOW_MODAL);
+                }
+                if (!i_homeController.isShowing()) {
+                    i_homeController.show();
+                } else {
+                    i_homeController.toFront();
+                }
+            } catch (Exception e) {
+                System.out.println(e.toString());
+            }
             //Close login stage
-            bpLogin.getScene().getWindow().hide();
+            //bpLogin.getScene().getWindow().hide();
 
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

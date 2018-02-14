@@ -5,32 +5,37 @@
  */
 package com.lydia.dao;
 
-import com.lydia.entity.Transaksi_has_Barang;
+import com.lydia.entity.Detail_transaksi;
 import com.lydia.utility.DaoService;
 import com.lydia.utility.Koneksi;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Lydia (1672014)
  */
-public class Transaksi_has_BarangDaoImpl implements
-        DaoService<Transaksi_has_Barang> {
+public class Detail_transaksiDaoImpl implements
+        DaoService<Detail_transaksi> {
 
     @Override
-    public int addData(Transaksi_has_Barang object) {
+    public int addData(Detail_transaksi object) {
         int result = 0;
         try {
             try (Connection connection = Koneksi.createConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "INSERT INTO barang(Transaksi_no_Transaksi,Barang_kd_Barang) VALUES (?,?)";
+                        = "INSERT INTO detail_transaksi(transaksi_id_Transaksi,barang_kd_Barang,jml,saling_price) VALUES (?,?,?,?)";
+
                 PreparedStatement ps = connection.prepareStatement(query);
-                ps.setInt(1, object.getTransaksi_no_Transaksi());
-                ps.setString(2, object.getBarang_kd_Barang());
+                ps.setInt(1, object.getTransaksi_id_Transaksi());
+                ps.setInt(2, object.getBarang_kd_Barang());
+                ps.setInt(3, object.getJml());
+                ps.setDouble(4, object.getSaling_price());
 
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
@@ -38,30 +43,33 @@ public class Transaksi_has_BarangDaoImpl implements
                 } else {
                     connection.rollback();
                 }
+            } catch (SQLException ex) {
+                Logger.getLogger(Detail_transaksiDaoImpl.class.getName()).
+                        log(Level.SEVERE, null, ex);
             }
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         }
         return result;
     }
 
     @Override
-    public int deleteData(Transaksi_has_Barang object) {
+    public int deleteData(Detail_transaksi object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int updateData(Transaksi_has_Barang object) {
+    public int updateData(Detail_transaksi object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Transaksi_has_Barang> showAllData() {
+    public List<Detail_transaksi> showAllData() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Transaksi_has_Barang getData(Transaksi_has_Barang id) {
+    public Detail_transaksi getData(Detail_transaksi id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
