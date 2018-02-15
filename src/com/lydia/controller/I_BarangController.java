@@ -39,7 +39,7 @@ public class I_BarangController implements Initializable {
     @FXML
     private ComboBox<?> comboKategoriBarang;
     @FXML
-    private BorderPane borderPane;
+    private BorderPane bpBarang;
 
     /**
      * Initializes the controller class.

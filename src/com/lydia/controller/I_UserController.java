@@ -7,6 +7,7 @@ package com.lydia.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -18,12 +19,10 @@ import javafx.scene.layout.BorderPane;
 /**
  * FXML Controller class
  *
- * @author USER
+ * @author Lydia (1672014)
  */
-public class I_KaryawanController implements Initializable {
+public class I_UserController implements Initializable {
 
-    @FXML
-    private BorderPane bpUser;
     @FXML
     private TextField txtCariUser;
     @FXML
@@ -48,6 +47,8 @@ public class I_KaryawanController implements Initializable {
     private ComboBox<?> comboDivisi;
     @FXML
     private TextField txtPasswordAccess;
+    @FXML
+    private BorderPane bpUser;
 
     /**
      * Initializes the controller class.
@@ -55,6 +56,30 @@ public class I_KaryawanController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+    }
+
+    @FXML
+    private void btnCariUserAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnSimpanUserAcction(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnUbahUserAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnHapusUserAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnBackAction(ActionEvent event) {
+    }
+
+    void setHomeController(I_HomeController aThis) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

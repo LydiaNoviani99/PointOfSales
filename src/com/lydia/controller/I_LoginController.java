@@ -22,7 +22,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -38,7 +37,7 @@ public class I_LoginController implements Initializable {
     private PasswordField txtPassword;
     @FXML
     private BorderPane bpLogin;
-    private Stage i_homeController;
+    private Stage i_HomeStage;
     private I_HomeController i_HomeController;
 
     public I_HomeController getI_HomeController() {
@@ -50,6 +49,30 @@ public class I_LoginController implements Initializable {
 
     public void setI_HomeController(I_HomeController i_HomeController) {
         this.i_HomeController = i_HomeController;
+    }
+
+    public UserDaoImpl getUserDao() {
+        if (userDao == null) {
+            userDao = new UserDaoImpl();
+        }
+        return userDao;
+    }
+
+    private ObservableList<User> users;
+
+    public ObservableList<User> getUser() {
+        if (users == null) {
+            users = FXCollections.observableArrayList();
+            users.addAll(getUserDao().showAllData());
+        }
+        return users;
+    }
+    private UserDaoImpl userDao;
+
+    private User selectedUser;
+
+    public User getSelectedUser() {
+        return selectedUser;
     }
 
     /**
@@ -71,13 +94,21 @@ public class I_LoginController implements Initializable {
             alert.setContentText("Please fill all field");
             alert.showAndWait();
         } else if (getUserDao().getData(user) != null) {
+
+            selectedUser = getUserDao().getData(user);
+//            Role r = new Role();
+//            selectedUser.setUsername_access(txtUsername.getText().trim());
+//            selectedUser.setPassword_access(txtPassword.getText().trim());
+//            r.setId_Role(user.getRole_id_Role());
+//            selectedUser.setRole_id_Role(r.getId_Role());
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Login berhasil");
             alert.showAndWait();
             try {
-                if (i_homeController == null) {
-                    i_homeController = new Stage();
-                    i_homeController.setTitle("Home Controller");
+                if (i_HomeStage == null) {
+                    i_HomeStage = new Stage();
+                    i_HomeStage.setTitle("Home Controller");
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(MainApp.class.getResource(
                             "view/i_Home.fxml"));
@@ -86,20 +117,23 @@ public class I_LoginController implements Initializable {
                     I_HomeController i_HomeController = loader.
                             getController();
                     i_HomeController.setLoginController(this);
-                    i_homeController.setScene(scene);
-                    i_homeController.initOwner(bpLogin.getScene().getWindow());
-                    i_homeController.initModality(Modality.WINDOW_MODAL);
+//                    I_HomeController.setListUserController(this);
+                    i_HomeStage.setScene(scene);
+//                    i_homeController.initOwner(bpLogin.getScene().getWindow());
+//                    i_homeController.initModality(Modality.WINDOW_MODAL);
                 }
-                if (!i_homeController.isShowing()) {
-                    i_homeController.show();
+                if (!i_HomeStage.isShowing()) {
+                    i_HomeStage.show();
                 } else {
-                    i_homeController.toFront();
+                    i_HomeStage.toFront();
                 }
-            } catch (Exception e) {
-                System.out.println(e.toString());
+            } catch (IOException e) {
+//                Logger.getLogger(I_LoginController.class.getName()).log(
+//                        Level.SEVERE, e.getMessage());
+                e.printStackTrace();
             }
             //Close login stage
-            //bpLogin.getScene().getWindow().hide();
+            bpLogin.getScene().getWindow().hide();
 
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -107,22 +141,4 @@ public class I_LoginController implements Initializable {
             alert.showAndWait();
         }
     }
-
-    public UserDaoImpl getUserDao() {
-        if (userDao == null) {
-            userDao = new UserDaoImpl();
-        }
-        return userDao;
-    }
-
-    private ObservableList<User> users;
-
-    public ObservableList<User> getUser() {
-        if (users == null) {
-            users = FXCollections.observableArrayList();
-            users.addAll(getUserDao().showAllData());
-        }
-        return users;
-    }
-    private UserDaoImpl userDao;
 }

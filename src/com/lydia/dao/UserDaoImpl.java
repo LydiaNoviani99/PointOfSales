@@ -5,6 +5,7 @@
  */
 package com.lydia.dao;
 
+import com.lydia.entity.Role;
 import com.lydia.entity.User;
 import com.lydia.utility.DaoService;
 import com.lydia.utility.Koneksi;
@@ -41,7 +42,7 @@ public class UserDaoImpl implements DaoService<User> {
                 ps.setString(6, object.getNo_Hp());
                 ps.setString(7, object.getUsername_access());
                 ps.setString(8, object.getPassword_access());
-                ps.setInt(9, object.getRole_id_Role());
+                ps.setInt(9, object.getRoleProperty().getId_Role());
 
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
@@ -77,7 +78,7 @@ public class UserDaoImpl implements DaoService<User> {
     @Override
     public User getData(User id) {
         try (Connection connection = Koneksi.createConnection()) {
-            connection.setAutoCommit(false);
+
             String query
                     = "SELECT u.username_access, u.password_access, u.role_id_Role FROM user u join role r on u.role_id_Role = r.id_Role WHERE u.username_access = ? AND u.password_access = ?";
             PreparedStatement ps = connection.prepareStatement(query);
@@ -90,7 +91,9 @@ public class UserDaoImpl implements DaoService<User> {
 
                 user.setPassword_access(rs.getString("u.password_access"));
 //                    user.setRole_id_Role(rs.get);
-
+                Role role = new Role();
+                role.setId_Role(rs.getInt("role_id_Role"));
+                user.setRoleProperty(role);
                 return user;
             }
         } catch (ClassNotFoundException | SQLException ex) {

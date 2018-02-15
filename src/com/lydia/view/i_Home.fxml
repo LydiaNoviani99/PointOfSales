@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lydia.controller.I_HomeController">
+<BorderPane fx:id="bpHome" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lydia.controller.I_HomeController">
    <center>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -61,33 +61,38 @@
    <top>
       <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
         <menus>
-          <Menu fx:id="menuFile" mnemonicParsing="false" text="File">
+          <Menu fx:id="menuFile" mnemonicParsing="false" onAction="#menuFileOnAction" text="File">
             <items>
-                  <MenuItem fx:id="menuLogout" mnemonicParsing="false" text="Log Out" />
-                  <MenuItem fx:id="menuExit" mnemonicParsing="false" text="Exit" />
+                  <MenuItem fx:id="menuLogout" mnemonicParsing="false" onAction="#menuLogoutOnAction" text="Log Out" />
+                  <MenuItem fx:id="menuExit" mnemonicParsing="false" onAction="#menuExitOnAction" text="Exit" />
             </items>
           </Menu>
-          <Menu fx:id="menuDataBarang" mnemonicParsing="false" text="Data Barang">
+          <Menu fx:id="menuDataBarang" mnemonicParsing="false" onAction="#menuDataBarangOnAction" text="Data Barang">
             <items>
-              <MenuItem fx:id="menuKelolaDataBarang" mnemonicParsing="false" text="Kelola Data Barang" />
-                  <MenuItem fx:id="menuCetakBarang" mnemonicParsing="false" text="Cetak" />
+              <MenuItem fx:id="menuKelolaDataBarang" mnemonicParsing="false" onAction="#menuKelolaDataBarangOnAction" text="Kelola Data Barang" />
+                  <MenuItem fx:id="menuCetakBarang" mnemonicParsing="false" onAction="#menuCetakBarangOnAction" text="Cetak" />
             </items>
           </Menu>
-          <Menu fx:id="menuDataUser" mnemonicParsing="false" text="Data User">
+          <Menu fx:id="menuDataUser" mnemonicParsing="false" onAction="#menuDataUserOnAction" text="Data User">
             <items>
-              <MenuItem fx:id="menuKelolaDataUser" mnemonicParsing="false" text="Kelola Data Pegawai" />
-                  <MenuItem fx:id="menuCetakUser" mnemonicParsing="false" text="Cetak" />
+              <MenuItem fx:id="menuKelolaDataUser" mnemonicParsing="false" onAction="#menuKelolaDataUserOnAction" text="Kelola Data Pegawai" />
+                  <MenuItem fx:id="menuCetakUser" mnemonicParsing="false" onAction="#menuCetakUserOnAction" text="Cetak" />
             </items>
           </Menu>
-            <Menu fx:id="menuTransaksi" mnemonicParsing="false" text="Transaksi">
+            <Menu fx:id="menuTransaksi" mnemonicParsing="false" onAction="#menuTransaksiOnAction" text="Transaksi">
                <items>
-                  <MenuItem fx:id="menuKelolaDataTransaksi" mnemonicParsing="false" text="Kelola Data Transaksi" />
-                  <MenuItem fx:id="menuCetakTransaksi" mnemonicParsing="false" text="Cetak" />
+                  <MenuItem fx:id="menuKelolaDataTransaksi" mnemonicParsing="false" onAction="#menuKelolaDataTransaksiOnAction" text="Kelola Data Transaksi" />
+                  <MenuItem fx:id="menuCetakTransaksi" mnemonicParsing="false" onAction="#menuCetakTransaksiOnAction" text="Cetak" />
                </items>
             </Menu>
-            <Menu fx:id="menuLaporan" mnemonicParsing="false" text="Laporan">
+            <Menu fx:id="menuLaporan" mnemonicParsing="false" onAction="#menuLaporanOnAction" text="Laporan">
                <items>
-                  <MenuItem fx:id="menuLaporanPenjualan" mnemonicParsing="false" text="Laporan Penjualan" />
+                  <MenuItem fx:id="menuLaporanPenjualan" mnemonicParsing="false" onAction="#menuLaporanPenjualanOnAction" text="Laporan Penjualan" />
+               </items>
+            </Menu>
+            <Menu fx:id="menuAbout" mnemonicParsing="false" onAction="#menuAboutOnAction" text="About">
+               <items>
+                  <MenuItem fx:id="menuLaporanPenjualan1" mnemonicParsing="false" onAction="#menuLaporanPenjualanOnAction" text="Laporan Penjualan" />
                </items>
             </Menu>
         </menus>

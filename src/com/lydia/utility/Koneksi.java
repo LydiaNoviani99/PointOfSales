@@ -20,6 +20,7 @@ public class Koneksi {
         Class.forName("com.mysql.jdbc.Driver");
         Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/PointOfSales", "root", "");
+        connection.setAutoCommit(false);
         return connection;
     }
 }

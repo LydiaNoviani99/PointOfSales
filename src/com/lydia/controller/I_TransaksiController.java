@@ -42,9 +42,9 @@ public class I_TransaksiController implements Initializable {
     @FXML
     private TextField txtTotalBelanja;
     @FXML
-    private BorderPane borderPane;
-    @FXML
     private TextField txtNamaKasir;
+    @FXML
+    private BorderPane bpTransaksi;
 
     /**
      * Initializes the controller class.
