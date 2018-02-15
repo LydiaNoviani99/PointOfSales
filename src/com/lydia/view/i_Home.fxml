@@ -90,11 +90,7 @@
                   <MenuItem fx:id="menuLaporanPenjualan" mnemonicParsing="false" onAction="#menuLaporanPenjualanOnAction" text="Laporan Penjualan" />
                </items>
             </Menu>
-            <Menu fx:id="menuAbout" mnemonicParsing="false" onAction="#menuAboutOnAction" text="About">
-               <items>
-                  <MenuItem fx:id="menuLaporanPenjualan1" mnemonicParsing="false" onAction="#menuLaporanPenjualanOnAction" text="Laporan Penjualan" />
-               </items>
-            </Menu>
+            <Menu fx:id="menuAbout" mnemonicParsing="false" onAction="#menuAboutOnAction" text="About" />
         </menus>
       </MenuBar>
    </top>

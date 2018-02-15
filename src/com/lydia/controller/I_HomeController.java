@@ -77,8 +77,6 @@ public class I_HomeController implements Initializable {
     @FXML
     private Menu menuAbout;
     @FXML
-    private MenuItem menuLaporanPenjualan1;
-    @FXML
     private BorderPane bpHome;
 
     public ObservableList<User> getUsers() {
@@ -111,16 +109,16 @@ public class I_HomeController implements Initializable {
 
     @FXML
     private void menuLogoutOnAction(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/i_Login.fxml"));
-            BorderPane borderPane = loader.load();
-            Scene scene = new Scene(borderPane);
-            MainApp.getPrimaryStage().setScene(scene);
-        } catch (IOException ex) {
-            Logger.getLogger(MainLayoutController.class.getName()).log(
-                    Level.SEVERE, null, ex);
-        }
+//        try {
+//            FXMLLoader loader = new FXMLLoader();
+//            loader.setLocation(MainApp.class.getResource("view/i_Login.fxml"));
+//            BorderPane borderPane = loader.load();
+//            Scene scene = new Scene(borderPane);
+//            MainApp.getPrimaryStage().setScene(scene);
+//        } catch (IOException ex) {
+//            Logger.getLogger(MainLayoutController.class.getName()).log(
+//                    Level.SEVERE, null, ex);
+//        }
     }
 
     @FXML
