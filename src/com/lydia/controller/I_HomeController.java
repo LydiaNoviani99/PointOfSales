@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -68,16 +69,19 @@ public class I_HomeController implements Initializable {
     private MenuItem menuLaporanPenjualan;
     @FXML
     private ImageView imgLogo;
-
-    private ObservableList<User> users;
-
-    private UserDaoImpl userDaoImpl;
-
-    private I_LoginController i_LoginController;
     @FXML
     private Menu menuAbout;
     @FXML
     private BorderPane bpHome;
+
+    private Stage homeStage;
+    private Stage barangStage;
+    private Stage userStage;
+    private Stage transaksiStage;
+
+    private ObservableList<User> users;
+    private UserDaoImpl userDaoImpl;
+    private I_LoginController i_LoginController;
 
     public ObservableList<User> getUsers() {
         if (users == null) {
@@ -109,20 +113,26 @@ public class I_HomeController implements Initializable {
 
     @FXML
     private void menuLogoutOnAction(ActionEvent event) {
-//        try {
-//            FXMLLoader loader = new FXMLLoader();
-//            loader.setLocation(MainApp.class.getResource("view/i_Login.fxml"));
-//            BorderPane borderPane = loader.load();
-//            Scene scene = new Scene(borderPane);
-//            MainApp.getPrimaryStage().setScene(scene);
-//        } catch (IOException ex) {
-//            Logger.getLogger(MainLayoutController.class.getName()).log(
-//                    Level.SEVERE, null, ex);
-//        }
+        try {
+            homeStage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/i_Login.fxml"));
+            BorderPane borderPane = loader.load();
+            Scene scene = new Scene(borderPane);
+            I_LoginController i_LoginController = loader.getController();
+            homeStage.setScene(scene);
+            homeStage.show();
+
+            bpHome.getScene().getWindow().hide();
+        } catch (IOException ex) {
+            Logger.getLogger(I_LoginController.class.getName()).log(
+                    Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     private void menuExitOnAction(ActionEvent event) {
+        Platform.exit();
     }
 
     //DATA BARANG
@@ -133,22 +143,21 @@ public class I_HomeController implements Initializable {
     @FXML
     private void menuKelolaDataBarangOnAction(ActionEvent event) {
         try {
+            barangStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource(
-                    "view/i_KBarang.fxml"));
-            BorderPane root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            I_BarangController i_BarangController = loader.
-                    getController();
-//            i_BarangController.setHomeController(this);
-            stage.setScene(scene);
-//            stage.initOwner(bpBarang.getScene().getWindow());
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.showAndWait();
+            loader.setLocation(MainApp.class.getResource("view/i_Barang.fxml"));
+            BorderPane borderPane = loader.load();
+            Scene scene = new Scene(borderPane);
+            I_BarangController i_BarangController = loader.getController();
+
+            barangStage.initOwner(bpHome.getScene().getWindow());
+            barangStage.initModality(Modality.WINDOW_MODAL);
+            barangStage.setScene(scene);
+            barangStage.show();
+
         } catch (IOException ex) {
-            Logger.getLogger(I_LoginController.class.getName()).
-                    log(Level.SEVERE, null, ex);
+            Logger.getLogger(I_LoginController.class.getName()).log(
+                    Level.SEVERE, null, ex);
         }
     }
 
@@ -163,6 +172,26 @@ public class I_HomeController implements Initializable {
 
     @FXML
     private void menuKelolaDataUserOnAction(ActionEvent event) {
+        try {
+            userStage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            loader.
+                    setLocation(MainApp.class.
+                            getResource("view/i_User.fxml"));
+            BorderPane borderPane = loader.load();
+            Scene scene = new Scene(borderPane);
+            I_UserController i_UserController = loader.getController();
+
+            userStage.initOwner(bpHome.getScene().getWindow());
+            userStage.initModality(Modality.WINDOW_MODAL);
+
+            userStage.setScene(scene);
+            userStage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(I_LoginController.class.getName()).log(
+                    Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -177,6 +206,27 @@ public class I_HomeController implements Initializable {
 
     @FXML
     private void menuKelolaDataTransaksiOnAction(ActionEvent event) {
+        try {
+            transaksiStage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            loader.
+                    setLocation(MainApp.class.
+                            getResource("view/i_User.fxml"));
+            BorderPane borderPane = loader.load();
+            Scene scene = new Scene(borderPane);
+            I_TransaksiController i_TransaksiController = loader.getController();
+
+            transaksiStage.initOwner(bpHome.getScene().getWindow());
+            transaksiStage.initModality(Modality.WINDOW_MODAL);
+
+            transaksiStage.setScene(scene);
+            transaksiStage.show();
+
+            bpHome.getScene().getWindow().hide();
+        } catch (IOException ex) {
+            Logger.getLogger(I_LoginController.class.getName()).log(
+                    Level.SEVERE, null, ex);
+        }
     }
 
     @FXML

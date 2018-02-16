@@ -17,6 +17,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -72,7 +74,35 @@ public class UserDaoImpl implements DaoService<User> {
 
     @Override
     public List<User> showAllData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ObservableList<User> user = FXCollections.observableArrayList();
+        try {
+            try (Connection connection = Koneksi.createConnection()) {
+                String query = "SELECT * FROM user";
+                PreparedStatement ps = connection.prepareStatement(query);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    User userObject = new User();
+                    Role roleObject = new Role();
+                    userObject.setKd_Pegawai(rs.getInt("kd_Pegawai"));
+                    userObject.setNm_Pegawai(rs.getString("nm_Pegawai"));
+                    userObject.setJenis_kelamin(rs.getInt("jenis_Kelamin"));
+                    userObject.setAlamat(rs.getString(
+                            "alamat"));
+                    userObject.setAgama(rs.getString("agama"));
+                    userObject.setNo_Hp(rs.getString("no_Hp"));
+                    userObject.setUsername_access(rs.
+                            getString("username_access"));
+                    userObject.setPassword_access(rs.
+                            getString("password_access"));
+                    roleObject.setId_Role(rs.getInt("id_Role"));
+                }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(BarangDaoImpl.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+
+        return user;
     }
 
     @Override

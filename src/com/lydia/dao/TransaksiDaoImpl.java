@@ -10,11 +10,14 @@ import com.lydia.utility.DaoService;
 import com.lydia.utility.Koneksi;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -65,7 +68,28 @@ public class TransaksiDaoImpl implements DaoService<Transaksi> {
 
     @Override
     public List<Transaksi> showAllData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ObservableList<Transaksi> transaksi = FXCollections.
+                observableArrayList();
+        try {
+            try (Connection connection = Koneksi.createConnection()) {
+                String query = "SELECT * FROM transaksi";
+                PreparedStatement ps = connection.prepareStatement(query);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    Transaksi transaksiObject = new Transaksi();
+                    transaksiObject.setId_Transaksi(rs.getInt("id_Transaksi"));
+                    transaksiObject.setTgl_Transaksi(rs.getTimestamp(
+                            "tgl_Barang"));
+                    transaksiObject.setUser_kd_Pegawai(rs.getInt(
+                            "user_kd_Pegawai"));
+                }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(BarangDaoImpl.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+
+        return transaksi;
     }
 
     @Override

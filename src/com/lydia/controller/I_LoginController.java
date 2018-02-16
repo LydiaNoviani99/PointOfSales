@@ -96,11 +96,6 @@ public class I_LoginController implements Initializable {
         } else if (getUserDao().getData(user) != null) {
 
             selectedUser = getUserDao().getData(user);
-//            Role r = new Role();
-//            selectedUser.setUsername_access(txtUsername.getText().trim());
-//            selectedUser.setPassword_access(txtPassword.getText().trim());
-//            r.setId_Role(user.getRole_id_Role());
-//            selectedUser.setRole_id_Role(r.getId_Role());
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Login berhasil");
@@ -117,7 +112,6 @@ public class I_LoginController implements Initializable {
                     I_HomeController i_HomeController = loader.
                             getController();
                     i_HomeController.setLoginController(this);
-//                    I_HomeController.setListUserController(this);
                     i_HomeStage.setScene(scene);
 //                    i_homeController.initOwner(bpLogin.getScene().getWindow());
 //                    i_homeController.initModality(Modality.WINDOW_MODAL);
