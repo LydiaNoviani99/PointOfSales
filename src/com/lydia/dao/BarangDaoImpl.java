@@ -32,15 +32,15 @@ public class BarangDaoImpl implements DaoService<Barang> {
             try (Connection connection = Koneksi.createConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "INSERT INTO barang(kd_Barang, nm_Barang, hrg_Beli, hrg_Jual, kategori_id_Kategori) VALUES (?,?,?,?,?)";
+                        = "INSERT INTO barang(nm_Barang, hrg_Beli, hrg_Jual, kategori_id_Kategori) VALUES (?,?,?,?)";
                 PreparedStatement ps = connection.prepareStatement(query);
-                ps.setInt(1, object.getKd_Barang());
-                ps.setString(2, object.getNm_Barang());
-                ps.setDouble(3, object.getHrg_Beli());
-                ps.setDouble(4, object.getHrg_Jual());
-                ps.setInt(5, object.getKategori_Id_Kategori().getId_Kategori());
+                ps.setString(1, object.getNm_Barang());
+                ps.setInt(2, object.getHrg_Beli());
+                ps.setInt(3, object.getHrg_Jual());
+                ps.setInt(4, object.getKategori_Id_Kategori().getId_Kategori());
 
                 if (ps.executeUpdate() != 0) {
+                    System.out.println("aaa");
                     connection.commit();
                     result = 1;
                 } else {
@@ -58,12 +58,62 @@ public class BarangDaoImpl implements DaoService<Barang> {
 
     @Override
     public int deleteData(Barang object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int result = 0;
+        try {
+            try (Connection connection = Koneksi.createConnection()) {
+                connection.setAutoCommit(false);
+                String query
+                        = "DELETE FROM barang WHERE kd_Barang = ?";
+                PreparedStatement ps = connection.prepareStatement(query);
+                ps.setInt(1, object.getKd_Barang());
+
+                if (ps.executeUpdate() != 0) {
+                    System.out.println("aaa");
+                    connection.commit();
+                    result = 1;
+                } else {
+                    connection.rollback();
+                }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(BarangDaoImpl.class.getName()).
+                        log(Level.SEVERE, null, ex);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return result;
     }
 
     @Override
     public int updateData(Barang object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int result = 0;
+        try {
+            try (Connection connection = Koneksi.createConnection()) {
+                connection.setAutoCommit(false);
+                String query
+                        = "UPDATE barang SET nm_Barang = ?, hrg_Beli = ?, hrg_Jual = ?, kategori_id_Kategori = ? WHERE kd_Barang = ?";
+                PreparedStatement ps = connection.prepareStatement(query);
+                ps.setString(1, object.getNm_Barang());
+                ps.setInt(2, object.getHrg_Beli());
+                ps.setInt(3, object.getHrg_Jual());
+                ps.setInt(4, object.getKategori_Id_Kategori().getId_Kategori());
+                ps.setInt(5, object.getKd_Barang());
+
+                if (ps.executeUpdate() != 0) {
+                    System.out.println("aaa");
+                    connection.commit();
+                    result = 1;
+                } else {
+                    connection.rollback();
+                }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(BarangDaoImpl.class.getName()).
+                        log(Level.SEVERE, null, ex);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return result;
     }
 
     @Override
@@ -72,7 +122,7 @@ public class BarangDaoImpl implements DaoService<Barang> {
         try {
             try (Connection connection = Koneksi.createConnection()) {
                 String query
-                        = "SELECT * FROM barang barang JOIN kategori kategori where barang.kategori_id_Kategori = kategori.id_Kategori";
+                        = "SELECT * FROM barang b JOIN kategori k where b.kategori_id_Kategori = k.id_Kategori";
                 PreparedStatement ps = connection.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
@@ -82,7 +132,9 @@ public class BarangDaoImpl implements DaoService<Barang> {
                     barangObject.setNm_Barang(rs.getString("nm_Barang"));
                     barangObject.setHrg_Beli(rs.getInt("hrg_Beli"));
                     barangObject.setHrg_Jual(rs.getInt("hrg_Jual"));
+                    kategoriObject.setId_Kategori(rs.getInt("id_Kategori"));
                     kategoriObject.setKet_Kategori(rs.getString("ket_Kategori"));
+                    barangObject.setKategori_Id_Kategori(kategoriObject);
                     barang.add(barangObject);
 
                 }

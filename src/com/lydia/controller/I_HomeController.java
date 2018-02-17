@@ -121,7 +121,7 @@ public class I_HomeController implements Initializable {
             Scene scene = new Scene(borderPane);
             I_LoginController i_LoginController = loader.getController();
             homeStage.setScene(scene);
-            homeStage.show();
+            homeStage.showAndWait();
 
             bpHome.getScene().getWindow().hide();
         } catch (IOException ex) {
@@ -152,8 +152,9 @@ public class I_HomeController implements Initializable {
 
             barangStage.initOwner(bpHome.getScene().getWindow());
             barangStage.initModality(Modality.WINDOW_MODAL);
+
             barangStage.setScene(scene);
-            barangStage.show();
+            barangStage.showAndWait();
 
         } catch (IOException ex) {
             Logger.getLogger(I_LoginController.class.getName()).log(
@@ -186,7 +187,7 @@ public class I_HomeController implements Initializable {
             userStage.initModality(Modality.WINDOW_MODAL);
 
             userStage.setScene(scene);
-            userStage.show();
+            userStage.showAndWait();
 
         } catch (IOException ex) {
             Logger.getLogger(I_LoginController.class.getName()).log(
@@ -211,7 +212,7 @@ public class I_HomeController implements Initializable {
             FXMLLoader loader = new FXMLLoader();
             loader.
                     setLocation(MainApp.class.
-                            getResource("view/i_User.fxml"));
+                            getResource("view/i_Transaksi.fxml"));
             BorderPane borderPane = loader.load();
             Scene scene = new Scene(borderPane);
             I_TransaksiController i_TransaksiController = loader.getController();
@@ -220,9 +221,8 @@ public class I_HomeController implements Initializable {
             transaksiStage.initModality(Modality.WINDOW_MODAL);
 
             transaksiStage.setScene(scene);
-            transaksiStage.show();
+            transaksiStage.showAndWait();
 
-            bpHome.getScene().getWindow().hide();
         } catch (IOException ex) {
             Logger.getLogger(I_LoginController.class.getName()).log(
                     Level.SEVERE, null, ex);
@@ -247,7 +247,7 @@ public class I_HomeController implements Initializable {
     private void menuAboutOnAction(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("Lydia - 1672014");
-        alert.showAndWait();
+        alert.show();
     }
 
     public void setLoginController(I_LoginController aThis) {

@@ -212,7 +212,7 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#btnSimpanTransaksiAction" prefHeight="25.0" prefWidth="72.0" text="Simpan" />
+                                    <Button mnemonicParsing="false" onAction="#btnSimpanTransaksiAction" prefHeight="25.0" prefWidth="90.0" text="Add To Cart" />
                                  </children>
                                  <GridPane.margin>
                                     <Insets top="10.0" />
@@ -220,7 +220,7 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#btnHapusTransaksiAction" prefHeight="25.0" prefWidth="65.0" text="Hapus" />
+                                    <Button mnemonicParsing="false" onAction="#btnHapusTransaksiAction" prefHeight="25.0" prefWidth="81.0" text="Hapus" />
                                  </children>
                                  <GridPane.margin>
                                     <Insets top="10.0" />
@@ -270,6 +270,19 @@
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
                         <TextField fx:id="txtNamaKasir" prefHeight="25.0" prefWidth="272.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="488.0" layoutY="411.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="9">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#btnSimpanTransaksiAction" prefHeight="25.0" prefWidth="90.0" text="Submit">
+                                 <HBox.margin>
+                                    <Insets top="20.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
                </children>

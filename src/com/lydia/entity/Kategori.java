@@ -30,32 +30,6 @@ public class Kategori {
         return id_Kategori;
     }
 
-//    int id_Kategori;
-//    String ket_Kategori;
-//
-//    public Kategori() {
-//    }
-//
-//    public Kategori(int id_Kategori, String ket_Kategori) {
-//        this.id_Kategori = id_Kategori;
-//        this.ket_Kategori = ket_Kategori;
-//    }
-//
-//    public int getId_Kategori() {
-//        return id_Kategori;
-//    }
-//
-//    public void setId_Kategori(int id_Kategori) {
-//        this.id_Kategori = id_Kategori;
-//    }
-//
-//    public String getKet_Kategori() {
-//        return ket_Kategori;
-//    }
-//
-//    public void setKet_Kategori(String ket_Kategori) {
-//        this.ket_Kategori = ket_Kategori;
-//    }
     private final StringProperty ket_Kategori = new SimpleStringProperty();
 
     public String getKet_Kategori() {
@@ -68,6 +42,11 @@ public class Kategori {
 
     public StringProperty ket_KategoriProperty() {
         return ket_Kategori;
+    }
+
+    @Override
+    public String toString() {
+        return getKet_Kategori();
     }
 
 }

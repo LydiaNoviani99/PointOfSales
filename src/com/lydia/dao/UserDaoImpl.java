@@ -77,7 +77,8 @@ public class UserDaoImpl implements DaoService<User> {
         ObservableList<User> user = FXCollections.observableArrayList();
         try {
             try (Connection connection = Koneksi.createConnection()) {
-                String query = "SELECT * FROM user";
+                String query
+                        = "SELECT * FROM user u JOIN role r WHERE u.role_Id_Role = r.id_Role";
                 PreparedStatement ps = connection.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
@@ -95,6 +96,8 @@ public class UserDaoImpl implements DaoService<User> {
                     userObject.setPassword_access(rs.
                             getString("password_access"));
                     roleObject.setId_Role(rs.getInt("id_Role"));
+
+                    user.add(userObject);
                 }
             }
         } catch (ClassNotFoundException | SQLException ex) {
