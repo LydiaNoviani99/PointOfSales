@@ -18,29 +18,27 @@ import javafx.beans.property.StringProperty;
  */
 public class User {
 
-    private final IntegerProperty kd_Pegawai = new SimpleIntegerProperty();
+    private final IntegerProperty kd_User = new SimpleIntegerProperty();
+    private final StringProperty nm_User = new SimpleStringProperty();
     private final IntegerProperty jenis_kelamin = new SimpleIntegerProperty();
     private final StringProperty alamat = new SimpleStringProperty();
     private final StringProperty agama = new SimpleStringProperty();
     private final StringProperty no_Hp = new SimpleStringProperty();
     private final StringProperty username_access = new SimpleStringProperty();
     private final StringProperty password_access = new SimpleStringProperty();
-
     private final ObjectProperty<Role> roleProperty
             = new SimpleObjectProperty<>();
 
-    private final StringProperty nm_Pegawai = new SimpleStringProperty();
-
-    public int getKd_Pegawai() {
-        return kd_Pegawai.get();
+    public int getKd_User() {
+        return kd_User.get();
     }
 
-    public void setKd_Pegawai(int value) {
-        kd_Pegawai.set(value);
+    public void setKd_User(int value) {
+        kd_User.set(value);
     }
 
-    public IntegerProperty kd_PegawaiProperty() {
-        return kd_Pegawai;
+    public IntegerProperty kd_UserProperty() {
+        return kd_User;
     }
 
     public int getJenis_kelamin() {
@@ -127,16 +125,16 @@ public class User {
         return roleProperty;
     }
 
-    public String getNm_Pegawai() {
-        return nm_Pegawai.get();
+    public String getNm_User() {
+        return nm_User.get();
     }
 
-    public void setNm_Pegawai(String value) {
-        nm_Pegawai.set(value);
+    public void setNm_User(String value) {
+        nm_User.set(value);
     }
 
-    public StringProperty nm_PegawaiProperty() {
-        return nm_Pegawai;
+    public StringProperty nm_UserProperty() {
+        return nm_User;
     }
 
 }

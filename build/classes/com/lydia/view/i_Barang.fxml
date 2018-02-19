@@ -43,7 +43,6 @@
                      <children>
                         <TableView fx:id="tableBarang" onMouseClicked="#tableBarangOnClicked" prefHeight="439.0" prefWidth="393.0">
                           <columns>
-                            <TableColumn fx:id="colKd_Barang" prefWidth="70.0" text="Kd_Barang" />
                             <TableColumn fx:id="colNm_Barang" prefWidth="104.0" text="Nm_Barang" />
                               <TableColumn fx:id="colHrg_Beli" prefWidth="60.0" text="Hrg_Beli" />
                               <TableColumn fx:id="colHrg_Jual" minWidth="0.0" prefWidth="60.0" text="Hrg_Jual" />

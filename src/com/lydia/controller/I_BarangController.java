@@ -57,7 +57,6 @@ public class I_BarangController implements Initializable {
     private KategoriDaoImpl kategoriDaoImpl;
     private ObservableList<Kategori> kategoris;
 
-    @FXML
     private TableColumn<Barang, Integer> colKd_Barang;
     @FXML
     private TableColumn<Barang, String> colNm_Barang;
@@ -72,8 +71,6 @@ public class I_BarangController implements Initializable {
     @FXML
     private Button btnSimpanBarang;
     @FXML
-    private Button btnUbahBarang;
-    @FXML
     private Button btnHapusBarang;
 
     /**
@@ -82,9 +79,9 @@ public class I_BarangController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         tableBarang.setItems(getBarangs());
-        colKd_Barang.
-                setCellValueFactory(data -> data.getValue().
-                kd_BarangProperty().asObject());
+//        colKd_Barang.
+//                setCellValueFactory(data -> data.getValue().
+//                kd_BarangProperty().asObject());
         colHrg_Beli.
                 setCellValueFactory(data -> data.getValue().
                 hrg_BeliProperty().asObject());
@@ -125,15 +122,15 @@ public class I_BarangController implements Initializable {
                 if (getBarangDao().addData(barang) == 1) {
                     getBarangs().clear();;
                     getBarangs().addAll(getBarangDao().showAllData());
-//
-//                barangs.addAll(getBarangDao().showAllData());
-                    tableBarang.refresh();
-                }
 
-//            mengkosongkan teks field setelah isi data
-                txtNamaBarang.clear();
-                txtHargaBeli.clear();
-                txtHargaJual.clear();
+                    tableBarang.refresh();
+
+//                    tableBarang.getSortOrder().add(colKd_Barang);
+                    //mengkosongkan teks field setelah isi data
+                    txtNamaBarang.clear();
+                    txtHargaBeli.clear();
+                    txtHargaJual.clear();
+                }
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Isi semua terlebih dahulu");
@@ -158,15 +155,14 @@ public class I_BarangController implements Initializable {
                 if (getBarangDao().updateData(barang) == 1) {
                     getBarangs().clear();;
                     getBarangs().addAll(getBarangDao().showAllData());
-//
-//                barangs.addAll(getBarangDao().showAllData());
-                    tableBarang.refresh();
-                }
 
-//            mengkosongkan teks field setelah isi data
-                txtNamaBarang.clear();
-                txtHargaBeli.clear();
-                txtHargaJual.clear();
+                    tableBarang.refresh();
+                    //mengkosongkan teks field setelah isi data
+                    txtNamaBarang.clear();
+                    txtHargaBeli.clear();
+                    txtHargaJual.clear();
+                    selectedBarang = null;
+                }
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Isi semua terlebih dahulu");
@@ -174,12 +170,6 @@ public class I_BarangController implements Initializable {
             }
         }
 
-    }
-
-    @FXML
-    private void btnUbahBarangAction(ActionEvent event
-    ) {
-//
     }
 
     @FXML
@@ -207,15 +197,17 @@ public class I_BarangController implements Initializable {
 //
 //                barangs.addAll(getBarangDao().showAllData());
                 tableBarang.refresh();
+
             }
 
 //            mengkosongkan teks field setelah isi data
             txtNamaBarang.clear();
             txtHargaBeli.clear();
             txtHargaJual.clear();
+            selectedBarang = null;
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Isi semua terlebih dahulu");
+            alert.setContentText("Pilih barang terlebih dahulu");
             alert.showAndWait();
         }
 

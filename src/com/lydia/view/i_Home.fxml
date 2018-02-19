@@ -75,7 +75,7 @@
           </Menu>
           <Menu fx:id="menuDataUser" mnemonicParsing="false" onAction="#menuDataUserOnAction" text="Data User">
             <items>
-              <MenuItem fx:id="menuKelolaDataUser" mnemonicParsing="false" onAction="#menuKelolaDataUserOnAction" text="Kelola Data Pegawai" />
+              <MenuItem fx:id="menuKelolaDataUser" mnemonicParsing="false" onAction="#menuKelolaDataUserOnAction" text="Kelola Data User" />
                   <MenuItem fx:id="menuCetakUser" mnemonicParsing="false" onAction="#menuCetakUserOnAction" text="Cetak" />
             </items>
           </Menu>

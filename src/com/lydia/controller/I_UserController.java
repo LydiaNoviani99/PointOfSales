@@ -5,6 +5,7 @@
  */
 package com.lydia.controller;
 
+import com.lydia.entity.User;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -26,11 +27,11 @@ public class I_UserController implements Initializable {
     @FXML
     private TextField txtCariUser;
     @FXML
-    private TableView<?> tableUser;
+    private TableView<User> tableUser;
     @FXML
-    private TextField txtKodePegawai;
+    private TextField txtKodeUser;
     @FXML
-    private TextField txtNamaPegawai;
+    private TextField txtNamaUser;
     @FXML
     private RadioButton radioPerempuan;
     @FXML
@@ -76,10 +77,6 @@ public class I_UserController implements Initializable {
 
     @FXML
     private void btnBackAction(ActionEvent event) {
-    }
-
-    void setHomeController(I_HomeController aThis) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

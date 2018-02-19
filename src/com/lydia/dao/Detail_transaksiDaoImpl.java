@@ -29,10 +29,10 @@ public class Detail_transaksiDaoImpl implements
             try (Connection connection = Koneksi.createConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "INSERT INTO detail_transaksi(transaksi_id_Transaksi,barang_kd_Barang,jml,saling_price) VALUES (?,?,?,?)";
+                        = "INSERT INTO detail_transaksi(transaksi_kd_Transaksi,barang_kd_Barang,jml,saling_price) VALUES (?,?,?,?)";
 
                 PreparedStatement ps = connection.prepareStatement(query);
-                ps.setInt(1, object.getTransaksi_id_Transaksi());
+                ps.setInt(1, object.getTransaksi_kd_Transaksi());
                 ps.setInt(2, object.getBarang_kd_Barang());
                 ps.setInt(3, object.getJml());
                 ps.setDouble(4, object.getSaling_price());

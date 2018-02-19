@@ -53,14 +53,12 @@
                      <children>
                         <TableView fx:id="tableUser" prefHeight="336.0" prefWidth="551.0">
                           <columns>
-                            <TableColumn prefWidth="13.0" text="Kd_Pegawai" />
-                            <TableColumn prefWidth="33.0" text="Nm_Pegawai" />
-                              <TableColumn prefWidth="24.0" text="JK" />
-                              <TableColumn prefWidth="30.0" text="Agama" />
-                              <TableColumn prefWidth="27.0" text="Alamat" />
-                              <TableColumn prefWidth="23.0" text="No_HP" />
-                              <TableColumn prefWidth="19.0" text="Username" />
-                              <TableColumn prefWidth="19.0" text="Divisi" />
+                            <TableColumn fx:id="colNm_User" prefWidth="33.0" text="Nm_User" />
+                              <TableColumn fx:id="colJK" prefWidth="24.0" text="JK" />
+                              <TableColumn fx:id="colAgama" prefWidth="30.0" text="Agama" />
+                              <TableColumn fx:id="colAlamat" prefWidth="27.0" text="Alamat" />
+                              <TableColumn fx:id="colNo_HP" prefWidth="23.0" text="No_HP" />
+                              <TableColumn fx:id="colUsername_Access" prefWidth="19.0" text="Username" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -81,8 +79,6 @@
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -93,30 +89,20 @@
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Label text="Kode Pegawai" />
+                                    <Label text="Nama User" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                  <children>
-                                    <TextField fx:id="txtKodePegawai" prefHeight="25.0" prefWidth="250.0" />
+                                    <TextField fx:id="txtNamaUser" prefHeight="25.0" prefWidth="250.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
-                                    <Label text="Nama Pegawai" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <children>
-                                    <TextField fx:id="txtNamaPegawai" prefHeight="25.0" prefWidth="250.0" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
-                                 <children>
                                     <Label text="Jenis Kelamin" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
                                     <GridPane>
                                       <columnConstraints>
@@ -141,67 +127,57 @@
                                     </GridPane>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                                  <children>
                                     <Label text="Agama" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
                                     <TextField fx:id="txtAgama" prefHeight="25.0" prefWidth="250.0" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                                  <children>
                                     <Label text="Alamat" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
                                     <TextField fx:id="txtAlamat" prefHeight="25.0" prefWidth="250.0" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                                  <children>
                                     <Label text="No. Handphone" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                  <children>
                                     <TextField fx:id="txtNoHp" prefHeight="25.0" prefWidth="250.0" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
                                  <children>
                                     <Label text="Username Access" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <children>
                                     <TextField fx:id="txtUsernameAccess" prefHeight="25.0" prefWidth="250.0" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="8">
-                                 <children>
-                                    <Label text="Divisi" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
-                                 <children>
-                                    <ComboBox fx:id="comboDivisi" prefWidth="250.0" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                                  <children>
                                     <Label text="Password Access" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                  <children>
                                     <TextField fx:id="txtPasswordAccess" prefHeight="25.0" prefWidth="250.0" />
                                  </children>
                               </HBox>
-                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                  <children>
                                     <GridPane>
                                       <columnConstraints>

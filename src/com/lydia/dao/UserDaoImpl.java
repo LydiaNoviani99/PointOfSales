@@ -34,10 +34,10 @@ public class UserDaoImpl implements DaoService<User> {
             try (Connection connection = Koneksi.createConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "INSERT INTO user(kd_Pegawai, nm_Pegawai, jenis_kelamin, alamat, agama, no_HP,username_access, password_access, role_id_Role) VALUES (?,?,?,?,?,?,?,?,?)";
+                        = "INSERT INTO user(kd_User, nm_User, jenis_kelamin, alamat, agama, no_Hp,username_access, password_access, role_id_Role) VALUES (?,?,?,?,?,?,?,?,?)";
                 PreparedStatement ps = connection.prepareStatement(query);
-                ps.setInt(1, object.getKd_Pegawai());
-                ps.setString(2, object.getNm_Pegawai());
+                ps.setInt(1, object.getKd_User());
+                ps.setString(2, object.getNm_User());
                 ps.setInt(3, object.getJenis_kelamin());
                 ps.setString(4, object.getAlamat());
                 ps.setString(5, object.getAgama());
@@ -84,8 +84,8 @@ public class UserDaoImpl implements DaoService<User> {
                 while (rs.next()) {
                     User userObject = new User();
                     Role roleObject = new Role();
-                    userObject.setKd_Pegawai(rs.getInt("kd_Pegawai"));
-                    userObject.setNm_Pegawai(rs.getString("nm_Pegawai"));
+                    userObject.setKd_User(rs.getInt("kd_User"));
+                    userObject.setNm_User(rs.getString("nm_User"));
                     userObject.setJenis_kelamin(rs.getInt("jenis_Kelamin"));
                     userObject.setAlamat(rs.getString(
                             "alamat"));

@@ -5,6 +5,7 @@
  */
 package com.lydia.controller;
 
+import com.lydia.entity.Transaksi;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -22,7 +23,7 @@ import javafx.scene.layout.BorderPane;
 public class I_TransaksiController implements Initializable {
 
     @FXML
-    private TableView<?> tableTransaksi;
+    private TableView<Transaksi> tableTransaksi;
     @FXML
     private TextField txtTglTransaksi;
     @FXML

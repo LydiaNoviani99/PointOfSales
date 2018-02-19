@@ -33,12 +33,12 @@ public class TransaksiDaoImpl implements DaoService<Transaksi> {
             try (Connection connection = Koneksi.createConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "INSERT INTO transaksi(id_Transaksi, tgl_Transaksi, user_kd_Pegawai) VALUES (?,?,?)";
+                        = "INSERT INTO transaksi(kd_Transaksi, tgl_Transaksi, user_kd_User) VALUES (?,?,?)";
 
                 PreparedStatement ps = connection.prepareStatement(query);
-                ps.setInt(1, object.getId_Transaksi());
+                ps.setInt(1, object.getKd_Transaksi());
                 ps.setTimestamp(2, t);
-                ps.setInt(3, object.getUser_kd_Pegawai());
+                ps.setInt(3, object.getUser_kd_User());
 
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
@@ -77,11 +77,11 @@ public class TransaksiDaoImpl implements DaoService<Transaksi> {
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     Transaksi transaksiObject = new Transaksi();
-                    transaksiObject.setId_Transaksi(rs.getInt("id_Transaksi"));
+                    transaksiObject.setKd_Transaksi(rs.getInt("kd_Transaksi"));
                     transaksiObject.setTgl_Transaksi(rs.getTimestamp(
                             "tgl_Barang"));
-                    transaksiObject.setUser_kd_Pegawai(rs.getInt(
-                            "user_kd_Pegawai"));
+                    transaksiObject.setUser_kd_User(rs.getInt(
+                            "user_kd_User"));
                 }
             }
         } catch (ClassNotFoundException | SQLException ex) {

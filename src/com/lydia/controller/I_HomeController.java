@@ -176,9 +176,7 @@ public class I_HomeController implements Initializable {
         try {
             userStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
-            loader.
-                    setLocation(MainApp.class.
-                            getResource("view/i_User.fxml"));
+            loader.setLocation(MainApp.class.getResource("view/i_User.fxml"));
             BorderPane borderPane = loader.load();
             Scene scene = new Scene(borderPane);
             I_UserController i_UserController = loader.getController();

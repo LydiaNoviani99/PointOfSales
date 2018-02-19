@@ -17,32 +17,32 @@ import javafx.beans.property.SimpleObjectProperty;
  */
 public class Transaksi {
 
-    private final IntegerProperty id_Transaksi = new SimpleIntegerProperty();
+    private final IntegerProperty kd_Transaksi = new SimpleIntegerProperty();
 
-    public int getId_Transaksi() {
-        return id_Transaksi.get();
+    public int getKd_Transaksi() {
+        return kd_Transaksi.get();
     }
 
-    public void setId_Transaksi(int value) {
-        id_Transaksi.set(value);
+    public void setKd_Transaksi(int value) {
+        kd_Transaksi.set(value);
     }
 
-    public IntegerProperty id_TransaksiProperty() {
-        return id_Transaksi;
+    public IntegerProperty Kd_TransaksiProperty() {
+        return kd_Transaksi;
     }
 
-    private final IntegerProperty user_kd_Pegawai = new SimpleIntegerProperty();
+    private final IntegerProperty user_kd_User = new SimpleIntegerProperty();
 
-    public int getUser_kd_Pegawai() {
-        return user_kd_Pegawai.get();
+    public int getUser_kd_User() {
+        return user_kd_User.get();
     }
 
-    public void setUser_kd_Pegawai(int value) {
-        user_kd_Pegawai.set(value);
+    public void setUser_kd_User(int value) {
+        user_kd_User.set(value);
     }
 
-    public IntegerProperty user_kd_PegawaiProperty() {
-        return user_kd_Pegawai;
+    public IntegerProperty user_kd_UserProperty() {
+        return user_kd_User;
     }
     private final ObjectProperty<Timestamp> tgl_Transaksi
             = new SimpleObjectProperty<>();
