@@ -46,7 +46,7 @@ public class I_UserKaryawanController implements Initializable {
     @FXML
     private TableColumn<User, String> colNm_User;
     @FXML
-    private TableColumn<User, ?> colJK;
+    private TableColumn<User, Integer> colJK;
     @FXML
     private TableColumn<User, String> colAgama;
     @FXML
@@ -104,13 +104,13 @@ public class I_UserKaryawanController implements Initializable {
                 setCellValueFactory(data -> data.getValue().
                 nm_UserProperty());
 
-//        colJK.
-//                setCellValueFactory(data -> data.getValue().
-//                jenis_kelaminProperty().asObject());
-//        if (users.getValue().getJenisKelamin() == 1) {
-//            colJK.setCellValueFactory(
-//                    new PropertyValueFactory<>("jenis_kelamin"));
-//        } else if (users.getValue().getJenisKelamin() == 2) {
+        colJK.
+                setCellValueFactory(data -> data.getValue().
+                jenis_kelaminProperty().asObject());
+
+//        if (users.getJenisKelamin() == 1) {
+//            colJK.setCellValueFactory(data -> data.getValue().);
+//        } else if (users.getJenisKelamin() == 2) {
 //            colJK.setCellValueFactory(
 //                    new PropertyValueFactory<>("jenis_kelamin"));
 //        }
@@ -209,12 +209,11 @@ public class I_UserKaryawanController implements Initializable {
                         getKet_Role());
                 user.setRole_Id_Role(role);
 
-                if (jeniskelamin.getSelectedToggle().equals(radioPerempuan)) {
-                    user.setJenis_kelamin(2);
-                } else if (jeniskelamin.getToggles().equals(radioLakiLaki)) {
+                if (jeniskelamin.getSelectedToggle().equals(radioPria)) {
                     user.setJenis_kelamin(1);
+                } else if (jeniskelamin.getToggles().equals(radioWanita)) {
+                    user.setJenis_kelamin(2);
                 }
-
                 if (txtVerifyPassword.getText().equals(txtPasswordAccess.
                         getText())) {
                     if (getUserDao().updateData(user) == 1) {
@@ -247,6 +246,50 @@ public class I_UserKaryawanController implements Initializable {
     @FXML
     private void btnHapusUserAction(ActionEvent event
     ) {
+        Utility utility = new Utility();
+        if (!utility.isEmptyField(txtNamaUser, txtAgama,
+                txtAlamat, txtNoHp, txtUsernameAccess, txtPasswordAccess,
+                txtVerifyPassword)) {
+            User user = new User();
+            Role role = new Role();
+            user.setNm_User(txtNamaUser.getText().trim());
+//                user.setJenis_kelamin(Integer.
+//                        valueOf(txtHargaBeli.getText().trim()));
+            user.setAgama(txtAgama.getText().trim());
+            user.setAlamat(txtAlamat.getText().trim());
+            user.setNo_Hp(txtNoHp.getText().trim());
+            user.setUsername_access(txtUsernameAccess.getText().trim());
+            user.setPassword_access(txtPasswordAccess.getText().trim());
+//                user.setVerifyPassword(txtVerifyPassword.getText().trim());
+            role.setId_Role(comboJabatanUser.getValue().getId_Role());
+            role.setKet_Role(comboJabatanUser.getValue().
+                    getKet_Role());
+            user.setRole_Id_Role(role);
+
+            if (jeniskelamin.getSelectedToggle().equals(radioPria)) {
+                user.setJenis_kelamin(1);
+            } else if (jeniskelamin.getToggles().equals(radioWanita)) {
+                user.setJenis_kelamin(2);
+            }
+
+            if (getUserDao().deleteData(user) == 1) {
+                getUsers().clear();;
+                getUsers().addAll(getUserDao().showAllData());
+
+                tableUser.refresh();
+
+//                    tableBarang.getSortOrder().add(colKd_Barang);
+                //mengkosongkan teks field setelah isi data
+                txtNamaUser.clear();
+                txtAgama.clear();
+                txtAlamat.clear();
+                txtNoHp.clear();
+                txtUsernameAccess.clear();
+                txtPasswordAccess.clear();
+                txtVerifyPassword.clear();
+            }
+
+        }
     }
 
     @FXML

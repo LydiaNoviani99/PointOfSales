@@ -84,7 +84,7 @@
                                        <children>
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <RadioButton fx:id="radioPerempuan" mnemonicParsing="false" text="Perempuan">
+                                                <RadioButton fx:id="radioPria" mnemonicParsing="false" text="Pria">
                                                    <toggleGroup>
                                                       <ToggleGroup fx:id="jeniskelamin" />
                                                    </toggleGroup>
@@ -93,7 +93,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                              <children>
-                                                <RadioButton fx:id="radioLakiLaki" mnemonicParsing="false" text="Laki-Laki" toggleGroup="$jeniskelamin" />
+                                                <RadioButton fx:id="radioWanita" mnemonicParsing="false" text="Wanita" toggleGroup="$jeniskelamin" />
                                              </children>
                                           </HBox>
                                        </children>
