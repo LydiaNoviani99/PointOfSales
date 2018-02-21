@@ -10,10 +10,13 @@ import com.lydia.utility.DaoService;
 import com.lydia.utility.Koneksi;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -31,7 +34,7 @@ public class RoleDaoImpl implements DaoService<Role> {
                         = "INSERT INTO role(id_Role, ket_Role) VALUES (?,?)";
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setInt(1, object.getId_Role());
-                ps.setString(2, object.getKet_String());
+                ps.setString(2, object.getKet_Role());
 
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
@@ -61,7 +64,27 @@ public class RoleDaoImpl implements DaoService<Role> {
 
     @Override
     public List<Role> showAllData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ObservableList<Role> role = FXCollections.observableArrayList();
+        try {
+            try (Connection connection = Koneksi.createConnection()) {
+                String query
+                        = "SELECT * FROM role";
+                PreparedStatement ps = connection.prepareStatement(query);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    Role roleObject = new Role();
+
+                    roleObject.setId_Role(rs.getInt("id_Role"));
+                    roleObject.setKet_Role(rs.getString("ket_Role"));
+                    role.add(roleObject);
+
+                }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(BarangDaoImpl.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return role;
     }
 
     @Override

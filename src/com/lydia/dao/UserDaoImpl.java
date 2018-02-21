@@ -44,7 +44,7 @@ public class UserDaoImpl implements DaoService<User> {
                 ps.setString(6, object.getNo_Hp());
                 ps.setString(7, object.getUsername_access());
                 ps.setString(8, object.getPassword_access());
-                ps.setInt(9, object.getRoleProperty().getId_Role());
+                ps.setInt(9, object.getRole_Id_Role().getId_Role());
 
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
@@ -52,11 +52,8 @@ public class UserDaoImpl implements DaoService<User> {
                 } else {
                     connection.rollback();
                 }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(UserDaoImpl.class.getName()).
-                        log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             System.out.println(ex);
         }
         return result;
@@ -64,12 +61,58 @@ public class UserDaoImpl implements DaoService<User> {
 
     @Override
     public int deleteData(User object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int result = 0;
+        try {
+            try (Connection connection = Koneksi.createConnection()) {
+                connection.setAutoCommit(false);
+                String query
+                        = "DELETE FROM user WHERE kd_User = ?";
+                PreparedStatement ps = connection.prepareStatement(query);
+                ps.setInt(1, object.getKd_User());
+
+                if (ps.executeUpdate() != 0) {
+                    connection.commit();
+                    result = 1;
+                } else {
+                    connection.rollback();
+                }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex);
+        }
+        return result;
     }
 
     @Override
     public int updateData(User object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int result = 0;
+        try {
+            try (Connection connection = Koneksi.createConnection()) {
+                connection.setAutoCommit(false);
+                String query
+                        = "UPDATE barang SET kd_User = ?, nm_User = ?, jenis_kelamin = ?, alamat = ?, agama = ?, no_Hp = ?, username_access = ?, password_access = ?, role_Id_Role = ? WHERE kd_User = ?";
+                PreparedStatement ps = connection.prepareStatement(query);
+                ps.setInt(1, object.getKd_User());
+                ps.setString(2, object.getNm_User());
+                ps.setInt(3, object.getJenis_kelamin());
+                ps.setString(4, object.getAlamat());
+                ps.setString(5, object.getAgama());
+                ps.setString(6, object.getNo_Hp());
+                ps.setString(7, object.getUsername_access());
+                ps.setString(8, object.getPassword_access());
+                ps.setInt(9, object.getRole_Id_Role().getId_Role());
+
+                if (ps.executeUpdate() != 0) {
+                    connection.commit();
+                    result = 1;
+                } else {
+                    connection.rollback();
+                }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex);
+        }
+        return result;
     }
 
     @Override
@@ -126,7 +169,7 @@ public class UserDaoImpl implements DaoService<User> {
 //                    user.setRole_id_Role(rs.get);
                 Role role = new Role();
                 role.setId_Role(rs.getInt("role_id_Role"));
-                user.setRoleProperty(role);
+                user.setRole_Id_Role(role);
                 return user;
             }
         } catch (ClassNotFoundException | SQLException ex) {

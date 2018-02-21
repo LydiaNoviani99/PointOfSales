@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,7 +27,7 @@ public class User {
     private final StringProperty no_Hp = new SimpleStringProperty();
     private final StringProperty username_access = new SimpleStringProperty();
     private final StringProperty password_access = new SimpleStringProperty();
-    private final ObjectProperty<Role> roleProperty
+    private final ObjectProperty<Role> role_Id_Role
             = new SimpleObjectProperty<>();
 
     public int getKd_User() {
@@ -113,16 +114,16 @@ public class User {
         return password_access;
     }
 
-    public Role getRoleProperty() {
-        return roleProperty.get();
+    public Role getRole_Id_Role() {
+        return role_Id_Role.get();
     }
 
-    public void setRoleProperty(Role value) {
-        roleProperty.set(value);
+    public void setRole_Id_Role(Role value) {
+        role_Id_Role.set(value);
     }
 
-    public ObjectProperty rolePropertyProperty() {
-        return roleProperty;
+    public ObjectProperty role_Id_RoleProperty() {
+        return role_Id_Role;
     }
 
     public String getNm_User() {

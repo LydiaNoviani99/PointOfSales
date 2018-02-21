@@ -176,10 +176,12 @@ public class I_HomeController implements Initializable {
         try {
             userStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/i_User.fxml"));
+            loader.setLocation(MainApp.class.getResource(
+                    "view/i_UserKaryawan.fxml"));
             BorderPane borderPane = loader.load();
             Scene scene = new Scene(borderPane);
-            I_UserController i_UserController = loader.getController();
+            I_UserKaryawanController i_UserKaryawanController = loader.
+                    getController();
 
             userStage.initOwner(bpHome.getScene().getWindow());
             userStage.initModality(Modality.WINDOW_MODAL);
@@ -250,7 +252,7 @@ public class I_HomeController implements Initializable {
 
     public void setLoginController(I_LoginController aThis) {
         this.i_LoginController = aThis;
-        if (i_LoginController.getSelectedUser().getRoleProperty().getId_Role()
+        if (i_LoginController.getSelectedUser().getRole_Id_Role().getId_Role()
                 == 1) {
             menuFile.setDisable(false);
             menuDataBarang.setDisable(false);
@@ -258,7 +260,7 @@ public class I_HomeController implements Initializable {
             menuTransaksi.setDisable(true);
             menuLaporan.setDisable(false);
 
-        } else if (i_LoginController.getSelectedUser().getRoleProperty().
+        } else if (i_LoginController.getSelectedUser().getRole_Id_Role().
                 getId_Role() == 2) {
             menuFile.setDisable(false);
             menuDataBarang.setDisable(true);

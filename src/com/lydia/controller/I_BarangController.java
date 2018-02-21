@@ -51,6 +51,7 @@ public class I_BarangController implements Initializable {
     private BorderPane bpBarang;
 
     private Stage homeStage;
+
     private BarangDaoImpl barangDaoImpl;
     private ObservableList<Barang> barangs;
 

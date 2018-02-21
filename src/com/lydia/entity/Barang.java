@@ -61,6 +61,7 @@ public class Barang {
         return hrg_Jual;
     }
 
+    //
     public int getHrg_Beli() {
         return hrg_Beli.get();
     }
@@ -73,6 +74,7 @@ public class Barang {
         return hrg_Beli;
     }
 
+    //
     public Kategori getKategori_Id_Kategori() {
         return kategori_Id_Kategori.get();
     }

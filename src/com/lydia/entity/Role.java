@@ -30,44 +30,23 @@ public class Role {
         return id_Role;
     }
 
-    private final StringProperty ket_String = new SimpleStringProperty();
+    private final StringProperty ket_Role = new SimpleStringProperty();
 
-    public String getKet_String() {
-        return ket_String.get();
+    public String getKet_Role() {
+        return ket_Role.get();
     }
 
-    public void setKet_String(String value) {
-        ket_String.set(value);
+    public void setKet_Role(String value) {
+        ket_Role.set(value);
     }
 
-    public StringProperty ket_StringProperty() {
-        return ket_String;
+    public StringProperty ket_RoleProperty() {
+        return ket_Role;
     }
 
-//    int id_Role;
-//    String ket_Role;
-//
-//    public Role() {
-//    }
-//
-//    public Role(int id_Role, String ket_Role) {
-//        this.id_Role = id_Role;
-//        this.ket_Role = ket_Role;
-//    }
-//
-//    public int getId_Role() {
-//        return id_Role;
-//    }
-//
-//    public void setId_Role(int id_Role) {
-//        this.id_Role = id_Role;
-//    }
-//
-//    public String getKet_Role() {
-//        return ket_Role;
-//    }
-//
-//    public void setKet_Role(String ket_Role) {
-//        this.ket_Role = ket_Role;
-//    }
+    @Override
+    public String toString() {
+        return getKet_Role();
+    }
+
 }
