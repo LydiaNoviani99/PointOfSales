@@ -21,7 +21,7 @@ public class User {
 
     private final IntegerProperty kd_User = new SimpleIntegerProperty();
     private final StringProperty nm_User = new SimpleStringProperty();
-    private final IntegerProperty jenis_kelamin = new SimpleIntegerProperty();
+    private final StringProperty jenis_kelamin = new SimpleStringProperty();
     private final StringProperty alamat = new SimpleStringProperty();
     private final StringProperty agama = new SimpleStringProperty();
     private final StringProperty no_Hp = new SimpleStringProperty();
@@ -42,15 +42,15 @@ public class User {
         return kd_User;
     }
 
-    public int getJenis_kelamin() {
+    public String getJenis_kelamin() {
         return jenis_kelamin.get();
     }
 
-    public void setJenis_kelamin(int value) {
+    public void setJenis_kelamin(String value) {
         jenis_kelamin.set(value);
     }
 
-    public IntegerProperty jenis_kelaminProperty() {
+    public StringProperty jenis_kelaminProperty() {
         return jenis_kelamin;
     }
 

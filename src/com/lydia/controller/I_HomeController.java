@@ -6,7 +6,13 @@
 package com.lydia.controller;
 
 import com.lydia.MainApp;
+import com.lydia.dao.BarangDaoImpl;
+import com.lydia.dao.KategoriDaoImpl;
+import com.lydia.dao.RoleDaoImpl;
 import com.lydia.dao.UserDaoImpl;
+import com.lydia.entity.Barang;
+import com.lydia.entity.Kategori;
+import com.lydia.entity.Role;
 import com.lydia.entity.User;
 import java.io.IOException;
 import java.net.URL;
@@ -79,24 +85,7 @@ public class I_HomeController implements Initializable {
     private Stage userStage;
     private Stage transaksiStage;
 
-    private ObservableList<User> users;
-    private UserDaoImpl userDaoImpl;
     private I_LoginController i_LoginController;
-
-    public ObservableList<User> getUsers() {
-        if (users == null) {
-            users = FXCollections.observableArrayList();
-            users.addAll(getUserDaoImpl().showAllData());
-        }
-        return users;
-    }
-
-    public UserDaoImpl getUserDaoImpl() {
-        if (userDaoImpl == null) {
-            userDaoImpl = new UserDaoImpl();
-        }
-        return userDaoImpl;
-    }
 
     /**
      * 11 Initializes the controller class.
@@ -149,7 +138,7 @@ public class I_HomeController implements Initializable {
             BorderPane borderPane = loader.load();
             Scene scene = new Scene(borderPane);
             I_BarangController i_BarangController = loader.getController();
-
+            i_BarangController.setHomeController(this);
             barangStage.initOwner(bpHome.getScene().getWindow());
             barangStage.initModality(Modality.WINDOW_MODAL);
 
@@ -182,7 +171,7 @@ public class I_HomeController implements Initializable {
             Scene scene = new Scene(borderPane);
             I_UserKaryawanController i_UserKaryawanController = loader.
                     getController();
-
+            i_UserKaryawanController.setHomeController(this);
             userStage.initOwner(bpHome.getScene().getWindow());
             userStage.initModality(Modality.WINDOW_MODAL);
 
@@ -273,6 +262,78 @@ public class I_HomeController implements Initializable {
     public void setListUserController(I_LoginController i_LoginController) {
         this.i_LoginController = i_LoginController;
 
+    }
+
+    private BarangDaoImpl barangDaoImpl;
+    private ObservableList<Barang> barangs;
+
+    private KategoriDaoImpl kategoriDaoImpl;
+    private ObservableList<Kategori> kategoris;
+
+    public ObservableList<Barang> getBarangs() {
+        if (barangs == null) {
+            barangs = FXCollections.observableArrayList();
+            barangs.addAll(getBarangDao().showAllData());
+        }
+        return barangs;
+    }
+
+    public BarangDaoImpl getBarangDao() {
+        if (barangDaoImpl == null) {
+            barangDaoImpl = new BarangDaoImpl();
+        }
+        return barangDaoImpl;
+    }
+
+    public ObservableList<Kategori> getKategoris() {
+        if (kategoris == null) {
+            kategoris = FXCollections.observableArrayList();
+            kategoris.addAll(getKategoriDao().showAllData());
+        }
+        return kategoris;
+    }
+
+    public KategoriDaoImpl getKategoriDao() {
+        if (kategoriDaoImpl == null) {
+            kategoriDaoImpl = new KategoriDaoImpl();
+        }
+        return kategoriDaoImpl;
+    }
+
+    private UserDaoImpl userDaoImpl;
+    private ObservableList<User> users;
+
+    private RoleDaoImpl roleDaoImpl;
+    private ObservableList<Role> roles;
+
+    public UserDaoImpl getUserDao() {
+        if (userDaoImpl == null) {
+            userDaoImpl = new UserDaoImpl();
+        }
+        return userDaoImpl;
+    }
+
+    public ObservableList<User> getUsers() {
+        if (users == null) {
+            users = FXCollections.observableArrayList();
+            users.addAll(getUserDao().showAllData());
+        }
+        return users;
+    }
+
+    public ObservableList<Role> getRoles() {
+        if (roles == null) {
+            roles = FXCollections.observableArrayList();
+            roles.addAll(getRoleDao().showAllData());
+        }
+        return roles;
+    }
+
+    public RoleDaoImpl getRoleDao() {
+        if (roleDaoImpl == null) {
+            roleDaoImpl = new RoleDaoImpl();
+        }
+        return roleDaoImpl;
     }
 
 }

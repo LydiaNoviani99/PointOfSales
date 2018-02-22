@@ -84,7 +84,7 @@
                                        <children>
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <RadioButton fx:id="radioPria" mnemonicParsing="false" text="Pria">
+                                                <RadioButton fx:id="radioPria" mnemonicParsing="false" selected="true" text="Pria">
                                                    <toggleGroup>
                                                       <ToggleGroup fx:id="jeniskelamin" />
                                                    </toggleGroup>

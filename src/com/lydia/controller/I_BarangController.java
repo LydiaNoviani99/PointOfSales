@@ -5,15 +5,11 @@
  */
 package com.lydia.controller;
 
-import com.lydia.dao.BarangDaoImpl;
-import com.lydia.dao.KategoriDaoImpl;
 import com.lydia.entity.Barang;
 import com.lydia.entity.Kategori;
 import com.lydia.utility.Utility;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,6 +30,15 @@ import javafx.stage.Stage;
  */
 public class I_BarangController implements Initializable {
 
+    private I_HomeController i_homeController;
+
+    public void setHomeController(
+            I_HomeController i_homeController) {
+        this.i_homeController = i_homeController;
+        tableBarang.setItems(i_homeController.getBarangs());
+        comboKategoriBarang.setItems(i_homeController.getKategoris());
+    }
+
     @FXML
     private TableView<Barang> tableBarang;
     @FXML
@@ -51,12 +56,6 @@ public class I_BarangController implements Initializable {
     private BorderPane bpBarang;
 
     private Stage homeStage;
-
-    private BarangDaoImpl barangDaoImpl;
-    private ObservableList<Barang> barangs;
-
-    private KategoriDaoImpl kategoriDaoImpl;
-    private ObservableList<Kategori> kategoris;
 
     private TableColumn<Barang, Integer> colKd_Barang;
     @FXML
@@ -79,7 +78,6 @@ public class I_BarangController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        tableBarang.setItems(getBarangs());
 //        colKd_Barang.
 //                setCellValueFactory(data -> data.getValue().
 //                kd_BarangProperty().asObject());
@@ -94,8 +92,6 @@ public class I_BarangController implements Initializable {
         col_Kategori.
                 setCellValueFactory(data -> data.getValue().
                 getKategori_Id_Kategori().ket_KategoriProperty());
-        getKategoris();
-        comboKategoriBarang.setItems(kategoris);
     }
 
     @FXML
@@ -120,9 +116,10 @@ public class I_BarangController implements Initializable {
                 kategori.setKet_Kategori(comboKategoriBarang.getValue().
                         getKet_Kategori());
                 barang.setKategori_Id_Kategori(kategori);
-                if (getBarangDao().addData(barang) == 1) {
-                    getBarangs().clear();;
-                    getBarangs().addAll(getBarangDao().showAllData());
+                if (i_homeController.getBarangDao().addData(barang) == 1) {
+                    i_homeController.getBarangs().clear();;
+                    i_homeController.getBarangs().addAll(i_homeController.
+                            getBarangDao().showAllData());
 
                     tableBarang.refresh();
 
@@ -153,9 +150,10 @@ public class I_BarangController implements Initializable {
                 kategori.setKet_Kategori(comboKategoriBarang.getValue().
                         getKet_Kategori());
                 barang.setKategori_Id_Kategori(kategori);
-                if (getBarangDao().updateData(barang) == 1) {
-                    getBarangs().clear();;
-                    getBarangs().addAll(getBarangDao().showAllData());
+                if (i_homeController.getBarangDao().updateData(barang) == 1) {
+                    i_homeController.getBarangs().clear();;
+                    i_homeController.getBarangs().addAll(i_homeController.
+                            getBarangDao().showAllData());
 
                     tableBarang.refresh();
                     //mengkosongkan teks field setelah isi data
@@ -192,9 +190,10 @@ public class I_BarangController implements Initializable {
             kategori.setKet_Kategori(comboKategoriBarang.getValue().
                     getKet_Kategori());
             barang.setKategori_Id_Kategori(kategori);
-            if (getBarangDao().deleteData(barang) == 1) {
-                getBarangs().clear();;
-                getBarangs().addAll(getBarangDao().showAllData());
+            if (i_homeController.getBarangDao().deleteData(barang) == 1) {
+                i_homeController.getBarangs().clear();;
+                i_homeController.getBarangs().addAll(i_homeController.
+                        getBarangDao().showAllData());
 //
 //                barangs.addAll(getBarangDao().showAllData());
                 tableBarang.refresh();
@@ -236,36 +235,6 @@ public class I_BarangController implements Initializable {
 //                    .getName()).log(
 //                            Level.SEVERE, null, ex);
 //        }
-    }
-
-    public ObservableList<Barang> getBarangs() {
-        if (barangs == null) {
-            barangs = FXCollections.observableArrayList();
-            barangs.addAll(getBarangDao().showAllData());
-        }
-        return barangs;
-    }
-
-    public BarangDaoImpl getBarangDao() {
-        if (barangDaoImpl == null) {
-            barangDaoImpl = new BarangDaoImpl();
-        }
-        return barangDaoImpl;
-    }
-
-    public ObservableList<Kategori> getKategoris() {
-        if (kategoris == null) {
-            kategoris = FXCollections.observableArrayList();
-            kategoris.addAll(getKategoriDao().showAllData());
-        }
-        return kategoris;
-    }
-
-    public KategoriDaoImpl getKategoriDao() {
-        if (kategoriDaoImpl == null) {
-            kategoriDaoImpl = new KategoriDaoImpl();
-        }
-        return kategoriDaoImpl;
     }
 
     @FXML

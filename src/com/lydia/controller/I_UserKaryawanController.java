@@ -5,15 +5,11 @@
  */
 package com.lydia.controller;
 
-import com.lydia.dao.RoleDaoImpl;
-import com.lydia.dao.UserDaoImpl;
 import com.lydia.entity.Role;
 import com.lydia.entity.User;
 import com.lydia.utility.Utility;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,6 +31,15 @@ import javafx.scene.layout.BorderPane;
  */
 public class I_UserKaryawanController implements Initializable {
 
+    private I_HomeController i_homeController;
+
+    public void setHomeController(
+            I_HomeController i_homeController) {
+        this.i_homeController = i_homeController;
+        tableUser.setItems(i_homeController.getUsers());
+        comboJabatanUser.setItems(i_homeController.getRoles());
+    }
+
     @FXML
     private BorderPane bpUser;
     @FXML
@@ -46,7 +51,7 @@ public class I_UserKaryawanController implements Initializable {
     @FXML
     private TableColumn<User, String> colNm_User;
     @FXML
-    private TableColumn<User, Integer> colJK;
+    private TableColumn<User, String> colJK;
     @FXML
     private TableColumn<User, String> colAgama;
     @FXML
@@ -59,8 +64,6 @@ public class I_UserKaryawanController implements Initializable {
     private TableColumn<User, String> colJabatan;
     @FXML
     private TextField txtNamaUser;
-    private RadioButton radioPerempuan;
-    private RadioButton radioLakiLaki;
     @FXML
     private TextField txtAgama;
     @FXML
@@ -74,12 +77,6 @@ public class I_UserKaryawanController implements Initializable {
 
     @FXML
     private TextField txtVerifyPassword;
-
-    private UserDaoImpl userDaoImpl;
-    private ObservableList<User> users;
-
-    private RoleDaoImpl roleDaoImpl;
-    private ObservableList<Role> roles;
 
     public User selectedUser;
     @FXML
@@ -96,24 +93,15 @@ public class I_UserKaryawanController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        tableUser.setItems(getUsers());
 //        colKd_Barang.
 //                setCellValueFactory(data -> data.getValue().
 //                kd_BarangProperty().asObject());
         colNm_User.
                 setCellValueFactory(data -> data.getValue().
                 nm_UserProperty());
-
         colJK.
                 setCellValueFactory(data -> data.getValue().
-                jenis_kelaminProperty().asObject());
-
-//        if (users.getJenisKelamin() == 1) {
-//            colJK.setCellValueFactory(data -> data.getValue().);
-//        } else if (users.getJenisKelamin() == 2) {
-//            colJK.setCellValueFactory(
-//                    new PropertyValueFactory<>("jenis_kelamin"));
-//        }
+                jenis_kelaminProperty());
         colAgama.
                 setCellValueFactory(data -> data.getValue().agamaProperty());
         colAlamat.
@@ -123,11 +111,9 @@ public class I_UserKaryawanController implements Initializable {
         colUsername_Access.
                 setCellValueFactory(data -> data.getValue().
                 username_accessProperty());
-//        colJabatan.
-//                setCellValueFactory(data -> data.getValue().getRole_Id_Role().
-//                ket_RoleProperty());
-        getRoles();
-        comboJabatanUser.setItems(roles);
+        colJabatan.
+                setCellValueFactory(data -> data.getValue().
+                getRole_Id_Role().ket_RoleProperty());
     }
 
     @FXML
@@ -136,16 +122,19 @@ public class I_UserKaryawanController implements Initializable {
 
     @FXML
     private void btnSimpanUserAcction(ActionEvent event) {
-        Utility utility = new Utility();
+//        Utility utility = new Utility();
         if (selectedUser == null) {
-            if (!utility.isEmptyField(txtNamaUser, txtAgama,
+            if (!Utility.isEmptyField(txtNamaUser, txtAgama,
                     txtAlamat, txtNoHp, txtUsernameAccess, txtPasswordAccess,
                     txtVerifyPassword)) {
                 User user = new User();
                 Role role = new Role();
                 user.setNm_User(txtNamaUser.getText().trim());
-//                user.setJenis_kelamin(Integer.
-//                        valueOf(txtHargaBeli.getText().trim()));
+                if (radioPria.isSelected()) {
+                    user.setJenis_kelamin("Pria");
+                } else {
+                    user.setJenis_kelamin("Wanita");
+                }
                 user.setAgama(txtAgama.getText().trim());
                 user.setAlamat(txtAlamat.getText().trim());
                 user.setNo_Hp(txtNoHp.getText().trim());
@@ -156,21 +145,15 @@ public class I_UserKaryawanController implements Initializable {
                         getKet_Role());
                 user.setRole_Id_Role(role);
 
-                if (jeniskelamin.getSelectedToggle().equals(radioPria)) {
-                    user.setJenis_kelamin(1);
-                } else if (jeniskelamin.getToggles().equals(radioWanita)) {
-                    user.setJenis_kelamin(2);
-                }
-
                 if (txtVerifyPassword.getText().equals(txtPasswordAccess.
                         getText())) {
-                    if (getUserDao().addData(user) == 1) {
-                        getUsers().clear();;
-                        getUsers().addAll(getUserDao().showAllData());
+                    if (i_homeController.getUserDao().addData(user) == 1) {
+                        i_homeController.getUsers().clear();;
+                        i_homeController.getUsers().addAll(i_homeController.
+                                getUserDao().showAllData());
 
                         tableUser.refresh();
 
-//                    tableBarang.getSortOrder().add(colKd_Barang);
                         //mengkosongkan teks field setelah isi data
                         txtNamaUser.clear();
                         txtAgama.clear();
@@ -184,41 +167,41 @@ public class I_UserKaryawanController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setContentText("Password Tidak Sama, Isi Lagi!");
                     alert.showAndWait();
+                    txtPasswordAccess.clear();
+                    txtVerifyPassword.clear();
                 }
-
-                user.setRole_Id_Role(comboJabatanUser.getValue());
 
             }
         } else {
-            if (!utility.isEmptyField(txtNamaUser, txtAgama,
+            if (!Utility.isEmptyField(txtNamaUser, txtAgama,
                     txtAlamat, txtNoHp, txtUsernameAccess, txtPasswordAccess,
                     txtVerifyPassword)) {
-                User user = new User();
-                Role role = new Role();
-                user.setNm_User(txtNamaUser.getText().trim());
-//                user.setJenis_kelamin(Integer.
-//                        valueOf(txtHargaBeli.getText().trim()));
-                user.setAgama(txtAgama.getText().trim());
-                user.setAlamat(txtAlamat.getText().trim());
-                user.setNo_Hp(txtNoHp.getText().trim());
-                user.setUsername_access(txtUsernameAccess.getText().trim());
-                user.setPassword_access(txtPasswordAccess.getText().trim());
-//                user.setVerifyPassword(txtVerifyPassword.getText().trim());
-                role.setId_Role(comboJabatanUser.getValue().getId_Role());
-                role.setKet_Role(comboJabatanUser.getValue().
-                        getKet_Role());
-                user.setRole_Id_Role(role);
+//                User user = new User();
+//                Role role = new Role();
+                selectedUser.setNm_User(txtNamaUser.getText().trim());
 
-                if (jeniskelamin.getSelectedToggle().equals(radioPria)) {
-                    user.setJenis_kelamin(1);
-                } else if (jeniskelamin.getToggles().equals(radioWanita)) {
-                    user.setJenis_kelamin(2);
+                if (radioPria.isSelected()) {
+                    selectedUser.setJenis_kelamin("Pria");
+                } else {
+                    selectedUser.setJenis_kelamin("Wanita");
                 }
+
+                selectedUser.setAgama(txtAgama.getText().trim());
+                selectedUser.setAlamat(txtAlamat.getText().trim());
+                selectedUser.setNo_Hp(txtNoHp.getText().trim());
+                selectedUser.setUsername_access(txtUsernameAccess.getText().
+                        trim());
+                selectedUser.setPassword_access(txtPasswordAccess.getText().
+                        trim());
+                selectedUser.setRole_Id_Role(comboJabatanUser.getValue());
+
                 if (txtVerifyPassword.getText().equals(txtPasswordAccess.
                         getText())) {
-                    if (getUserDao().updateData(user) == 1) {
-                        getUsers().clear();;
-                        getUsers().addAll(getUserDao().showAllData());
+                    if (i_homeController.getUserDao().updateData(selectedUser)
+                            == 1) {
+                        i_homeController.getUsers().clear();
+                        i_homeController.getUsers().addAll(i_homeController.
+                                getUserDao().showAllData());
 
                         tableUser.refresh();
 
@@ -231,14 +214,14 @@ public class I_UserKaryawanController implements Initializable {
                         txtUsernameAccess.clear();
                         txtPasswordAccess.clear();
                         txtVerifyPassword.clear();
+
+                        selectedUser = null;
                     }
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setContentText("Password Tidak Sama, Isi Lagi!");
                     alert.showAndWait();
                 }
-
-                user.setRole_Id_Role(comboJabatanUser.getValue());
             }
         }
     }
@@ -250,31 +233,29 @@ public class I_UserKaryawanController implements Initializable {
         if (!utility.isEmptyField(txtNamaUser, txtAgama,
                 txtAlamat, txtNoHp, txtUsernameAccess, txtPasswordAccess,
                 txtVerifyPassword)) {
-            User user = new User();
-            Role role = new Role();
-            user.setNm_User(txtNamaUser.getText().trim());
-//                user.setJenis_kelamin(Integer.
-//                        valueOf(txtHargaBeli.getText().trim()));
-            user.setAgama(txtAgama.getText().trim());
-            user.setAlamat(txtAlamat.getText().trim());
-            user.setNo_Hp(txtNoHp.getText().trim());
-            user.setUsername_access(txtUsernameAccess.getText().trim());
-            user.setPassword_access(txtPasswordAccess.getText().trim());
-//                user.setVerifyPassword(txtVerifyPassword.getText().trim());
-            role.setId_Role(comboJabatanUser.getValue().getId_Role());
-            role.setKet_Role(comboJabatanUser.getValue().
-                    getKet_Role());
-            user.setRole_Id_Role(role);
-
-            if (jeniskelamin.getSelectedToggle().equals(radioPria)) {
-                user.setJenis_kelamin(1);
-            } else if (jeniskelamin.getToggles().equals(radioWanita)) {
-                user.setJenis_kelamin(2);
+//            User user = new User();
+//            Role role = new Role();
+            selectedUser.setNm_User(txtNamaUser.getText().trim());
+            if (radioPria.isSelected()) {
+                selectedUser.setJenis_kelamin("Pria");
+            } else {
+                selectedUser.setJenis_kelamin("Wanita");
             }
+            selectedUser.setAgama(txtAgama.getText().trim());
+            selectedUser.setAlamat(txtAlamat.getText().trim());
+            selectedUser.setNo_Hp(txtNoHp.getText().trim());
+            selectedUser.setUsername_access(txtUsernameAccess.getText().trim());
+            selectedUser.setPassword_access(txtPasswordAccess.getText().trim());
+//                user.setVerifyPassword(txtVerifyPassword.getText().trim());
+//            role.setId_Role(comboJabatanUser.getValue().getId_Role());
+//            role.setKet_Role(comboJabatanUser.getValue().
+//                    getKet_Role());
+            selectedUser.setRole_Id_Role(comboJabatanUser.getValue());
 
-            if (getUserDao().deleteData(user) == 1) {
-                getUsers().clear();;
-                getUsers().addAll(getUserDao().showAllData());
+            if (i_homeController.getUserDao().deleteData(selectedUser) == 1) {
+                i_homeController.getUsers().clear();;
+                i_homeController.getUsers().addAll(
+                        i_homeController.getUserDao().showAllData());
 
                 tableUser.refresh();
 
@@ -287,6 +268,7 @@ public class I_UserKaryawanController implements Initializable {
                 txtUsernameAccess.clear();
                 txtPasswordAccess.clear();
                 txtVerifyPassword.clear();
+                comboJabatanUser.setValue(null);
             }
 
         }
@@ -295,36 +277,6 @@ public class I_UserKaryawanController implements Initializable {
     @FXML
     private void btnBackAction(ActionEvent event
     ) {
-    }
-
-    public ObservableList<User> getUsers() {
-        if (users == null) {
-            users = FXCollections.observableArrayList();
-            users.addAll(getUserDao().showAllData());
-        }
-        return users;
-    }
-
-    public UserDaoImpl getUserDao() {
-        if (userDaoImpl == null) {
-            userDaoImpl = new UserDaoImpl();
-        }
-        return userDaoImpl;
-    }
-
-    public ObservableList<Role> getRoles() {
-        if (roles == null) {
-            roles = FXCollections.observableArrayList();
-            roles.addAll(getRoleDao().showAllData());
-        }
-        return roles;
-    }
-
-    public RoleDaoImpl getRoleDao() {
-        if (roleDaoImpl == null) {
-            roleDaoImpl = new RoleDaoImpl();
-        }
-        return roleDaoImpl;
     }
 
     @FXML
@@ -339,10 +291,16 @@ public class I_UserKaryawanController implements Initializable {
             txtNoHp.setText(selectedUser.getNo_Hp());
             txtUsernameAccess.setText(selectedUser.getUsername_access());
             txtPasswordAccess.setText(selectedUser.getPassword_access());
-//            txtVerifyPassword.setText(selectedUser.getVerifyPassword());
-
-//            comboKategoriBarang.setValue(selectedUser.
-//                    getKategori_Id_Kategori());
+            if (selectedUser.getJenis_kelamin().equals("Pria")) {
+                jeniskelamin.getToggles().clear();
+                jeniskelamin.selectToggle(radioPria);
+            } else {
+                jeniskelamin.getToggles().clear();
+                jeniskelamin.selectToggle(radioWanita);
+            }
+            txtVerifyPassword.setText(selectedUser.getPassword_access());
+            comboJabatanUser.setValue(selectedUser.
+                    getRole_Id_Role());
         }
     }
 

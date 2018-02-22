@@ -18,6 +18,9 @@ import javafx.beans.property.SimpleObjectProperty;
 public class Transaksi {
 
     private final IntegerProperty kd_Transaksi = new SimpleIntegerProperty();
+    private final IntegerProperty user_kd_User = new SimpleIntegerProperty();
+    private final ObjectProperty<Timestamp> tgl_Transaksi
+            = new SimpleObjectProperty<>();
 
     public int getKd_Transaksi() {
         return kd_Transaksi.get();
@@ -31,8 +34,6 @@ public class Transaksi {
         return kd_Transaksi;
     }
 
-    private final IntegerProperty user_kd_User = new SimpleIntegerProperty();
-
     public int getUser_kd_User() {
         return user_kd_User.get();
     }
@@ -44,8 +45,6 @@ public class Transaksi {
     public IntegerProperty user_kd_UserProperty() {
         return user_kd_User;
     }
-    private final ObjectProperty<Timestamp> tgl_Transaksi
-            = new SimpleObjectProperty<>();
 
     public Timestamp getTgl_Transaksi() {
         return tgl_Transaksi.get();

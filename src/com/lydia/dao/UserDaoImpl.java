@@ -38,7 +38,11 @@ public class UserDaoImpl implements DaoService<User> {
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setInt(1, object.getKd_User());
                 ps.setString(2, object.getNm_User());
-                ps.setInt(3, object.getJenis_kelamin());
+                if (object.getJenis_kelamin().equals("Pria")) {
+                    ps.setInt(3, 1);
+                } else {
+                    ps.setInt(3, 2);
+                }
                 ps.setString(4, object.getAlamat());
                 ps.setString(5, object.getAgama());
                 ps.setString(6, object.getNo_Hp());
@@ -90,17 +94,21 @@ public class UserDaoImpl implements DaoService<User> {
             try (Connection connection = Koneksi.createConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "UPDATE barang SET kd_User = ?, nm_User = ?, jenis_kelamin = ?, alamat = ?, agama = ?, no_Hp = ?, username_access = ?, password_access = ?, role_Id_Role = ? WHERE kd_User = ?";
+                        = "UPDATE user SET nm_User = ?, jenis_kelamin = ?, alamat = ?, agama = ?, no_Hp = ?, username_access = ?, password_access = ?, role_Id_Role = ? WHERE kd_User = ?";
                 PreparedStatement ps = connection.prepareStatement(query);
-                ps.setInt(1, object.getKd_User());
-                ps.setString(2, object.getNm_User());
-                ps.setInt(3, object.getJenis_kelamin());
-                ps.setString(4, object.getAlamat());
-                ps.setString(5, object.getAgama());
-                ps.setString(6, object.getNo_Hp());
-                ps.setString(7, object.getUsername_access());
-                ps.setString(8, object.getPassword_access());
-                ps.setInt(9, object.getRole_Id_Role().getId_Role());
+                ps.setInt(9, object.getKd_User());
+                ps.setString(1, object.getNm_User());
+                if (object.getJenis_kelamin().equals("Pria")) {
+                    ps.setInt(2, 1);
+                } else {
+                    ps.setInt(2, 2);
+                }
+                ps.setString(3, object.getAlamat());
+                ps.setString(4, object.getAgama());
+                ps.setString(5, object.getNo_Hp());
+                ps.setString(6, object.getUsername_access());
+                ps.setString(7, object.getPassword_access());
+                ps.setInt(8, object.getRole_Id_Role().getId_Role());
 
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
@@ -121,24 +129,32 @@ public class UserDaoImpl implements DaoService<User> {
         try {
             try (Connection connection = Koneksi.createConnection()) {
                 String query
-                        = "SELECT * FROM user u JOIN role r WHERE u.role_Id_Role = r.id_Role";
+                        = "SELECT u.kd_User, u.nm_User, u.jenis_kelamin, u.alamat, u.agama, u.no_Hp, u.username_access, u.password_access, r.id_Role,r.ket_Role FROM user u JOIN role r ON u.role_Id_Role = r.id_Role";
                 PreparedStatement ps = connection.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     User userObject = new User();
                     Role roleObject = new Role();
-                    userObject.setKd_User(rs.getInt("kd_User"));
-                    userObject.setNm_User(rs.getString("nm_User"));
-                    userObject.setJenis_kelamin(rs.getInt("jenis_Kelamin"));
-                    userObject.setAlamat(rs.getString(
-                            "alamat"));
-                    userObject.setAgama(rs.getString("agama"));
-                    userObject.setNo_Hp(rs.getString("no_Hp"));
+                    userObject.setKd_User(rs.getInt("u.kd_User"));
+                    userObject.setNm_User(rs.getString("u.nm_User"));
+                    String jenis = "";
+                    if (rs.getInt("u.jenis_Kelamin") == 1) {
+                        jenis = "Pria";
+                    } else {
+                        jenis = "Wanita";
+                    }
+                    userObject.setJenis_kelamin(jenis);
+                    userObject.setAlamat(rs.getString("u.alamat"));
+                    userObject.setAgama(rs.getString("u.agama"));
+                    userObject.setNo_Hp(rs.getString("u.no_Hp"));
                     userObject.setUsername_access(rs.
-                            getString("username_access"));
+                            getString("u.username_access"));
                     userObject.setPassword_access(rs.
-                            getString("password_access"));
-                    roleObject.setId_Role(rs.getInt("id_Role"));
+                            getString("u.password_access"));
+                    roleObject.setId_Role(rs.getInt("r.id_Role"));
+                    roleObject.setKet_Role(rs.getString("r.ket_Role"));
+
+                    userObject.setRole_Id_Role(roleObject);
 
                     user.add(userObject);
                 }
