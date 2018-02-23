@@ -126,7 +126,7 @@ public class I_UserKaryawanController implements Initializable {
         if (selectedUser == null) {
             if (!Utility.isEmptyField(txtNamaUser, txtAgama,
                     txtAlamat, txtNoHp, txtUsernameAccess, txtPasswordAccess,
-                    txtVerifyPassword)) {
+                    txtVerifyPassword) && comboJabatanUser.getValue() != null) {
                 User user = new User();
                 Role role = new Role();
                 user.setNm_User(txtNamaUser.getText().trim());
@@ -162,6 +162,7 @@ public class I_UserKaryawanController implements Initializable {
                         txtUsernameAccess.clear();
                         txtPasswordAccess.clear();
                         txtVerifyPassword.clear();
+                        comboJabatanUser.setValue(null);
                     }
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -171,11 +172,15 @@ public class I_UserKaryawanController implements Initializable {
                     txtVerifyPassword.clear();
                 }
 
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Isi semua terlebih dahulu");
+                alert.showAndWait();
             }
         } else {
             if (!Utility.isEmptyField(txtNamaUser, txtAgama,
                     txtAlamat, txtNoHp, txtUsernameAccess, txtPasswordAccess,
-                    txtVerifyPassword)) {
+                    txtVerifyPassword) && comboJabatanUser.getValue() != null) {
 //                User user = new User();
 //                Role role = new Role();
                 selectedUser.setNm_User(txtNamaUser.getText().trim());
@@ -214,6 +219,7 @@ public class I_UserKaryawanController implements Initializable {
                         txtUsernameAccess.clear();
                         txtPasswordAccess.clear();
                         txtVerifyPassword.clear();
+                        comboJabatanUser.setValue(null);
 
                         selectedUser = null;
                     }
@@ -222,6 +228,10 @@ public class I_UserKaryawanController implements Initializable {
                     alert.setContentText("Password Tidak Sama, Isi Lagi!");
                     alert.showAndWait();
                 }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Isi semua terlebih dahulu");
+                alert.showAndWait();
             }
         }
     }

@@ -128,6 +128,7 @@ public class I_BarangController implements Initializable {
                     txtNamaBarang.clear();
                     txtHargaBeli.clear();
                     txtHargaJual.clear();
+                    comboKategoriBarang.setValue(null);
                 }
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -137,20 +138,16 @@ public class I_BarangController implements Initializable {
         } else {
             if (!utility.isEmptyField(txtNamaBarang, txtHargaBeli,
                     txtHargaJual)) {
-                Barang barang = new Barang();
-                Kategori kategori = new Kategori();
-                barang.setKd_Barang(selectedBarang.getKd_Barang());
-                barang.setNm_Barang(txtNamaBarang.getText().trim());
-                barang.setHrg_Beli(Integer.
+                selectedBarang.setKd_Barang(selectedBarang.getKd_Barang());
+                selectedBarang.setNm_Barang(txtNamaBarang.getText().trim());
+                selectedBarang.setHrg_Beli(Integer.
                         valueOf(txtHargaBeli.getText().trim()));
-                barang.setHrg_Jual(Integer.
+                selectedBarang.setHrg_Jual(Integer.
                         valueOf(txtHargaJual.getText().trim()));
-                kategori.setId_Kategori(comboKategoriBarang.getValue().
-                        getId_Kategori());
-                kategori.setKet_Kategori(comboKategoriBarang.getValue().
-                        getKet_Kategori());
-                barang.setKategori_Id_Kategori(kategori);
-                if (i_homeController.getBarangDao().updateData(barang) == 1) {
+                selectedBarang.setKategori_Id_Kategori(comboKategoriBarang.
+                        getValue());
+                if (i_homeController.getBarangDao().updateData(selectedBarang)
+                        == 1) {
                     i_homeController.getBarangs().clear();;
                     i_homeController.getBarangs().addAll(i_homeController.
                             getBarangDao().showAllData());
@@ -160,6 +157,7 @@ public class I_BarangController implements Initializable {
                     txtNamaBarang.clear();
                     txtHargaBeli.clear();
                     txtHargaJual.clear();
+                    comboKategoriBarang.setValue(null);
                     selectedBarang = null;
                 }
             } else {
