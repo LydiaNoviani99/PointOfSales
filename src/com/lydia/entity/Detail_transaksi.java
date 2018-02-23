@@ -6,7 +6,9 @@
 package com.lydia.entity;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 
 /**
  *
@@ -14,21 +16,36 @@ import javafx.beans.property.SimpleIntegerProperty;
  */
 public class Detail_transaksi {
 
-    private final IntegerProperty transaksi_kd_Transaksi
-            = new SimpleIntegerProperty();
+    private final ObjectProperty<Transaksi> transaksi_kd_Transaksi
+            = new SimpleObjectProperty<>();
+    private final ObjectProperty<Barang> barang_kd_Barang
+            = new SimpleObjectProperty<>();
+    private final IntegerProperty jml = new SimpleIntegerProperty();
+    private final IntegerProperty saling_price = new SimpleIntegerProperty();
 
-    public int getTransaksi_kd_Transaksi() {
+    public Transaksi getTransaksi_kd_Transaksi() {
         return transaksi_kd_Transaksi.get();
     }
 
-    public void setTransaksi_kd_Transaksi(int value) {
+    public void setTransaksi_kd_Transaksi(Transaksi value) {
         transaksi_kd_Transaksi.set(value);
     }
 
-    public IntegerProperty transaksi_kd_TransaksiProperty() {
+    public ObjectProperty transaksi_kd_TransaksiProperty() {
         return transaksi_kd_Transaksi;
     }
-    private final IntegerProperty jml = new SimpleIntegerProperty();
+
+    public Barang getBarang_kd_Barang() {
+        return barang_kd_Barang.get();
+    }
+
+    public void setBarang_kd_Barang(Barang value) {
+        barang_kd_Barang.set(value);
+    }
+
+    public ObjectProperty barang_kd_BarangProperty() {
+        return barang_kd_Barang;
+    }
 
     public int getJml() {
         return jml.get();
@@ -41,7 +58,6 @@ public class Detail_transaksi {
     public IntegerProperty jmlProperty() {
         return jml;
     }
-    private final IntegerProperty saling_price = new SimpleIntegerProperty();
 
     public int getSaling_price() {
         return saling_price.get();
@@ -53,20 +69,6 @@ public class Detail_transaksi {
 
     public IntegerProperty saling_priceProperty() {
         return saling_price;
-    }
-
-    private final IntegerProperty barang_kd_Barang = new SimpleIntegerProperty();
-
-    public int getBarang_kd_Barang() {
-        return barang_kd_Barang.get();
-    }
-
-    public void setBarang_kd_Barang(int value) {
-        barang_kd_Barang.set(value);
-    }
-
-    public IntegerProperty barang_kd_BarangProperty() {
-        return barang_kd_Barang;
     }
 
 }

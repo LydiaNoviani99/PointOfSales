@@ -15,7 +15,7 @@ import javafx.beans.property.SimpleObjectProperty;
  *
  * @author Lydia (1672014)
  */
-public class Transaksi {
+public final class Transaksi {
 
     private final IntegerProperty kd_Transaksi = new SimpleIntegerProperty();
     private final IntegerProperty user_kd_User = new SimpleIntegerProperty();
@@ -56,6 +56,30 @@ public class Transaksi {
 
     public ObjectProperty tgl_TransaksiProperty() {
         return tgl_Transaksi;
+    }
+    private final IntegerProperty pembayaran = new SimpleIntegerProperty();
+
+    public int getPembayaran() {
+        return pembayaran.get();
+    }
+
+    public void setPembayaran(int value) {
+        pembayaran.set(value);
+    }
+
+    public IntegerProperty pembayaranProperty() {
+        return pembayaran;
+    }
+
+    public Transaksi() {
+    }
+
+    public Transaksi(int kd_Transaksi, int user_kd_User, int pembayaran,
+            Timestamp tgl_Transaksi) {
+        this.setKd_Transaksi(kd_Transaksi);
+        this.setUser_kd_User(user_kd_User);
+        this.setPembayaran(pembayaran);
+        this.setTgl_Transaksi(tgl_Transaksi);
     }
 
 }

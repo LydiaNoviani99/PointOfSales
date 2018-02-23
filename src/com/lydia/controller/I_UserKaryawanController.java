@@ -122,7 +122,6 @@ public class I_UserKaryawanController implements Initializable {
 
     @FXML
     private void btnSimpanUserAcction(ActionEvent event) {
-//        Utility utility = new Utility();
         if (selectedUser == null) {
             if (!Utility.isEmptyField(txtNamaUser, txtAgama,
                     txtAlamat, txtNoHp, txtUsernameAccess, txtPasswordAccess,

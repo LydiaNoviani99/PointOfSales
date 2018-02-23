@@ -32,12 +32,13 @@ public class BarangDaoImpl implements DaoService<Barang> {
             try (Connection connection = Koneksi.createConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "INSERT INTO barang(nm_Barang, hrg_Beli, hrg_Jual, kategori_id_Kategori) VALUES (?,?,?,?) ";
+                        = "INSERT INTO barang(nm_Barang, hrg_Beli, hrg_Jual, stock, kategori_id_Kategori) VALUES (?,?,?,?,?) ";
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setString(1, object.getNm_Barang());
                 ps.setInt(2, object.getHrg_Beli());
                 ps.setInt(3, object.getHrg_Jual());
-                ps.setInt(4, object.getKategori_Id_Kategori().getId_Kategori());
+                ps.setInt(4, object.getStock());
+                ps.setInt(5, object.getKategori_Id_Kategori().getId_Kategori());
 
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
@@ -85,14 +86,15 @@ public class BarangDaoImpl implements DaoService<Barang> {
             try (Connection connection = Koneksi.createConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "UPDATE barang SET nm_Barang = ?, hrg_Beli = ?, hrg_Jual = ?, kategori_id_Kategori = ? WHERE kd_Barang = ?";
+                        = "UPDATE barang SET nm_Barang = ?, hrg_Beli = ?, hrg_Jual = ?, stock = ?, kategori_id_Kategori = ? WHERE kd_Barang = ?";
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setString(1, object.getNm_Barang());
                 ps.setInt(2, object.getHrg_Beli());
                 ps.setInt(3, object.getHrg_Jual());
-                ps.setInt(4, object.getKategori_Id_Kategori().
+                ps.setInt(4, object.getStock());
+                ps.setInt(5, object.getKategori_Id_Kategori().
                         getId_Kategori());
-                ps.setInt(5, object.getKd_Barang());
+                ps.setInt(6, object.getKd_Barang());
 
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
@@ -123,6 +125,7 @@ public class BarangDaoImpl implements DaoService<Barang> {
                     barangObject.setNm_Barang(rs.getString("nm_Barang"));
                     barangObject.setHrg_Beli(rs.getInt("hrg_Beli"));
                     barangObject.setHrg_Jual(rs.getInt("hrg_Jual"));
+                    barangObject.setStock(rs.getInt("stock"));
                     kategoriObject.setId_Kategori(rs.getInt("id_Kategori"));
                     kategoriObject.setKet_Kategori(rs.getString(
                             "ket_Kategori"));
@@ -142,7 +145,36 @@ public class BarangDaoImpl implements DaoService<Barang> {
     @Override
     public Barang getData(Barang id
     ) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try (Connection connection = Koneksi.createConnection()) {
+
+            String query
+                    = "SELECT b.kd_Barang, b.nm_Barang, b.hrg_Beli, b.hrg_Jual, b.stock, b.kategori_Id_Kategori FROM barang b join kategori k on b.kategori_Id_Kategori = k.id_Kategori";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, id.getKd_Barang());
+            ps.setString(2, id.getNm_Barang());
+            ps.setInt(3, id.getHrg_Beli());
+            ps.setInt(4, id.getHrg_Jual());
+            ps.setInt(5, id.getStock());
+            ps.setInt(6, id.getKategori_Id_Kategori().getId_Kategori());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Barang barang = new Barang();
+                Kategori kategori = new Kategori();
+                barang.setKd_Barang(rs.getInt("kd_Barang"));
+                barang.setNm_Barang(rs.getString("nm_Barang"));
+                barang.setHrg_Beli(rs.getInt("hrg_Beli"));
+                barang.setHrg_Jual(rs.getInt("hrg_Jual"));
+                barang.setStock(rs.getInt("stock"));
+                kategori.setId_Kategori(rs.getInt("id_Kategori"));
+                barang.setKategori_Id_Kategori(kategori);
+
+                return barang;
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(UserDaoImpl.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return (null);
     }
 
 }

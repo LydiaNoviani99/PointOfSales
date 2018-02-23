@@ -20,31 +20,26 @@
                   <ColumnConstraints />
               </columnConstraints>
               <rowConstraints>
-                  <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="85.0" minHeight="0.0" prefHeight="32.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="226.0" minHeight="10.0" prefHeight="212.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="98.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="98.0" minHeight="0.0" prefHeight="32.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="59.0" minHeight="6.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="38.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="98.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="98.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="98.0" minHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="59.0" minHeight="6.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="38.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="9">
-                     <children>
-                        <Label alignment="CENTER" text="Harga">
-                           <padding>
-                              <Insets left="15.0" />
-                           </padding>
-                        </Label>
-                     </children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="8">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="100.0" GridPane.rowIndex="8">
+                  <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="100.0" GridPane.rowIndex="7">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                      <children>
                         <Label text="Jumlah">
                            <padding>
@@ -52,21 +47,6 @@
                            </padding>
                         </Label>
                      </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
-                     <children>
-                        <Label text="Nama Barang">
-                           <padding>
-                              <Insets left="15.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                      <children>
@@ -92,25 +72,11 @@
                         <Insets />
                      </opaqueInsets>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
-                     <children>
-                        <Label text="Tanggal Transaksi">
-                           <padding>
-                              <Insets left="15.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2" />
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="5" GridPane.rowIndex="1" GridPane.rowSpan="2">
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="5" GridPane.rowSpan="2">
                      <children>
                         <TableView fx:id="tableTransaksi" prefHeight="208.0" prefWidth="753.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Tgl_Transaksi" />
-                            <TableColumn prefWidth="75.0" text="Id_Transaksi" />
                               <TableColumn prefWidth="75.0" text="Kd_Barang" />
                               <TableColumn prefWidth="75.0" text="Nm_Barang" />
                               <TableColumn prefWidth="75.0" text="Jumlah" />
@@ -131,37 +97,31 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
-                        <TextField fx:id="txtTglTransaksi" prefHeight="25.0" prefWidth="272.0" />
+                        <TextField fx:id="txtNamaKasir" disable="true" prefHeight="25.0" prefWidth="272.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <children>
-                        <TextField fx:id="txtNoTransaksi" prefHeight="25.0" prefWidth="272.0" />
+                        <TextField fx:id="txtNoTransaksi" disable="true" prefHeight="25.0" prefWidth="272.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <children>
-                        <TextField fx:id="txtKodeBarang" prefHeight="25.0" prefWidth="272.0" />
+                        <TextField fx:id="txtKodeBarang" layoutX="13.0" layoutY="13.0" prefHeight="25.0" prefWidth="272.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <children>
-                        <TextField fx:id="txtNamaBarang" prefHeight="25.0" prefWidth="272.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
-                     <children>
                         <TextField fx:id="txtJumlah" prefHeight="25.0" prefWidth="272.0" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
-                     <children>
-                        <TextField fx:id="txtHarga" prefHeight="25.0" prefWidth="272.0" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                      <children>
                         <Label text="Kembalian">
                            <HBox.margin>
@@ -169,24 +129,16 @@
                            </HBox.margin>
                         </Label>
                      </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <children>
-                        <Label text="Bayar">
+                        <Label text="Pembayaran">
                            <HBox.margin>
                               <Insets left="15.0" />
                            </HBox.margin>
                         </Label>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     </children></HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <children>
                         <Label text="Total Belanja">
                            <HBox.margin>
@@ -198,8 +150,8 @@
                         <Insets />
                      </opaqueInsets>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="8">
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7">
                      <children>
                         <GridPane>
                           <columnConstraints>
@@ -230,17 +182,12 @@
                         </GridPane>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7">
-                     <children>
-                        <TextField fx:id="txtKembalian" prefHeight="285.0" prefWidth="285.0" />
-                     </children>
-                  </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="6">
                      <children>
-                        <TextField fx:id="txtBayar" prefHeight="25.0" prefWidth="285.0" />
+                        <TextField fx:id="txtKembalian" disable="true" prefHeight="285.0" prefWidth="285.0" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.rowSpan="3">
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="3">
                      <children>
                         <TextField fx:id="txtTotalBelanja" disable="true" prefHeight="86.0" prefWidth="285.0">
                            <HBox.margin>
@@ -249,30 +196,28 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
-                        <Label text="Nama Kasir">
-                           <padding>
-                              <Insets left="15.0" />
-                           </padding>
-                        </Label>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Tanggal Transaksi">
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#btnBackAction" prefHeight="25.0" prefWidth="79.0" text="Back">
-                           <HBox.margin>
-                              <Insets bottom="20.0" right="20.0" />
-                           </HBox.margin>
-                        </Button>
+                        <TextField fx:id="txtTglTransaksi" disable="true" prefHeight="25.0" prefWidth="272.0" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <children>
-                        <TextField fx:id="txtNamaKasir" prefHeight="25.0" prefWidth="272.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" layoutX="488.0" layoutY="411.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="9">
+                  <HBox alignment="CENTER" layoutX="488.0" layoutY="411.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="8">
                      <children>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
@@ -285,6 +230,30 @@
                         </HBox>
                      </children>
                   </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                     <children>
+                        <Label text="Id Kasir">
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="274.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <TextField fx:id="txtNamaKasir" disable="true" prefHeight="25.0" prefWidth="272.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                     <children>
+                        <TextField fx:id="txtPembayaran" prefHeight="25.0" prefWidth="285.0" />
+                     </children>
+                  </HBox>
+                  <Label text="Nama Kasir" GridPane.rowIndex="4">
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </Label>
                </children>
                <HBox.margin>
                   <Insets top="20.0" />

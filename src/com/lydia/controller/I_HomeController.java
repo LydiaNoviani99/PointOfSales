@@ -13,6 +13,7 @@ import com.lydia.dao.UserDaoImpl;
 import com.lydia.entity.Barang;
 import com.lydia.entity.Kategori;
 import com.lydia.entity.Role;
+import com.lydia.entity.Transaksi;
 import com.lydia.entity.User;
 import java.io.IOException;
 import java.net.URL;
@@ -334,6 +335,16 @@ public class I_HomeController implements Initializable {
             roleDaoImpl = new RoleDaoImpl();
         }
         return roleDaoImpl;
+    }
+
+    private Transaksi cartDaoImpl;
+    private ObservableList<Transaksi> carts;
+
+    public ObservableList<Transaksi> getCarts() {
+        if (carts == null) {
+            carts = FXCollections.observableArrayList();
+        }
+        return carts;
     }
 
 }

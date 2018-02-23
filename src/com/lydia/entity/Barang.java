@@ -24,6 +24,19 @@ public class Barang {
     private final IntegerProperty hrg_Beli = new SimpleIntegerProperty();
     private final ObjectProperty<Kategori> kategori_Id_Kategori
             = new SimpleObjectProperty<>();
+    private final IntegerProperty stock = new SimpleIntegerProperty();
+
+    public int getStock() {
+        return stock.get();
+    }
+
+    public void setStock(int value) {
+        stock.set(value);
+    }
+
+    public IntegerProperty stockProperty() {
+        return stock;
+    }
 
     public int getKd_Barang() {
         return kd_Barang.get();

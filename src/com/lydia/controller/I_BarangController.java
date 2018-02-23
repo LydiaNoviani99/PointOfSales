@@ -51,6 +51,8 @@ public class I_BarangController implements Initializable {
     @FXML
     private TextField txtHargaJual;
     @FXML
+    private TextField txtStock;
+    @FXML
     private ComboBox<Kategori> comboKategoriBarang;
     @FXML
     private BorderPane bpBarang;
@@ -64,6 +66,8 @@ public class I_BarangController implements Initializable {
     private TableColumn<Barang, Integer> colHrg_Beli;
     @FXML
     private TableColumn<Barang, Integer> colHrg_Jual;
+    @FXML
+    private TableColumn<Barang, Integer> colStock;
     @FXML
     private TableColumn<Barang, String> col_Kategori;
 
@@ -81,14 +85,18 @@ public class I_BarangController implements Initializable {
 //        colKd_Barang.
 //                setCellValueFactory(data -> data.getValue().
 //                kd_BarangProperty().asObject());
+        colNm_Barang.
+                setCellValueFactory(data -> data.getValue().nm_BarangProperty());
         colHrg_Beli.
                 setCellValueFactory(data -> data.getValue().
                 hrg_BeliProperty().asObject());
         colHrg_Jual.
                 setCellValueFactory(data -> data.getValue().
                 hrg_JualProperty().asObject());
-        colNm_Barang.
-                setCellValueFactory(data -> data.getValue().nm_BarangProperty());
+
+        colStock.
+                setCellValueFactory(data -> data.getValue().stockProperty().
+                asObject());
         col_Kategori.
                 setCellValueFactory(data -> data.getValue().
                 getKategori_Id_Kategori().ket_KategoriProperty());
@@ -103,7 +111,7 @@ public class I_BarangController implements Initializable {
         Utility utility = new Utility();
         if (selectedBarang == null) {
             if (!utility.isEmptyField(txtNamaBarang, txtHargaBeli,
-                    txtHargaJual)) {
+                    txtHargaJual, txtStock)) {
                 Barang barang = new Barang();
                 Kategori kategori = new Kategori();
                 barang.setNm_Barang(txtNamaBarang.getText().trim());
@@ -111,6 +119,8 @@ public class I_BarangController implements Initializable {
                         valueOf(txtHargaBeli.getText().trim()));
                 barang.setHrg_Jual(Integer.
                         valueOf(txtHargaJual.getText().trim()));
+                barang.setStock(Integer.
+                        valueOf(txtStock.getText().trim()));
                 kategori.setId_Kategori(comboKategoriBarang.getValue().
                         getId_Kategori());
                 kategori.setKet_Kategori(comboKategoriBarang.getValue().
@@ -128,6 +138,7 @@ public class I_BarangController implements Initializable {
                     txtNamaBarang.clear();
                     txtHargaBeli.clear();
                     txtHargaJual.clear();
+                    txtStock.clear();
                     comboKategoriBarang.setValue(null);
                 }
             } else {
@@ -137,13 +148,15 @@ public class I_BarangController implements Initializable {
             }
         } else {
             if (!utility.isEmptyField(txtNamaBarang, txtHargaBeli,
-                    txtHargaJual)) {
+                    txtHargaJual, txtStock)) {
                 selectedBarang.setKd_Barang(selectedBarang.getKd_Barang());
                 selectedBarang.setNm_Barang(txtNamaBarang.getText().trim());
                 selectedBarang.setHrg_Beli(Integer.
                         valueOf(txtHargaBeli.getText().trim()));
                 selectedBarang.setHrg_Jual(Integer.
                         valueOf(txtHargaJual.getText().trim()));
+                selectedBarang.setStock(Integer.
+                        valueOf(txtStock.getText().trim()));
                 selectedBarang.setKategori_Id_Kategori(comboKategoriBarang.
                         getValue());
                 if (i_homeController.getBarangDao().updateData(selectedBarang)
@@ -157,6 +170,7 @@ public class I_BarangController implements Initializable {
                     txtNamaBarang.clear();
                     txtHargaBeli.clear();
                     txtHargaJual.clear();
+                    txtStock.clear();
                     comboKategoriBarang.setValue(null);
                     selectedBarang = null;
                 }
@@ -174,7 +188,7 @@ public class I_BarangController implements Initializable {
     ) {
         Utility utility = new Utility();
         if (!utility.isEmptyField(txtNamaBarang, txtHargaBeli,
-                txtHargaJual)) {
+                txtHargaJual, txtStock)) {
             Barang barang = new Barang();
             Kategori kategori = new Kategori();
             barang.setKd_Barang(selectedBarang.getKd_Barang());
@@ -183,6 +197,8 @@ public class I_BarangController implements Initializable {
                     valueOf(txtHargaBeli.getText().trim()));
             barang.setHrg_Jual(Integer.
                     valueOf(txtHargaJual.getText().trim()));
+            barang.setStock(Integer.
+                    valueOf(txtStock.getText().trim()));
             kategori.setId_Kategori(comboKategoriBarang.getValue().
                     getId_Kategori());
             kategori.setKet_Kategori(comboKategoriBarang.getValue().
@@ -202,6 +218,7 @@ public class I_BarangController implements Initializable {
             txtNamaBarang.clear();
             txtHargaBeli.clear();
             txtHargaJual.clear();
+            txtStock.clear();
             selectedBarang = null;
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -244,6 +261,7 @@ public class I_BarangController implements Initializable {
             txtNamaBarang.setText(selectedBarang.getNm_Barang());
             txtHargaBeli.setText(String.valueOf(selectedBarang.getHrg_Beli()));
             txtHargaJual.setText(String.valueOf(selectedBarang.getHrg_Jual()));
+            txtStock.setText(String.valueOf(selectedBarang.getStock()));
             comboKategoriBarang.setValue(selectedBarang.
                     getKategori_Id_Kategori());
         }
