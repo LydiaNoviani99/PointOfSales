@@ -172,7 +172,7 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                  <children>
-                                    <Button fx:id="btnHapusCart" mnemonicParsing="false" onAction="#btnHapusTCartOnAction" prefHeight="25.0" prefWidth="81.0" text="Hapus" />
+                                    <Button fx:id="btnCancelCart" mnemonicParsing="false" onAction="#btnCancelCartOnAction" prefHeight="25.0" prefWidth="81.0" text="Cancel" />
                                  </children>
                                  <GridPane.margin>
                                     <Insets top="10.0" />
@@ -241,7 +241,7 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="274.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <TextField fx:id="txtNamaKasir" disable="true" prefHeight="25.0" prefWidth="272.0" />
+                        <TextField fx:id="txtIdKasir" disable="true" prefHeight="25.0" prefWidth="272.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5">

@@ -146,28 +146,15 @@ public class BarangDaoImpl implements DaoService<Barang> {
     public Barang getData(Barang id
     ) {
         try (Connection connection = Koneksi.createConnection()) {
-
             String query
-                    = "SELECT b.kd_Barang, b.nm_Barang, b.hrg_Beli, b.hrg_Jual, b.stock, b.kategori_Id_Kategori FROM barang b join kategori k on b.kategori_Id_Kategori = k.id_Kategori";
+                    = "SELECT hrg_Jual where kd_Barang=? ";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, id.getKd_Barang());
-            ps.setString(2, id.getNm_Barang());
-            ps.setInt(3, id.getHrg_Beli());
-            ps.setInt(4, id.getHrg_Jual());
-            ps.setInt(5, id.getStock());
-            ps.setInt(6, id.getKategori_Id_Kategori().getId_Kategori());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Barang barang = new Barang();
                 Kategori kategori = new Kategori();
-                barang.setKd_Barang(rs.getInt("kd_Barang"));
-                barang.setNm_Barang(rs.getString("nm_Barang"));
-                barang.setHrg_Beli(rs.getInt("hrg_Beli"));
                 barang.setHrg_Jual(rs.getInt("hrg_Jual"));
-                barang.setStock(rs.getInt("stock"));
-                kategori.setId_Kategori(rs.getInt("id_Kategori"));
-                barang.setKategori_Id_Kategori(kategori);
-
                 return barang;
             }
         } catch (ClassNotFoundException | SQLException ex) {
@@ -176,5 +163,4 @@ public class BarangDaoImpl implements DaoService<Barang> {
         }
         return (null);
     }
-
 }

@@ -11,6 +11,7 @@ import com.lydia.dao.KategoriDaoImpl;
 import com.lydia.dao.RoleDaoImpl;
 import com.lydia.dao.UserDaoImpl;
 import com.lydia.entity.Barang;
+import com.lydia.entity.Detail_transaksi;
 import com.lydia.entity.Kategori;
 import com.lydia.entity.Role;
 import com.lydia.entity.Transaksi;
@@ -206,6 +207,7 @@ public class I_HomeController implements Initializable {
             BorderPane borderPane = loader.load();
             Scene scene = new Scene(borderPane);
             I_TransaksiController i_TransaksiController = loader.getController();
+            i_TransaksiController.setHomeController(this);
 
             transaksiStage.initOwner(bpHome.getScene().getWindow());
             transaksiStage.initModality(Modality.WINDOW_MODAL);
@@ -338,13 +340,19 @@ public class I_HomeController implements Initializable {
     }
 
     private Transaksi cartDaoImpl;
-    private ObservableList<Transaksi> carts;
+    private ObservableList<Detail_transaksi> carts;
 
-    public ObservableList<Transaksi> getCarts() {
+    public ObservableList<Detail_transaksi> getCarts() {
         if (carts == null) {
             carts = FXCollections.observableArrayList();
         }
         return carts;
+    }
+
+    private User selectedUser;
+
+    public User getSelectedUser() {
+        return selectedUser;
     }
 
 }

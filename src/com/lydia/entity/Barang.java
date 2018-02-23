@@ -100,4 +100,9 @@ public class Barang {
         return kategori_Id_Kategori;
     }
 
+    @Override
+    public String toString() {
+        return getKd_Barang() + '-' + getNm_Barang();
+    }
+
 }
