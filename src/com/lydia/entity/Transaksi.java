@@ -15,7 +15,7 @@ import javafx.beans.property.SimpleObjectProperty;
  *
  * @author Lydia (1672014)
  */
-public final class Transaksi {
+public class Transaksi {
 
     private final IntegerProperty kd_Transaksi = new SimpleIntegerProperty();
     private final IntegerProperty user_kd_User = new SimpleIntegerProperty();

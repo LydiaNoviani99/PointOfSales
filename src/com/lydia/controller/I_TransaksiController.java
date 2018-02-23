@@ -6,7 +6,9 @@
 package com.lydia.controller;
 
 import com.lydia.dao.BarangDaoImpl;
+import com.lydia.dao.TransaksiDaoImpl;
 import com.lydia.entity.Barang;
+import com.lydia.entity.Carts;
 import com.lydia.entity.Detail_transaksi;
 import com.lydia.entity.Transaksi;
 import com.lydia.entity.User;
@@ -38,15 +40,15 @@ import javafx.scene.layout.BorderPane;
 public class I_TransaksiController implements Initializable {
 
     @FXML
-    private TableColumn<Detail_transaksi, String> colKd_Barang;
+    private TableColumn<Carts, String> colKd_Barang;
     @FXML
-    private TableColumn<Detail_transaksi, String> colNm_Barang;
+    private TableColumn<Carts, String> colNm_Barang;
     @FXML
-    private TableColumn<Detail_transaksi, String> colJumlah;
+    private TableColumn<Carts, String> colJumlah;
     @FXML
-    private TableColumn<Detail_transaksi, String> colHarga;
+    private TableColumn<Carts, String> colHarga;
     @FXML
-    private TableColumn<Detail_transaksi, String> colTotal;
+    private TableColumn<Carts, String> colTotal;
     @FXML
     private ComboBox<Barang> comboListBarang;
     @FXML
@@ -85,7 +87,7 @@ public class I_TransaksiController implements Initializable {
     public void setHomeController(
             I_HomeController i_homeController) {
         this.i_homeController = i_homeController;
-        tableTransaksi.setItems(i_homeController.getCarts());
+        tableTransaksi.setItems(getCarts());
     }
 
     @Override
@@ -95,28 +97,28 @@ public class I_TransaksiController implements Initializable {
         Date date = new Date();
         colKd_Barang.
                 setCellValueFactory((
-                        TableColumn.CellDataFeatures<Detail_transaksi, String> param)
+                        TableColumn.CellDataFeatures<Carts, String> param)
                         -> new SimpleStringProperty(String.valueOf(param.
-                        getValue().getBarang_kd_Barang().getKd_Barang())
-                        + param.getValue().getBarang_kd_Barang().getNm_Barang()));
+                        getValue().getKd_Barang())));
+//                        + param.getValue().getBarang_kd_Barang().getNm_Barang()));
         colNm_Barang.
                 setCellValueFactory((
-                        TableColumn.CellDataFeatures<Detail_transaksi, String> param)
+                        TableColumn.CellDataFeatures<Carts, String> param)
                         -> new SimpleStringProperty(String.valueOf(param.
-                        getValue().getBarang_kd_Barang().getNm_Barang())));
+                        getValue().getNm_Barang())));
         colJumlah.
                 setCellValueFactory((
-                        TableColumn.CellDataFeatures<Detail_transaksi, String> param)
+                        TableColumn.CellDataFeatures<Carts, String> param)
                         -> new SimpleStringProperty(String.valueOf(param.
-                        getValue().getJml())));
+                        getValue().getJumlah())));
         colHarga.setCellValueFactory((
-                TableColumn.CellDataFeatures<Detail_transaksi, String> param)
+                TableColumn.CellDataFeatures<Carts, String> param)
                 -> new SimpleStringProperty(String.valueOf(param.
-                        getValue().getSaling_price())));
+                        getValue().getSaling_Price())));
         colTotal.setCellValueFactory((
-                TableColumn.CellDataFeatures<Detail_transaksi, String> param)
+                TableColumn.CellDataFeatures<Carts, String> param)
                 -> new SimpleStringProperty(String.valueOf(param.getValue().
-                        getSaling_price() * param.getValue().getJml())));
+                        getSaling_Price() * param.getValue().getJumlah())));
 
         txtTglTransaksi.setText(dateFormat.format(date));
 //        txtIdKasir.setText(i_homeController.getSelectedUser().
@@ -147,6 +149,14 @@ public class I_TransaksiController implements Initializable {
             transaksi.setPembayaran(Integer.valueOf(txtPembayaran.getText().
                     trim()));
             //Kembalian
+
+            if (getTransactionDao().addData(transaksi) == 1) {
+                getTransaksis().clear();
+                getTransaksis().addAll(
+                        getTransactionDao().showAllData());
+
+                tableTransaksi.refresh();
+            }
         }
     }
 
@@ -161,6 +171,13 @@ public class I_TransaksiController implements Initializable {
     private ObservableList<Barang> barangs;
     private BarangDaoImpl barangDao;
 
+    public BarangDaoImpl getBarangDao() {
+        if (barangDao == null) {
+            barangDao = new BarangDaoImpl();
+        }
+        return barangDao;
+    }
+
     public ObservableList<Barang> getBarangs() {
         if (barangs == null) {
             barangs = FXCollections.observableArrayList();
@@ -169,10 +186,29 @@ public class I_TransaksiController implements Initializable {
         return barangs;
     }
 
-    public BarangDaoImpl getBarangDao() {
-        if (barangDao == null) {
-            barangDao = new BarangDaoImpl();
+    private ObservableList<Transaksi> transaksis;
+    private TransaksiDaoImpl transaksiDao;
+
+    public TransaksiDaoImpl getTransactionDao() {
+        if (transaksiDao == null) {
+            transaksiDao = new TransaksiDaoImpl();
         }
-        return barangDao;
+        return transaksiDao;
     }
+
+    public ObservableList<Transaksi> getTransaksis() {
+        if (transaksis == null) {
+            transaksis = FXCollections.observableArrayList();
+            transaksis.addAll(getTransactionDao().showAllData());
+        }
+        return transaksis;
+    }
+
+    public ObservableList<Carts> getCarts() {
+        if (carts == null) {
+            carts = FXCollections.observableArrayList();
+        }
+        return carts;
+    }
+
 }

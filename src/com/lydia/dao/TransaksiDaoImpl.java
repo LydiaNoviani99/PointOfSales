@@ -33,12 +33,13 @@ public class TransaksiDaoImpl implements DaoService<Transaksi> {
             try (Connection connection = Koneksi.createConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "INSERT INTO transaksi(kd_Transaksi, tgl_Transaksi, user_kd_User) VALUES (?,?,?)";
+                        = "INSERT INTO transaksi(kd_Transaksi, tgl_Transaksi, pembayaran, user_kd_User) VALUES (?,?,?,?)";
 
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setInt(1, object.getKd_Transaksi());
                 ps.setTimestamp(2, t);
-                ps.setInt(3, object.getUser_kd_User());
+                ps.setInt(3, object.getPembayaran());
+                ps.setInt(4, object.getUser_kd_User());
 
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
