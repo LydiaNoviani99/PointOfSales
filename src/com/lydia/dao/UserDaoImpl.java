@@ -172,13 +172,17 @@ public class UserDaoImpl implements DaoService<User> {
         try (Connection connection = Koneksi.createConnection()) {
 
             String query
-                    = "SELECT u.username_access, u.password_access, u.role_id_Role FROM user u join role r on u.role_id_Role = r.id_Role WHERE u.username_access = ? AND u.password_access = ?";
+                    = "SELECT u.kd_User, u.nm_User, u.username_access, u.password_access, u.role_id_Role FROM user u join role r on u.role_id_Role = r.id_Role WHERE u.username_access = ? AND u.password_access = ?";
             PreparedStatement ps = connection.prepareStatement(query);
+//            ps.setInt(1, id.getKd_User());
+//            ps.setString(2, id.getNm_User());
             ps.setString(1, id.getUsername_access());
             ps.setString(2, id.getPassword_access());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 User user = new User();
+                user.setKd_User(rs.getInt("u.kd_User"));
+                user.setNm_User(rs.getString("u.nm_User"));
                 user.setUsername_access(rs.getString("u.username_access"));
 
                 user.setPassword_access(rs.getString("u.password_access"));

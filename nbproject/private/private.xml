@@ -3,12 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/KULIAH/SMT%204/PBO2B/Proyek1/PointOfSales/src/com/lydia/entity/Role.java</file>
-            <file>file:/D:/KULIAH/SMT%204/PBO2B/Proyek1/PointOfSales/src/com/lydia/entity/User.java</file>
+            <file>file:/D:/KULIAH/SMT%204/PBO2B/Proyek1/PointOfSales/src/com/lydia/entity/Transaksi.java</file>
+            <file>file:/D:/KULIAH/SMT%204/PBO2B/Proyek1/PointOfSales/src/com/lydia/entity/Barang.java</file>
+            <file>file:/D:/KULIAH/SMT%204/PBO2B/Proyek1/PointOfSales/src/com/lydia/entity/Carts.java</file>
             <file>file:/D:/KULIAH/SMT%204/PBO2B/Proyek1/PointOfSales/src/com/lydia/dao/UserDaoImpl.java</file>
-            <file>file:/D:/KULIAH/SMT%204/PBO2B/Proyek1/PointOfSales/src/com/lydia/controller/I_UserKaryawanController.java</file>
+            <file>file:/D:/KULIAH/SMT%204/PBO2B/Proyek1/PointOfSales/src/com/lydia/dao/TransaksiDaoImpl.java</file>
             <file>file:/D:/KULIAH/SMT%204/PBO2B/Proyek1/PointOfSales/src/com/lydia/controller/I_HomeController.java</file>
-            <file>file:/D:/KULIAH/SMT%204/PBO2B/Proyek1/PointOfSales/src/com/lydia/controller/I_BarangController.java</file>
+            <file>file:/D:/KULIAH/SMT%204/PBO2B/Proyek1/PointOfSales/src/com/lydia/controller/I_LoginController.java</file>
+            <file>file:/D:/KULIAH/SMT%204/PBO2B/Proyek1/PointOfSales/src/com/lydia/controller/I_TransaksiController.java</file>
+            <file>file:/D:/KULIAH/SMT%204/PBO2B/Proyek1/PointOfSales/src/com/lydia/dao/BarangDaoImpl.java</file>
         </group>
     </open-files>
 </project-private>

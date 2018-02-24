@@ -26,6 +26,14 @@ public class Barang {
             = new SimpleObjectProperty<>();
     private final IntegerProperty stock = new SimpleIntegerProperty();
 
+    public Barang(int kd_Barang) {
+        this.setKd_Barang(kd_Barang);
+
+    }
+
+    public Barang() {
+    }
+
     public int getStock() {
         return stock.get();
     }
@@ -102,7 +110,7 @@ public class Barang {
 
     @Override
     public String toString() {
-        return getKd_Barang() + '-' + getNm_Barang();
+        return String.valueOf(getKd_Barang()) + "-" + getNm_Barang();
     }
 
 }

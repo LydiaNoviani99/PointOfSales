@@ -206,7 +206,7 @@ public class I_HomeController implements Initializable {
             Scene scene = new Scene(borderPane);
             I_TransaksiController i_TransaksiController = loader.getController();
             i_TransaksiController.setHomeController(this);
-
+            System.out.println(this);
             transaksiStage.initOwner(bpHome.getScene().getWindow());
             transaksiStage.initModality(Modality.WINDOW_MODAL);
 
@@ -240,8 +240,11 @@ public class I_HomeController implements Initializable {
         alert.show();
     }
 
-    public void setLoginController(I_LoginController aThis) {
+    public void setLoginController(I_LoginController aThis, User user) {
         this.i_LoginController = aThis;
+        this.selectedUser = user;
+        System.out.println(selectedUser.getNm_User()
+        );
         if (i_LoginController.getSelectedUser().getRole_Id_Role().getId_Role()
                 == 1) {
             menuFile.setDisable(false);

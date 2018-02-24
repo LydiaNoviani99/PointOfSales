@@ -6,6 +6,7 @@
 package com.lydia.dao;
 
 import com.lydia.entity.Transaksi;
+import com.lydia.entity.User;
 import com.lydia.utility.DaoService;
 import com.lydia.utility.Koneksi;
 import java.sql.Connection;
@@ -33,13 +34,12 @@ public class TransaksiDaoImpl implements DaoService<Transaksi> {
             try (Connection connection = Koneksi.createConnection()) {
                 connection.setAutoCommit(false);
                 String query
-                        = "INSERT INTO transaksi(kd_Transaksi, tgl_Transaksi, pembayaran, user_kd_User) VALUES (?,?,?,?)";
+                        = "INSERT INTO transaksi(kd_Transaksi, pembayaran, user_kd_User) VALUES (?,?,?)";
 
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setInt(1, object.getKd_Transaksi());
-                ps.setTimestamp(2, t);
-                ps.setInt(3, object.getPembayaran());
-                ps.setInt(4, object.getUser_kd_User());
+                ps.setInt(2, object.getPembayaran());
+                ps.setInt(3, object.getUser_Kd_User().getKd_User());
 
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
@@ -73,16 +73,20 @@ public class TransaksiDaoImpl implements DaoService<Transaksi> {
                 observableArrayList();
         try {
             try (Connection connection = Koneksi.createConnection()) {
-                String query = "SELECT * FROM transaksi";
+                String query
+                        = "SELECT t.kd_Transaksi, t.pembayaran,t.tgl_Transaksi,t.user_Kd_User FROM transaksi t JOIN user u ON t.user_Kd_User = u.kd_User";
                 PreparedStatement ps = connection.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     Transaksi transaksiObject = new Transaksi();
-                    transaksiObject.setKd_Transaksi(rs.getInt("kd_Transaksi"));
+                    transaksiObject.setKd_Transaksi(rs.getInt("t.kd_Transaksi"));
+                    transaksiObject.setPembayaran(rs.getInt("t.pembayaran"));
                     transaksiObject.setTgl_Transaksi(rs.getTimestamp(
-                            "tgl_Barang"));
-                    transaksiObject.setUser_kd_User(rs.getInt(
-                            "user_kd_User"));
+                            "tgl_Transaksi"));
+                    User user = new User();
+                    user.setKd_User(rs.getInt("t.user_Kd_User"));
+                    transaksiObject.setUser_Kd_User(user);
+                    transaksi.add(transaksiObject);
                 }
             }
         } catch (ClassNotFoundException | SQLException ex) {

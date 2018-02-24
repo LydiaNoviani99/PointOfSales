@@ -36,7 +36,7 @@ public class Detail_transaksiDaoImpl implements
                         getKd_Transaksi());
                 ps.setInt(2, object.getBarang_kd_Barang().getKd_Barang());
                 ps.setInt(3, object.getJml());
-                ps.setDouble(4, object.getSaling_price());
+                ps.setInt(4, object.getSaling_price());
 
                 if (ps.executeUpdate() != 0) {
                     connection.commit();

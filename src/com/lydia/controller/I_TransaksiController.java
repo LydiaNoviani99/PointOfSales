@@ -6,6 +6,7 @@
 package com.lydia.controller;
 
 import com.lydia.dao.BarangDaoImpl;
+import com.lydia.dao.Detail_transaksiDaoImpl;
 import com.lydia.dao.TransaksiDaoImpl;
 import com.lydia.entity.Barang;
 import com.lydia.entity.Carts;
@@ -14,7 +15,6 @@ import com.lydia.entity.Transaksi;
 import com.lydia.entity.User;
 import com.lydia.utility.Utility;
 import java.net.URL;
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,11 +25,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -39,6 +41,15 @@ import javafx.scene.layout.BorderPane;
  */
 public class I_TransaksiController implements Initializable {
 
+    @FXML
+    private Button btnAddToCart;
+    @FXML
+    private Button btnSubmit;
+    @FXML
+    private Button btnCancelCart;
+
+    @FXML
+    private TableView<Carts> tableTransaksi;
     @FXML
     private TableColumn<Carts, String> colKd_Barang;
     @FXML
@@ -51,13 +62,7 @@ public class I_TransaksiController implements Initializable {
     private TableColumn<Carts, String> colTotal;
     @FXML
     private ComboBox<Barang> comboListBarang;
-    @FXML
-    private Button btnAddToCart;
-    @FXML
-    private Button btnSubmit;
 
-    @FXML
-    private TableView<Detail_transaksi> tableTransaksi;
     @FXML
     private TextField txtTglTransaksi;
     @FXML
@@ -74,25 +79,33 @@ public class I_TransaksiController implements Initializable {
     private BorderPane bpTransaksi;
     @FXML
     private TextField txtPembayaran;
+    @FXML
+    private TextField txtIdKasir;
 
     /**
      * Initializes the controller class.
      */
     private I_HomeController i_homeController;
     @FXML
-    private TextField txtIdKasir;
-    @FXML
-    private Button btnCancelCart;
+    private Button btnHapusCart;
 
     public void setHomeController(
             I_HomeController i_homeController) {
         this.i_homeController = i_homeController;
+        System.out.println(this.i_homeController);
         tableTransaksi.setItems(getCarts());
+        comboListBarang.setItems(getBarangs());
+        txtIdKasir.setText(String.valueOf(i_homeController.getSelectedUser().
+                getKd_User()));
+        txtNamaKasir.setText(i_homeController.getSelectedUser().
+                getNm_User());
+
+        txtNoTransaksi.setText(String.valueOf(getTransaksis().size() + 1));
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        comboListBarang.setItems(getBarangs());
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date date = new Date();
         colKd_Barang.
@@ -122,50 +135,173 @@ public class I_TransaksiController implements Initializable {
 
         txtTglTransaksi.setText(dateFormat.format(date));
 //        txtIdKasir.setText(i_homeController.getSelectedUser().
-//                getUsername_access());
+//                getKd_User());
+
 //        txtNamaKasir.setText(i_homeController.getSelectedUser().getNm_User());
         txtNoTransaksi.setText("");
 //        txtTotalBelanja.setText(Integer.valueOf());
 //        txtKembalian.setText(Integer.valueOf());
+
+        btnHapusCart.setDisable(true);
     }
 
     @FXML
     private void btnAddToCartOnAction(ActionEvent event) {
         if (!Utility.isEmptyField(txtTglTransaksi, txtIdKasir, txtNamaKasir,
                 txtNoTransaksi,
-                txtJumlah, txtTotalBelanja, txtPembayaran, txtKembalian)) {
-            Detail_transaksi detail_transaksi = new Detail_transaksi();
-            Transaksi transaksi = new Transaksi();
-            User user = new User();
+                txtJumlah) && comboListBarang != null) {
+            if (Utility.isNumber(txtJumlah.getText())) {
+                Carts cart = new Carts();
 
-            transaksi.setTgl_Transaksi(Timestamp.valueOf(txtTglTransaksi.
-                    getText().trim()));
-            user.setKd_User(Integer.valueOf(txtIdKasir.getText().trim()));
-            user.setNm_User(txtNamaKasir.getText().trim());
-            transaksi.setKd_Transaksi(Integer.valueOf(txtNoTransaksi.getText().
-                    trim()));
-            detail_transaksi.setJml(Integer.valueOf(txtJumlah.getText().trim()));
-            // Total belanja
-            transaksi.setPembayaran(Integer.valueOf(txtPembayaran.getText().
-                    trim()));
-            //Kembalian
+                cart.setKd_Barang(comboListBarang.getValue().getKd_Barang());
+                cart.setNm_Barang(comboListBarang.getValue().getNm_Barang());
+                cart.setJumlah(Integer.valueOf(txtJumlah.getText().trim()));
+                cart.setSaling_Price(Integer.valueOf(comboListBarang.getValue().
+                        getHrg_Jual()));
 
-            if (getTransactionDao().addData(transaksi) == 1) {
-                getTransaksis().clear();
-                getTransaksis().addAll(
-                        getTransactionDao().showAllData());
+                boolean duplikat = false;
 
-                tableTransaksi.refresh();
+                for (Carts c : carts) {
+                    if (comboListBarang.getValue().getNm_Barang().equals(c.
+                            getNm_Barang())) {
+                        duplikat = true;
+                        c.setJumlah(c.getJumlah() + Integer.valueOf(txtJumlah.
+                                getText()));
+                        tableTransaksi.refresh();
+                    }
+                }
+                if (!duplikat) {
+                    getCarts().add(cart);
+                }
+                getTransaksi().setPembayaran(0);
+                for (Carts c : carts) {
+
+                    getTransaksi().setPembayaran(getTransaksi().getPembayaran()
+                            + c.getJumlah() * c.getSaling_Price());
+                }
+                txtTotalBelanja.setText(String.valueOf(getTransaksi().
+                        getPembayaran()));
+
             }
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Isi semua terlebih dahulu");
+            alert.showAndWait();
         }
     }
 
     @FXML
     private void btnSubmitOnAction(ActionEvent event) {
+        if (!carts.isEmpty()) {
+            if (Utility.isNumber(txtPembayaran.getText())) {
+                if (Integer.valueOf(txtPembayaran.getText()) >= Integer.valueOf(
+                        txtTotalBelanja.getText())) {
+
+                    getTransaksi().setKd_Transaksi(Integer.valueOf(
+                            txtNoTransaksi.
+                                    getText().trim()));
+                    getTransaksi().setPembayaran(Integer.valueOf(
+                            txtTotalBelanja.getText().trim()));
+                    getTransaksi().setUser_Kd_User(new User(
+                            txtIdKasir.getText().
+                                    trim()));
+
+                    getTransaksiDao().addData(getTransaksi());
+
+                    for (Carts cart : carts) {
+                        Detail_transaksi detail_transaksi
+                                = new Detail_transaksi();
+
+                        detail_transaksi.setTransaksi_kd_Transaksi(
+                                getTransaksi());
+                        detail_transaksi.setBarang_kd_Barang(new Barang(cart.
+                                getKd_Barang()));
+                        detail_transaksi.setJml(cart.getJumlah());
+                        detail_transaksi.setSaling_price(cart.getSaling_Price());
+
+                        getDetail_transaksiDao().addData(detail_transaksi);
+
+                    }
+
+                    txtKembalian.setText(String.valueOf((Utility.StoI(
+                            txtPembayaran.getText()) - Utility.StoI(
+                            txtTotalBelanja.getText()))));
+
+                    Utility.showAlert("Infomasi", "Charge : Rp" + (Utility.StoI(
+                            txtPembayaran.getText()) - Utility.StoI(
+                            txtTotalBelanja.getText())),
+                            Alert.AlertType.INFORMATION);
+
+                    setTransaksi(null);
+
+                    carts.clear();
+
+                    txtTotalBelanja.setText("");
+                    txtJumlah.setText("");
+                    txtKembalian.setText("");
+                    txtPembayaran.setText("");
+
+                    comboListBarang.setValue(null);
+
+                    txtIdKasir.setText(String.valueOf(
+                            i_homeController.getSelectedUser().
+                                    getKd_User()));
+                    txtNamaKasir.setText(i_homeController.getSelectedUser().
+                            getNm_User());
+
+                    getTransaksis().clear();
+                    getTransaksis().addAll(getTransaksiDao().showAllData());
+
+                    txtNoTransaksi.setText(String.
+                            valueOf(getTransaksis().size() + 1));
+
+                    DateFormat dateFormat = new SimpleDateFormat(
+                            "dd/MM/yyyy HH:mm");
+                    Date date = new Date();
+
+                    txtTglTransaksi.setText(dateFormat.format(date));
+
+                } else {
+                    Utility.showAlert("Error", "Uang tidak cukup",
+                            Alert.AlertType.ERROR);
+                }
+            }
+
+        }
     }
 
     @FXML
     private void btnCancelCartOnAction(ActionEvent event) {
+        setTransaksi(null);
+
+        carts.clear();
+
+        txtTotalBelanja.setText("");
+        txtJumlah.setText("");
+        txtKembalian.setText("");
+        txtPembayaran.setText("");
+
+        comboListBarang.setValue(null);
+
+        txtIdKasir.setText(String.valueOf(
+                i_homeController.getSelectedUser().
+                        getKd_User()));
+        txtNamaKasir.setText(i_homeController.getSelectedUser().
+                getNm_User());
+
+        getTransaksis().clear();
+        getTransaksis().addAll(getTransaksiDao().showAllData());
+
+        txtNoTransaksi.setText(String.
+                valueOf(getTransaksis().size() + 1));
+
+        DateFormat dateFormat = new SimpleDateFormat(
+                "dd/MM/yyyy HH:mm");
+        Date date = new Date();
+
+        txtTglTransaksi.setText(dateFormat.format(date));
+
     }
 
     private ObservableList<Barang> barangs;
@@ -189,26 +325,81 @@ public class I_TransaksiController implements Initializable {
     private ObservableList<Transaksi> transaksis;
     private TransaksiDaoImpl transaksiDao;
 
-    public TransaksiDaoImpl getTransactionDao() {
+    public TransaksiDaoImpl getTransaksiDao() {
         if (transaksiDao == null) {
             transaksiDao = new TransaksiDaoImpl();
         }
         return transaksiDao;
     }
+    private Detail_transaksiDaoImpl detail_transaksiDaoImpl;
+
+    public Detail_transaksiDaoImpl getDetail_transaksiDao() {
+        if (detail_transaksiDaoImpl == null) {
+            detail_transaksiDaoImpl = new Detail_transaksiDaoImpl();
+        }
+        return detail_transaksiDaoImpl;
+    }
 
     public ObservableList<Transaksi> getTransaksis() {
         if (transaksis == null) {
             transaksis = FXCollections.observableArrayList();
-            transaksis.addAll(getTransactionDao().showAllData());
+            transaksis.addAll(getTransaksiDao().showAllData());
         }
         return transaksis;
     }
+
+    private Transaksi transaksi;
+
+    public Transaksi getTransaksi() {
+        if (transaksi == null) {
+            transaksi = new Transaksi();
+            transaksi.setPembayaran(0);
+        }
+        return transaksi;
+    }
+
+    private ObservableList<Carts> carts;
 
     public ObservableList<Carts> getCarts() {
         if (carts == null) {
             carts = FXCollections.observableArrayList();
         }
         return carts;
+    }
+
+    @FXML
+    private void btnHapusCartOnAction(ActionEvent event) {
+        if (selectedCart != null) {
+            carts.remove(selectedCart);
+            getTransaksi().setPembayaran(0);
+            for (Carts c : carts) {
+
+                getTransaksi().setPembayaran(getTransaksi().getPembayaran()
+                        + c.getJumlah() * c.getSaling_Price());
+            }
+            txtTotalBelanja.setText(String.valueOf(getTransaksi().
+                    getPembayaran()));
+
+            btnHapusCart.setDisable(true);
+
+            selectedCart = null;
+
+        }
+
+    }
+
+    public Carts selectedCart;
+
+    @FXML
+    private void tableCartOnClicked(MouseEvent event) {
+        selectedCart = tableTransaksi.getSelectionModel().getSelectedItem();
+        if (selectedCart != null) {
+            btnHapusCart.setDisable(false);
+        }
+    }
+
+    private void setTransaksi(Transaksi transaksi) {
+        this.transaksi = transaksi;
     }
 
 }

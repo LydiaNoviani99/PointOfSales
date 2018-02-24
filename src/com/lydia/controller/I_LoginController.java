@@ -111,7 +111,7 @@ public class I_LoginController implements Initializable {
                     Scene scene = new Scene(root);
                     I_HomeController i_HomeController = loader.
                             getController();
-                    i_HomeController.setLoginController(this);
+                    i_HomeController.setLoginController(this, selectedUser);
                     i_HomeStage.setScene(scene);
 //                    i_homeController.initOwner(bpLogin.getScene().getWindow());
 //                    i_homeController.initModality(Modality.WINDOW_MODAL);

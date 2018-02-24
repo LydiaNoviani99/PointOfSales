@@ -18,7 +18,6 @@ import javafx.beans.property.SimpleObjectProperty;
 public class Transaksi {
 
     private final IntegerProperty kd_Transaksi = new SimpleIntegerProperty();
-    private final IntegerProperty user_kd_User = new SimpleIntegerProperty();
     private final ObjectProperty<Timestamp> tgl_Transaksi
             = new SimpleObjectProperty<>();
 
@@ -32,18 +31,6 @@ public class Transaksi {
 
     public IntegerProperty Kd_TransaksiProperty() {
         return kd_Transaksi;
-    }
-
-    public int getUser_kd_User() {
-        return user_kd_User.get();
-    }
-
-    public void setUser_kd_User(int value) {
-        user_kd_User.set(value);
-    }
-
-    public IntegerProperty user_kd_UserProperty() {
-        return user_kd_User;
     }
 
     public Timestamp getTgl_Transaksi() {
@@ -70,16 +57,29 @@ public class Transaksi {
     public IntegerProperty pembayaranProperty() {
         return pembayaran;
     }
+    private final ObjectProperty<User> user_Kd_User
+            = new SimpleObjectProperty<>();
 
-    public Transaksi() {
+    public User getUser_Kd_User() {
+        return user_Kd_User.get();
     }
 
-    public Transaksi(int kd_Transaksi, int user_kd_User, int pembayaran,
-            Timestamp tgl_Transaksi) {
-        this.setKd_Transaksi(kd_Transaksi);
-        this.setUser_kd_User(user_kd_User);
-        this.setPembayaran(pembayaran);
-        this.setTgl_Transaksi(tgl_Transaksi);
+    public void setUser_Kd_User(User value) {
+        user_Kd_User.set(value);
     }
 
+    public ObjectProperty user_Kd_UserProperty() {
+        return user_Kd_User;
+    }
+
+//    public Transaksi() {
+//    }
+//
+//    public Transaksi(int kd_Transaksi, int user_kd_User, int pembayaran,
+//            Timestamp tgl_Transaksi) {
+//        this.setKd_Transaksi(kd_Transaksi);
+//        this.setUser_Kd_User(user_kd_User);
+//        this.setPembayaran(pembayaran);
+//        this.setTgl_Transaksi(tgl_Transaksi);
+//    }
 }

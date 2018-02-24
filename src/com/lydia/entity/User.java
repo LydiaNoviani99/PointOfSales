@@ -30,6 +30,15 @@ public class User {
     private final ObjectProperty<Role> role_Id_Role
             = new SimpleObjectProperty<>();
 
+    public User(String kd_User) {
+        this.setKd_User(Integer.valueOf(kd_User));
+
+    }
+
+    public User() {
+
+    }
+
     public int getKd_User() {
         return kd_User.get();
     }

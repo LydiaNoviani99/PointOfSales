@@ -17,6 +17,19 @@ import javafx.beans.property.StringProperty;
 public class Carts {
 
     private final IntegerProperty kd_Barang = new SimpleIntegerProperty();
+    private final StringProperty nm_Barang = new SimpleStringProperty();
+    private final IntegerProperty jumlah = new SimpleIntegerProperty();
+    private final IntegerProperty saling_Price = new SimpleIntegerProperty();
+
+    public Carts() {
+    }
+
+    public Carts(int kd_Barang, String nm_Barang, int jumlah, int saling_Price) {
+        this.setKd_Barang(kd_Barang);
+        this.setNm_Barang(nm_Barang);
+        this.setJumlah(jumlah);
+        this.setSaling_Price(saling_Price);
+    }
 
     public int getKd_Barang() {
         return kd_Barang.get();
@@ -29,7 +42,6 @@ public class Carts {
     public IntegerProperty kd_BarangProperty() {
         return kd_Barang;
     }
-    private final StringProperty nm_Barang = new SimpleStringProperty();
 
     public String getNm_Barang() {
         return nm_Barang.get();
@@ -42,7 +54,6 @@ public class Carts {
     public StringProperty nm_BarangProperty() {
         return nm_Barang;
     }
-    private final IntegerProperty jumlah = new SimpleIntegerProperty();
 
     public int getJumlah() {
         return jumlah.get();
@@ -55,7 +66,6 @@ public class Carts {
     public IntegerProperty jumlahProperty() {
         return jumlah;
     }
-    private final IntegerProperty saling_Price = new SimpleIntegerProperty();
 
     public int getSaling_Price() {
         return saling_Price.get();
@@ -69,23 +79,9 @@ public class Carts {
         return saling_Price;
     }
 
-    public Carts() {
-    }
-
-    public Carts(int kd_Barang, String nm_Barang, int jumlah, int saling_Price) {
-        this.setKd_Barang(kd_Barang);
-        this.setNm_Barang(nm_Barang);
-        this.setJumlah(jumlah);
-        this.setSaling_Price(saling_Price);
-    }
-
     @Override
     public String toString() {
         return String.valueOf(getKd_Barang()) + " - " + getNm_Barang();
-    }
-
-    public Object getBarang_kd_Barang() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
