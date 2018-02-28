@@ -147,4 +147,9 @@ public class User {
         return nm_User;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(getKd_User());
+    }
+
 }

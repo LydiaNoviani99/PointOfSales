@@ -20,6 +20,9 @@ public class Transaksi {
     private final IntegerProperty kd_Transaksi = new SimpleIntegerProperty();
     private final ObjectProperty<Timestamp> tgl_Transaksi
             = new SimpleObjectProperty<>();
+    private final IntegerProperty pembayaran = new SimpleIntegerProperty();
+    private final ObjectProperty<User> user_Kd_User
+            = new SimpleObjectProperty<>();
 
     public int getKd_Transaksi() {
         return kd_Transaksi.get();
@@ -44,7 +47,6 @@ public class Transaksi {
     public ObjectProperty tgl_TransaksiProperty() {
         return tgl_Transaksi;
     }
-    private final IntegerProperty pembayaran = new SimpleIntegerProperty();
 
     public int getPembayaran() {
         return pembayaran.get();
@@ -57,8 +59,6 @@ public class Transaksi {
     public IntegerProperty pembayaranProperty() {
         return pembayaran;
     }
-    private final ObjectProperty<User> user_Kd_User
-            = new SimpleObjectProperty<>();
 
     public User getUser_Kd_User() {
         return user_Kd_User.get();
@@ -72,14 +72,9 @@ public class Transaksi {
         return user_Kd_User;
     }
 
-//    public Transaksi() {
-//    }
-//
-//    public Transaksi(int kd_Transaksi, int user_kd_User, int pembayaran,
-//            Timestamp tgl_Transaksi) {
-//        this.setKd_Transaksi(kd_Transaksi);
-//        this.setUser_Kd_User(user_kd_User);
-//        this.setPembayaran(pembayaran);
-//        this.setTgl_Transaksi(tgl_Transaksi);
-//    }
+    @Override
+    public String toString() {
+        return String.valueOf(getKd_Transaksi());
+    }
+
 }

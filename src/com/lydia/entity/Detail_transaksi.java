@@ -87,4 +87,16 @@ public class Detail_transaksi {
         return saling_price;
     }
 
+    public Detail_transaksi() {
+    }
+
+    public Detail_transaksi(Integer jml, Integer saling_price,
+            Barang kdBarang) {
+
+        this.setJml(jml);
+        this.setSaling_price(saling_price);
+        this.setBarang_kd_Barang(kdBarang);
+
+    }
+
 }

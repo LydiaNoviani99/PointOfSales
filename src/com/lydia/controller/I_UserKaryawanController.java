@@ -27,7 +27,7 @@ import javafx.scene.layout.BorderPane;
 /**
  * FXML Controller class
  *
- * @author USER
+ * @author Lydia (1672014)
  */
 public class I_UserKaryawanController implements Initializable {
 
@@ -276,10 +276,6 @@ public class I_UserKaryawanController implements Initializable {
         }
     }
 
-    @FXML
-    private void btnBackAction(ActionEvent event
-    ) {
-    }
 
     @FXML
     private void tableUserOnClicked(MouseEvent event) {

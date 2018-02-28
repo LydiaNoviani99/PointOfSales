@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="775.0" style="-fx-background-color: #ffff99;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lydia.controller.I_LaporanController">
+<BorderPane fx:id="bpLaporan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="775.0" style="-fx-background-color: #ffff99;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lydia.controller.I_LaporanController">
    <center>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -23,7 +23,8 @@
               <rowConstraints>
                   <RowConstraints maxHeight="91.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="91.0" minHeight="0.0" prefHeight="45.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="275.0" minHeight="10.0" prefHeight="227.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="275.0" minHeight="10.0" prefHeight="196.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="106.0" vgrow="SOMETIMES" />
               </rowConstraints>
@@ -37,7 +38,12 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <ComboBox fx:id="cbYear" prefWidth="150.0" />
+                              <ComboBox fx:id="cbTahun" onAction="#cbTahunOnAction" prefHeight="25.0" prefWidth="129.0" />
+                              <Button fx:id="btnReset" mnemonicParsing="false" onAction="#btnResetOnAction" text="Reset">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Button>
                            </children>
                         </HBox>
                      </children>
@@ -53,12 +59,12 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="5" GridPane.rowIndex="2">
                      <children>
-                        <TableView fx:id="tableLaporanPenjualan" prefHeight="236.0" prefWidth="750.0">
+                        <TableView fx:id="tableLaporanPenjualan" prefHeight="170.0" prefWidth="750.0">
                           <columns>
                             <TableColumn fx:id="colTglLaporan" prefWidth="75.0" text="Tgl" />
                             <TableColumn fx:id="colNoTransaksiLaporan" prefWidth="75.0" text="No_Transaksi" />
-                              <TableColumn fx:id="colKdBarangLaporan" prefWidth="75.0" text="Kd_Barang" />
-                              <TableColumn fx:id="colNmBarangLaporan" prefWidth="75.0" text="Nm_Barang" />
+                              <TableColumn fx:id="colKdUser" prefWidth="75.0" text="Kd_User" />
+                              <TableColumn fx:id="colKdBarangLaporan" prefWidth="75.0" text="Barang" />
                               <TableColumn fx:id="colHargaLaporan" prefWidth="75.0" text="Harga" />
                               <TableColumn fx:id="colJmlTerjualLaporan" prefWidth="75.0" text="JmlTerjual" />
                               <TableColumn fx:id="colTotalLaporan" prefWidth="75.0" text="Total" />
@@ -69,7 +75,7 @@
                         </TableView>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="5" GridPane.rowIndex="4">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="5" GridPane.rowIndex="5">
                      <children>
                         <TableView fx:id="tableLaporanPenjualanTertinggi" prefHeight="236.0" prefWidth="750.0">
                            <columnResizePolicy>
@@ -94,9 +100,23 @@
                      </children>
                   </HBox>
                   <Button mnemonicParsing="false" onAction="#btnBackAction" text="Back" GridPane.columnIndex="4" />
-                  <DatePicker fx:id="dpSampai" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <Button fx:id="btnLapor" mnemonicParsing="false" onAction="#btnLaporOnAction" text="Lapor" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <DatePicker fx:id="dpDari" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="5" GridPane.rowIndex="4">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="34.0" text="Dari : " />
+                        <DatePicker fx:id="dpDari">
+                           <HBox.margin>
+                              <Insets right="60.0" />
+                           </HBox.margin>
+                        </DatePicker>
+                        <Label text="Sampai : " />
+                        <DatePicker fx:id="dpSampai">
+                           <HBox.margin>
+                              <Insets right="60.0" />
+                           </HBox.margin>
+                        </DatePicker>
+                        <Button fx:id="btnLihatLaporanTertinggi" mnemonicParsing="false" onAction="#btnLihatLaporanTertinggiOnAction" text="Lihat" />
+                     </children>
+                  </HBox>
                </children>
             </GridPane>
          </children>

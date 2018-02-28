@@ -230,29 +230,6 @@ public class I_BarangController implements Initializable {
 
     }
 
-    @FXML
-    private void btnBackOnAction(ActionEvent event
-    ) {
-//        try {
-//            homeStage = new Stage();
-//            FXMLLoader loader = new FXMLLoader();
-//            loader setLocation(MainApp.class getResource("view/i_Home.fxml")
-//            );
-//            BorderPane borderPane = loader.load();
-//            Scene scene = new Scene(borderPane);
-//            I_HomeController i_HomeController = loader.getController();
-//
-//            homeStage.setScene(scene);
-//            homeStage.show();
-//
-//            bpBarang.getScene().getWindow().hide();
-//
-//        } catch (IOException ex) {
-//            Logger.getLogger(I_LoginController.class
-//                    .getName()).log(
-//                            Level.SEVERE, null, ex);
-//        }
-    }
 
     @FXML
     private void tableBarangOnClicked(MouseEvent event) {

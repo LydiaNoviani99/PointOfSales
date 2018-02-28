@@ -220,15 +220,7 @@
                         </GridPane>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="47.0" prefWidth="284.0" GridPane.columnIndex="2">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#btnBackAction" text="Back">
-                           <HBox.margin>
-                              <Insets right="30.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="47.0" prefWidth="284.0" GridPane.columnIndex="2" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="308.0" minWidth="10.0" prefWidth="307.0" />

@@ -12,7 +12,7 @@ import javafx.beans.property.StringProperty;
 
 /**
  *
- * @author USER
+ * @author Lydia (1672014)
  */
 public class Kategori {
 

@@ -5,15 +5,20 @@
  */
 package com.lydia.dao;
 
+import com.lydia.entity.Barang;
 import com.lydia.entity.Detail_transaksi;
+import com.lydia.entity.Transaksi;
+import com.lydia.entity.User;
 import com.lydia.utility.DaoService;
 import com.lydia.utility.Koneksi;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -65,13 +70,85 @@ public class Detail_transaksiDaoImpl implements
     }
 
     @Override
-    public List<Detail_transaksi> showAllData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ObservableList<Detail_transaksi> showAllData() {
+        ObservableList<Detail_transaksi> relasiPenjualans = FXCollections.
+                observableArrayList();
+        try {
+            try (Connection connection = Koneksi.createConnection()) {
+                String query
+                        = "SELECT t.tgl_Transaksi, t.kd_Transaksi, b.kd_Barang, dt.jml, dt.saling_price,u.kd_User FROM detail_transaksi dt JOIN transaksi t ON dt.transaksi_kd_Transaksi = t.kd_Transaksi JOIN User u ON t.user_kd_User = u.kd_User JOIN Barang b ON b.kd_Barang = dt.barang_kd_Barang";
+
+                PreparedStatement ps = connection.prepareStatement(query);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    Detail_transaksi detail_transaksi = new Detail_transaksi();
+                    Transaksi transaksi1 = new Transaksi();
+                    User user = new User();
+                    Barang barang = new Barang();
+
+                    transaksi1.setKd_Transaksi(rs.getInt("t.kd_Transaksi"));
+                    user.setKd_User(rs.getInt("u.kd_User"));
+                    barang.setKd_Barang(rs.getInt("b.kd_Barang"));
+                    detail_transaksi.setJml(rs.getInt("dt.jml"));
+                    detail_transaksi.setSaling_price(rs.
+                            getInt("dt.saling_price"));
+
+                    detail_transaksi.setBarang_kd_Barang(barang);
+                    transaksi1.setUser_Kd_User(user);
+                    detail_transaksi.setTransaksi_kd_Transaksi(transaksi1);
+                    relasiPenjualans.add(detail_transaksi);
+
+                }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(BarangDaoImpl.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+
+        return relasiPenjualans;
     }
 
     @Override
     public Detail_transaksi getData(Detail_transaksi id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public ObservableList<Detail_transaksi> showData(String value) {
+        ObservableList<Detail_transaksi> relasiPenjualans = FXCollections.
+                observableArrayList();
+        try {
+            try (Connection connection = Koneksi.createConnection()) {
+                String query
+                        = "SELECT t.tgl_Transaksi, t.kd_Transaksi, b.kd_Barang, dt.jml, dt.saling_price,u.kd_User FROM detail_transaksi dt JOIN transaksi t ON dt.transaksi_kd_Transaksi = t.kd_Transaksi JOIN User u ON t.user_kd_User = u.kd_User JOIN Barang b ON b.kd_Barang = dt.barang_kd_Barang";
+
+                PreparedStatement ps = connection.prepareStatement(query);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    Detail_transaksi detail_transaksi = new Detail_transaksi();
+                    Transaksi transaksi1 = new Transaksi();
+                    User user = new User();
+                    Barang barang = new Barang();
+
+                    transaksi1.setKd_Transaksi(rs.getInt("t.kd_Transaksi"));
+                    user.setKd_User(rs.getInt("u.kd_User"));
+                    barang.setKd_Barang(rs.getInt("b.kd_Barang"));
+                    detail_transaksi.setJml(rs.getInt("dt.jml"));
+                    detail_transaksi.setSaling_price(rs.
+                            getInt("dt.saling_price"));
+
+                    detail_transaksi.setBarang_kd_Barang(barang);
+                    transaksi1.setUser_Kd_User(user);
+                    detail_transaksi.setTransaksi_kd_Transaksi(transaksi1);
+                    relasiPenjualans.add(detail_transaksi);
+
+                }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(BarangDaoImpl.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+
+        return relasiPenjualans;
     }
 
 }

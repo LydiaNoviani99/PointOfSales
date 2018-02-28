@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 
 /**
  *
- * @author USER
+ * @author Lydia (1672014)
  */
 public class Utility {
 

@@ -16,6 +16,7 @@ import com.lydia.entity.User;
 import com.lydia.utility.Koneksi;
 import com.lydia.utility.Utility;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -203,6 +204,11 @@ public class I_TransaksiController implements Initializable {
                 if (Integer.valueOf(txtPembayaran.getText()) >= Integer.valueOf(
                         txtTotalBelanja.getText())) {
 
+                    Timestamp t = new Timestamp(System.currentTimeMillis());
+
+                    Transaksi transaksi = new Transaksi();
+
+//                    transaksi.setTgl_Transaksi(String.valueOf(t));
                     getTransaksi().setKd_Transaksi(Integer.valueOf(
                             txtNoTransaksi.
                                     getText().trim()));
@@ -340,6 +346,27 @@ public class I_TransaksiController implements Initializable {
 
     }
 
+    @FXML
+    private void btnHapusCartOnAction(ActionEvent event) {
+        if (selectedCart != null) {
+            carts.remove(selectedCart);
+            getTransaksi().setPembayaran(0);
+            for (Carts c : carts) {
+
+                getTransaksi().setPembayaran(getTransaksi().getPembayaran()
+                        + c.getJumlah() * c.getSaling_Price());
+            }
+            txtTotalBelanja.setText(String.valueOf(getTransaksi().
+                    getPembayaran()));
+
+            btnHapusCart.setDisable(true);
+
+            selectedCart = null;
+
+        }
+
+    }
+
     private ObservableList<Barang> barangs;
     private BarangDaoImpl barangDao;
 
@@ -361,12 +388,21 @@ public class I_TransaksiController implements Initializable {
     private ObservableList<Transaksi> transaksis;
     private TransaksiDaoImpl transaksiDao;
 
+    public ObservableList<Transaksi> getTransaksis() {
+        if (transaksis == null) {
+            transaksis = FXCollections.observableArrayList();
+            transaksis.addAll(getTransaksiDao().showAllData());
+        }
+        return transaksis;
+    }
+
     public TransaksiDaoImpl getTransaksiDao() {
         if (transaksiDao == null) {
             transaksiDao = new TransaksiDaoImpl();
         }
         return transaksiDao;
     }
+
     private Detail_transaksiDaoImpl detail_transaksiDaoImpl;
 
     public Detail_transaksiDaoImpl getDetail_transaksiDao() {
@@ -374,14 +410,6 @@ public class I_TransaksiController implements Initializable {
             detail_transaksiDaoImpl = new Detail_transaksiDaoImpl();
         }
         return detail_transaksiDaoImpl;
-    }
-
-    public ObservableList<Transaksi> getTransaksis() {
-        if (transaksis == null) {
-            transaksis = FXCollections.observableArrayList();
-            transaksis.addAll(getTransaksiDao().showAllData());
-        }
-        return transaksis;
     }
 
     private Transaksi transaksi;
@@ -401,27 +429,6 @@ public class I_TransaksiController implements Initializable {
             carts = FXCollections.observableArrayList();
         }
         return carts;
-    }
-
-    @FXML
-    private void btnHapusCartOnAction(ActionEvent event) {
-        if (selectedCart != null) {
-            carts.remove(selectedCart);
-            getTransaksi().setPembayaran(0);
-            for (Carts c : carts) {
-
-                getTransaksi().setPembayaran(getTransaksi().getPembayaran()
-                        + c.getJumlah() * c.getSaling_Price());
-            }
-            txtTotalBelanja.setText(String.valueOf(getTransaksi().
-                    getPembayaran()));
-
-            btnHapusCart.setDisable(true);
-
-            selectedCart = null;
-
-        }
-
     }
 
     public Carts selectedCart;
