@@ -13,15 +13,20 @@ import com.lydia.entity.Carts;
 import com.lydia.entity.Detail_transaksi;
 import com.lydia.entity.Transaksi;
 import com.lydia.entity.User;
+import com.lydia.utility.Koneksi;
 import com.lydia.utility.Utility;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,6 +38,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  * FXML Controller class
@@ -47,6 +56,8 @@ public class I_TransaksiController implements Initializable {
     private Button btnSubmit;
     @FXML
     private Button btnCancelCart;
+    @FXML
+    private Button btnHapusCart;
 
     @FXML
     private TableView<Carts> tableTransaksi;
@@ -86,8 +97,6 @@ public class I_TransaksiController implements Initializable {
      * Initializes the controller class.
      */
     private I_HomeController i_homeController;
-    @FXML
-    private Button btnHapusCart;
 
     public void setHomeController(
             I_HomeController i_homeController) {
@@ -134,14 +143,7 @@ public class I_TransaksiController implements Initializable {
                         getSaling_Price() * param.getValue().getJumlah())));
 
         txtTglTransaksi.setText(dateFormat.format(date));
-//        txtIdKasir.setText(i_homeController.getSelectedUser().
-//                getKd_User());
-
-//        txtNamaKasir.setText(i_homeController.getSelectedUser().getNm_User());
         txtNoTransaksi.setText("");
-//        txtTotalBelanja.setText(Integer.valueOf());
-//        txtKembalian.setText(Integer.valueOf());
-
         btnHapusCart.setDisable(true);
     }
 
@@ -182,6 +184,9 @@ public class I_TransaksiController implements Initializable {
                 txtTotalBelanja.setText(String.valueOf(getTransaksi().
                         getPembayaran()));
 
+                txtJumlah.setText("");
+                comboListBarang.setValue(null);
+
             }
 
         } else {
@@ -202,7 +207,7 @@ public class I_TransaksiController implements Initializable {
                             txtNoTransaksi.
                                     getText().trim()));
                     getTransaksi().setPembayaran(Integer.valueOf(
-                            txtTotalBelanja.getText().trim()));
+                            txtPembayaran.getText().trim()));
                     getTransaksi().setUser_Kd_User(new User(
                             txtIdKasir.getText().
                                     trim()));
@@ -232,6 +237,37 @@ public class I_TransaksiController implements Initializable {
                             txtPembayaran.getText()) - Utility.StoI(
                             txtTotalBelanja.getText())),
                             Alert.AlertType.INFORMATION);
+
+                    System.out.println("haha" + txtTotalBelanja.getText());
+                    int duitmasuk = Integer.valueOf(txtTotalBelanja.getText());
+                    int kembalian = (Utility.StoI(
+                            txtPembayaran.getText()) - Utility.StoI(
+                            txtTotalBelanja.getText()));
+
+                    Task<Void> task = new Task<Void>() {
+                        @Override
+                        protected Void call() throws Exception {
+                            try {
+                                HashMap parameters = new HashMap();
+                                parameters.put("duitMasuk", duitmasuk);
+                                parameters.put("kembalian", kembalian);
+                                JasperPrint jasperPrint = JasperFillManager.
+                                        fillReport(
+                                                "report/report_kuitansi.jasper",
+                                                parameters, Koneksi.
+                                                        createConnection());
+                                JasperViewer jasperViewer = new JasperViewer(
+                                        jasperPrint, false);
+                                jasperViewer.setVisible(true);
+                            } catch (JRException ex) {
+                                System.out.println(ex);
+                            }
+                            return null;
+                        }
+                    };
+                    ExecutorService service = Executors.newCachedThreadPool();
+                    service.execute(task);
+                    service.shutdown();
 
                     setTransaksi(null);
 

@@ -115,7 +115,15 @@
                         <TextField fx:id="txtJumlah" prefHeight="25.0" prefWidth="272.0" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                     <children>
+                        <Button fx:id="btnAddToCart" mnemonicParsing="false" onAction="#btnAddToCartOnAction" prefHeight="25.0" prefWidth="90.0" text="Add To Cart" />
+                        <Button fx:id="btnHapusCart" mnemonicParsing="false" onAction="#btnHapusCartOnAction" prefHeight="25.0" prefWidth="81.0" text="Hapus">
+                           <HBox.margin>
+                              <Insets left="100.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children></HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
@@ -151,7 +159,7 @@
                      </opaqueInsets>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                  <HBox alignment="CENTER" prefHeight="54.0" prefWidth="297.0" GridPane.columnIndex="3" GridPane.rowIndex="7">
                      <children>
                         <GridPane>
                           <columnConstraints>
@@ -163,24 +171,31 @@
                           </rowConstraints>
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <Button fx:id="btnAddToCart" mnemonicParsing="false" onAction="#btnAddToCartOnAction" prefHeight="25.0" prefWidth="90.0" text="Add To Cart" />
-                                 </children>
                                  <GridPane.margin>
-                                    <Insets top="10.0" />
+                                    <Insets />
                                  </GridPane.margin>
+                                 <children>
+                                    <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#btnSubmitOnAction" prefHeight="25.0" prefWidth="90.0" text="Submit">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
-                                 <children>
-                                    <Button fx:id="btnHapusCart" mnemonicParsing="false" onAction="#btnHapusCartOnAction" prefHeight="25.0" prefWidth="81.0" text="Hapus" />
-                                 </children>
                                  <GridPane.margin>
-                                    <Insets top="10.0" />
+                                    <Insets />
                                  </GridPane.margin>
+                                 <children>
+                                    <Button fx:id="btnCancelCart" mnemonicParsing="false" onAction="#btnCancelCartOnAction" prefHeight="25.0" prefWidth="81.0" text="Cancel" />
+                                 </children>
                               </HBox>
                            </children>
                         </GridPane>
                      </children>
+                     <GridPane.margin>
+                        <Insets top="20.0" />
+                     </GridPane.margin>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="6">
                      <children>
@@ -217,20 +232,7 @@
                         <TextField fx:id="txtTglTransaksi" disable="true" prefHeight="25.0" prefWidth="272.0" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="488.0" layoutY="411.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="8">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#btnSubmitOnAction" prefHeight="25.0" prefWidth="90.0" text="Submit">
-                                 <HBox.margin>
-                                    <Insets top="20.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button fx:id="btnCancelCart" mnemonicParsing="false" onAction="#btnCancelCartOnAction" prefHeight="25.0" prefWidth="81.0" text="Cancel" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </HBox>
+                  <HBox alignment="CENTER" layoutX="488.0" layoutY="411.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                      <children>
                         <Label text="Id Kasir">

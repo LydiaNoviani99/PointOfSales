@@ -23,4 +23,8 @@ public class Koneksi {
         connection.setAutoCommit(false);
         return connection;
     }
+
+    public static Connection createMySQLConnection() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

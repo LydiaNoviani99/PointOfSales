@@ -154,7 +154,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                  <children>
-                                    <TextField fx:id="txtPasswordAccess" prefHeight="25.0" prefWidth="250.0" />
+                                    <PasswordField fx:id="txtPasswordAccess" prefHeight="25.0" prefWidth="250.0" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
@@ -191,7 +191,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="301.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                  <children>
-                                    <TextField fx:id="txtVerifyPassword" prefHeight="25.0" prefWidth="250.0" />
+                                    <PasswordField fx:id="txtVerifyPassword" prefHeight="25.0" prefWidth="250.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" layoutX="113.0" layoutY="316.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">

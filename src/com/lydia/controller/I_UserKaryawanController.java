@@ -93,9 +93,6 @@ public class I_UserKaryawanController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        colKd_Barang.
-//                setCellValueFactory(data -> data.getValue().
-//                kd_BarangProperty().asObject());
         colNm_User.
                 setCellValueFactory(data -> data.getValue().
                 nm_UserProperty());
@@ -127,7 +124,6 @@ public class I_UserKaryawanController implements Initializable {
                     txtAlamat, txtNoHp, txtUsernameAccess, txtPasswordAccess,
                     txtVerifyPassword) && comboJabatanUser.getValue() != null) {
                 User user = new User();
-                Role role = new Role();
                 user.setNm_User(txtNamaUser.getText().trim());
                 if (radioPria.isSelected()) {
                     user.setJenis_kelamin("Pria");
@@ -139,6 +135,8 @@ public class I_UserKaryawanController implements Initializable {
                 user.setNo_Hp(txtNoHp.getText().trim());
                 user.setUsername_access(txtUsernameAccess.getText().trim());
                 user.setPassword_access(txtPasswordAccess.getText().trim());
+
+                Role role = new Role();
                 role.setId_Role(comboJabatanUser.getValue().getId_Role());
                 role.setKet_Role(comboJabatanUser.getValue().
                         getKet_Role());
@@ -209,7 +207,6 @@ public class I_UserKaryawanController implements Initializable {
 
                         tableUser.refresh();
 
-//                    tableBarang.getSortOrder().add(colKd_Barang);
                         //mengkosongkan teks field setelah isi data
                         txtNamaUser.clear();
                         txtAgama.clear();
@@ -255,10 +252,6 @@ public class I_UserKaryawanController implements Initializable {
             selectedUser.setNo_Hp(txtNoHp.getText().trim());
             selectedUser.setUsername_access(txtUsernameAccess.getText().trim());
             selectedUser.setPassword_access(txtPasswordAccess.getText().trim());
-//                user.setVerifyPassword(txtVerifyPassword.getText().trim());
-//            role.setId_Role(comboJabatanUser.getValue().getId_Role());
-//            role.setKet_Role(comboJabatanUser.getValue().
-//                    getKet_Role());
             selectedUser.setRole_Id_Role(comboJabatanUser.getValue());
 
             if (i_homeController.getUserDao().deleteData(selectedUser) == 1) {

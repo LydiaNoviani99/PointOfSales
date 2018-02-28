@@ -14,6 +14,7 @@ import com.lydia.entity.Barang;
 import com.lydia.entity.Kategori;
 import com.lydia.entity.Role;
 import com.lydia.entity.User;
+import com.lydia.utility.Utility;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -84,8 +85,11 @@ public class I_HomeController implements Initializable {
     private Stage barangStage;
     private Stage userStage;
     private Stage transaksiStage;
+    private Stage laporanStage;
 
     private I_LoginController i_LoginController;
+    @FXML
+    private MenuItem menuAboutMe;
 
     /**
      * 11 Initializes the controller class.
@@ -230,14 +234,39 @@ public class I_HomeController implements Initializable {
 
     @FXML
     private void menuLaporanPenjualanOnAction(ActionEvent event) {
+        try {
+            laporanStage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            loader.
+                    setLocation(MainApp.class.
+                            getResource("view/i_Laporan.fxml"));
+            BorderPane borderPane = loader.load();
+            Scene scene = new Scene(borderPane);
+            I_LaporanController i_LaporanController = loader.getController();
+            System.out.println(this);
+            laporanStage.initOwner(bpHome.getScene().getWindow());
+            laporanStage.initModality(Modality.WINDOW_MODAL);
+
+            laporanStage.setScene(scene);
+            laporanStage.showAndWait();
+
+        } catch (IOException ex) {
+            Logger.getLogger(I_LoginController.class.getName()).log(
+                    Level.SEVERE, null, ex);
+        }
+
     }
 
     //ABOUT
     @FXML
     private void menuAboutOnAction(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Lydia - 1672014");
-        alert.show();
+    }
+
+    @FXML
+    private void menuAboutMeOnAction(ActionEvent event) {
+
+        Utility.showAlert("About", "Lydia - 1672014",
+                Alert.AlertType.INFORMATION);
     }
 
     public void setLoginController(I_LoginController aThis, User user) {

@@ -82,9 +82,6 @@ public class I_BarangController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        colKd_Barang.
-//                setCellValueFactory(data -> data.getValue().
-//                kd_BarangProperty().asObject());
         colNm_Barang.
                 setCellValueFactory(data -> data.getValue().nm_BarangProperty());
         colHrg_Beli.
@@ -113,7 +110,6 @@ public class I_BarangController implements Initializable {
             if (!utility.isEmptyField(txtNamaBarang, txtHargaBeli,
                     txtHargaJual, txtStock)) {
                 Barang barang = new Barang();
-                Kategori kategori = new Kategori();
                 barang.setNm_Barang(txtNamaBarang.getText().trim());
                 barang.setHrg_Beli(Integer.
                         valueOf(txtHargaBeli.getText().trim()));
@@ -121,6 +117,9 @@ public class I_BarangController implements Initializable {
                         valueOf(txtHargaJual.getText().trim()));
                 barang.setStock(Integer.
                         valueOf(txtStock.getText().trim()));
+//                System.out.println(barang.getStock());
+
+                Kategori kategori = new Kategori();
                 kategori.setId_Kategori(comboKategoriBarang.getValue().
                         getId_Kategori());
                 kategori.setKet_Kategori(comboKategoriBarang.getValue().
@@ -189,22 +188,25 @@ public class I_BarangController implements Initializable {
         Utility utility = new Utility();
         if (!utility.isEmptyField(txtNamaBarang, txtHargaBeli,
                 txtHargaJual, txtStock)) {
-            Barang barang = new Barang();
-            Kategori kategori = new Kategori();
-            barang.setKd_Barang(selectedBarang.getKd_Barang());
-            barang.setNm_Barang(txtNamaBarang.getText().trim());
-            barang.setHrg_Beli(Integer.
+//            Barang barang = new Barang();
+//            Kategori kategori = new Kategori();
+            selectedBarang.setKd_Barang(selectedBarang.getKd_Barang());
+            selectedBarang.setNm_Barang(txtNamaBarang.getText().trim());
+            selectedBarang.setHrg_Beli(Integer.
                     valueOf(txtHargaBeli.getText().trim()));
-            barang.setHrg_Jual(Integer.
+            selectedBarang.setHrg_Jual(Integer.
                     valueOf(txtHargaJual.getText().trim()));
-            barang.setStock(Integer.
+            selectedBarang.setStock(Integer.
                     valueOf(txtStock.getText().trim()));
-            kategori.setId_Kategori(comboKategoriBarang.getValue().
-                    getId_Kategori());
-            kategori.setKet_Kategori(comboKategoriBarang.getValue().
-                    getKet_Kategori());
-            barang.setKategori_Id_Kategori(kategori);
-            if (i_homeController.getBarangDao().deleteData(barang) == 1) {
+
+            selectedBarang.setKategori_Id_Kategori(comboKategoriBarang.
+                    getValue());
+//            kategori.setId_Kategori(comboKategoriBarang.getValue().
+//                    getId_Kategori());
+//            kategori.setKet_Kategori(comboKategoriBarang.getValue().
+//                    getKet_Kategori());
+//            barang.setKategori_Id_Kategori(kategori);
+            if (i_homeController.getBarangDao().deleteData(selectedBarang) == 1) {
                 i_homeController.getBarangs().clear();;
                 i_homeController.getBarangs().addAll(i_homeController.
                         getBarangDao().showAllData());

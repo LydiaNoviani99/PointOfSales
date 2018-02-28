@@ -5,6 +5,7 @@
  */
 package com.lydia.entity;
 
+import java.util.Date;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -15,6 +16,21 @@ import javafx.beans.property.SimpleObjectProperty;
  * @author Lydia (1672014)
  */
 public class Detail_transaksi {
+
+    private final ObjectProperty<Date> tgl_Transaksi
+            = new SimpleObjectProperty<>();
+
+    public Date getTgl_Transaksi() {
+        return tgl_Transaksi.get();
+    }
+
+    public void setTgl_Transaksi(Date value) {
+        tgl_Transaksi.set(value);
+    }
+
+    public ObjectProperty tgl_TransaksiProperty() {
+        return tgl_Transaksi;
+    }
 
     private final ObjectProperty<Transaksi> transaksi_kd_Transaksi
             = new SimpleObjectProperty<>();
