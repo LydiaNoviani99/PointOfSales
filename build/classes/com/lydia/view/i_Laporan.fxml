@@ -37,7 +37,7 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <DatePicker fx:id="dpDari" />
+                              <ComboBox prefWidth="150.0" />
                            </children>
                         </HBox>
                      </children>
@@ -55,13 +55,13 @@
                      <children>
                         <TableView fx:id="tableLaporanPenjualan" prefHeight="236.0" prefWidth="750.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Tgl" />
-                            <TableColumn prefWidth="75.0" text="No_Transaksi" />
-                              <TableColumn prefWidth="75.0" text="Kd_Barang" />
-                              <TableColumn prefWidth="75.0" text="Nm_Barang" />
-                              <TableColumn prefWidth="75.0" text="Harga" />
-                              <TableColumn prefWidth="75.0" text="JmlTerjual" />
-                              <TableColumn prefWidth="75.0" text="Total" />
+                            <TableColumn fx:id="colTglLaporan" prefWidth="75.0" text="Tgl" />
+                            <TableColumn fx:id="colNoTransaksiLaporan" prefWidth="75.0" text="No_Transaksi" />
+                              <TableColumn fx:id="colKdBarangLaporan" prefWidth="75.0" text="Kd_Barang" />
+                              <TableColumn fx:id="colNmBarangLaporan" prefWidth="75.0" text="Nm_Barang" />
+                              <TableColumn fx:id="colHargaLaporan" prefWidth="75.0" text="Harga" />
+                              <TableColumn fx:id="colJmlTerjualLaporan" prefWidth="75.0" text="JmlTerjual" />
+                              <TableColumn fx:id="colTotalLaporan" prefWidth="75.0" text="Total" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -76,13 +76,10 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                            <columns>
-                              <TableColumn prefWidth="75.0" text="Tgl" />
-                              <TableColumn prefWidth="75.0" text="No_Transaksi" />
-                              <TableColumn prefWidth="75.0" text="Kd_Barang" />
-                              <TableColumn prefWidth="75.0" text="Nm_Barang" />
-                              <TableColumn prefWidth="75.0" text="Harga" />
-                              <TableColumn prefWidth="75.0" text="JmlTerjual" />
-                              <TableColumn prefWidth="75.0" text="Total" />
+                              <TableColumn fx:id="colKdBarangTertinggi" prefWidth="75.0" text="Kd_Barang" />
+                              <TableColumn fx:id="colNmBarangTertingi" prefWidth="75.0" text="Nm_Barang" />
+                              <TableColumn fx:id="colJmlTerjualTertinggi" prefWidth="75.0" text="JmlTerjual" />
+                              <TableColumn fx:id="colTotalTertinggi" prefWidth="75.0" text="Total" />
                            </columns>
                         </TableView>
                      </children>
@@ -97,7 +94,9 @@
                      </children>
                   </HBox>
                   <Button mnemonicParsing="false" onAction="#btnBackAction" text="Back" GridPane.columnIndex="4" />
-                  <DatePicker fx:id="dpSampai" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <DatePicker fx:id="dpSampai" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Button fx:id="btnLapor" mnemonicParsing="false" onAction="#btnLaporOnAction" text="Lapor" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <DatePicker fx:id="dpDari" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children>

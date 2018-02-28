@@ -9,10 +9,12 @@ import com.lydia.entity.Detail_transaksi;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -52,25 +54,29 @@ public class I_LaporanController implements Initializable {
     @FXML
     private TableColumn<Detail_transaksi, String> colTotalLaporan;
     @FXML
-    private TableColumn<Detail_transaksi, String> colTglTertinggi;
-    @FXML
-    private TableColumn<Detail_transaksi, String> colNoTransaksiTertinggi;
-    @FXML
     private TableColumn<Detail_transaksi, String> colKdBarangTertinggi;
     @FXML
     private TableColumn<Detail_transaksi, String> colNmBarangTertingi;
     @FXML
-    private TableColumn<Detail_transaksi, String> colHargaTertinggi;
-    @FXML
     private TableColumn<Detail_transaksi, String> colJmlTerjualTertinggi;
     @FXML
     private TableColumn<Detail_transaksi, String> colTotalTertinggi;
+    @FXML
+    private ComboBox<?> cbYear;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        cmboSortBy.setItems(getYears());
+        relasiDao = new RelasiBarangNotaPenjualanDaoImpl();
+        notaPenjualans = FXCollections.observableArrayList();
+        notaPenjualans = relasiDao.showAllData();
+
+        tblePenjualan.setItems(getNotaPenjualans());
+
         colTglLaporan.setCellValueFactory((
                 TableColumn.CellDataFeatures<Detail_transaksi, String> param)
                 -> new SimpleStringProperty(String.valueOf(param.
@@ -104,11 +110,11 @@ public class I_LaporanController implements Initializable {
                         -> new SimpleStringProperty(String.valueOf(param.
                         getValue().getJml())));
 
-        colTotalLaporan.
-                setCellValueFactory((
-                        TableColumn.CellDataFeatures<Detail_transaksi, String> param)
-                        -> new SimpleStringProperty(String.valueOf(param.
-                        getValue().getBarang_kd_Barang())));
+//        colTotalLaporan.
+//                setCellValueFactory((
+//                        TableColumn.CellDataFeatures<Detail_transaksi, String> param)
+//                        -> new SimpleStringProperty(String.valueOf(param.
+//                        getValue().get())));
     }
 
     @FXML
