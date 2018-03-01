@@ -228,6 +228,7 @@ public class I_TransaksiController implements Initializable {
                                 getTransaksi());
                         detail_transaksi.setBarang_kd_Barang(new Barang(cart.
                                 getKd_Barang()));
+
                         detail_transaksi.setJml(cart.getJumlah());
                         detail_transaksi.setSaling_price(cart.getSaling_Price());
 

@@ -76,7 +76,7 @@ public class Detail_transaksiDaoImpl implements
         try {
             try (Connection connection = Koneksi.createConnection()) {
                 String query
-                        = "SELECT t.tgl_Transaksi, t.kd_Transaksi, b.kd_Barang, dt.jml, dt.saling_price,u.kd_User FROM detail_transaksi dt JOIN transaksi t ON dt.transaksi_kd_Transaksi = t.kd_Transaksi JOIN User u ON t.user_kd_User = u.kd_User JOIN Barang b ON b.kd_Barang = dt.barang_kd_Barang";
+                        = "SELECT t.tgl_Transaksi, t.kd_Transaksi, b.kd_Barang, b.nm_Barang, dt.jml, dt.saling_price,u.kd_User FROM detail_transaksi dt JOIN transaksi t ON dt.transaksi_kd_Transaksi = t.kd_Transaksi JOIN User u ON t.user_kd_User = u.kd_User JOIN Barang b ON b.kd_Barang = dt.barang_kd_Barang";
 
                 PreparedStatement ps = connection.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
@@ -89,9 +89,14 @@ public class Detail_transaksiDaoImpl implements
                     transaksi1.setKd_Transaksi(rs.getInt("t.kd_Transaksi"));
                     user.setKd_User(rs.getInt("u.kd_User"));
                     barang.setKd_Barang(rs.getInt("b.kd_Barang"));
+                    barang.setNm_Barang(rs.getString("b.nm_Barang"));
+
                     detail_transaksi.setJml(rs.getInt("dt.jml"));
                     detail_transaksi.setSaling_price(rs.
                             getInt("dt.saling_price"));
+
+                    detail_transaksi.setTgl_Transaksi(rs.getTimestamp(
+                            "t.tgl_Transaksi"));
 
                     detail_transaksi.setBarang_kd_Barang(barang);
                     transaksi1.setUser_Kd_User(user);

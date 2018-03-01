@@ -10,14 +10,15 @@ import com.lydia.dao.Detail_transaksiDaoImpl;
 import com.lydia.entity.Barang;
 import com.lydia.entity.Detail_transaksi;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -40,11 +41,9 @@ public class I_LaporanController implements Initializable {
     @FXML
     private TableView<Detail_transaksi> tableLaporanPenjualan;
     @FXML
-    private TableColumn<Detail_transaksi, String> colTglLaporan;
+    private TableColumn<Detail_transaksi, Date> colTglLaporan;
     @FXML
     private TableColumn<Detail_transaksi, String> colNoTransaksiLaporan;
-    @FXML
-    private TableColumn<Detail_transaksi, String> colKdUser;
     @FXML
     private TableColumn<Detail_transaksi, String> colKdBarangLaporan;
     private TableColumn<Detail_transaksi, String> colNmBarangLaporan;
@@ -134,9 +133,10 @@ public class I_LaporanController implements Initializable {
         tableLaporanPenjualan.setItems(getNotaPenjualans());
 
         colTglLaporan.setCellValueFactory((
-                TableColumn.CellDataFeatures<Detail_transaksi, String> param)
-                -> new SimpleStringProperty(String.valueOf(param.
-                        getValue().getTgl_Transaksi())));
+                TableColumn.CellDataFeatures<Detail_transaksi, Date> param)
+                -> new SimpleObjectProperty<Date>(param.
+                        getValue().
+                        getTgl_Transaksi()));
 
         colNoTransaksiLaporan.setCellValueFactory((
                 TableColumn.CellDataFeatures<Detail_transaksi, String> param)
@@ -146,8 +146,7 @@ public class I_LaporanController implements Initializable {
                 setCellValueFactory((
                         TableColumn.CellDataFeatures<Detail_transaksi, String> param)
                         -> new SimpleStringProperty(String.valueOf(param.
-                        getValue().getBarang_kd_Barang()) + param.getValue().
-                                getBarang_kd_Barang().getNm_Barang()));
+                        getValue().getBarang_kd_Barang())));
 
         colHargaLaporan.
                 setCellValueFactory((
@@ -167,7 +166,7 @@ public class I_LaporanController implements Initializable {
                         getSaling_price() * param.getValue().getJml())));
 
         //
-        tableLaporanPenjualanTertinggi.setItems(barangs);
+//        tableLaporanPenjualanTertinggi.setItems(barangs);
         colKdBarangTertinggi.setCellValueFactory((
                 TableColumn.CellDataFeatures<Detail_transaksi, String> param)
                 -> new SimpleStringProperty(String.valueOf(param.
@@ -210,23 +209,23 @@ public class I_LaporanController implements Initializable {
 
     @FXML
     private void btnLihatLaporanTertinggiOnAction(ActionEvent event) {
-        if (dpDari.getValue().isBefore(dpSampai.getValue())) {
-            if (barangs != null) {
-                barangs.clear();
-                barangs.addAll(getBarangDao().showTopData(dpDari.getValue().
-                        toString(), dpSampai.getValue().toString()));
-            } else {
-                getBarang(dpDari.getValue().
-                        toString(),
-                        dpSampai.getValue().toString());
-                tableLaporanPenjualanTertinggi.refresh();
-                tableLaporanPenjualanTertinggi.setItems(barangs);
-            }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Date Range you entered is invalid");
-            alert.showAndWait();
-        }
+//        if (dpDari.getValue().isBefore(dpSampai.getValue())) {
+//            if (barangs != null) {
+//                barangs.clear();
+//                barangs.addAll(getBarangDao().showTopData(dpDari.getValue().
+//                        toString(), dpSampai.getValue().toString()));
+//            } else {
+//                getBarang(dpDari.getValue().
+//                        toString(),
+//                        dpSampai.getValue().toString());
+//                tableLaporanPenjualanTertinggi.refresh();
+//                tableLaporanPenjualanTertinggi.setItems(barangs);
+//            }
+//        } else {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setContentText("Date Range you entered is invalid");
+//            alert.showAndWait();
+//        }
     }
 
     private BarangDaoImpl barangDao;

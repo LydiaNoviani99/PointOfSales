@@ -63,7 +63,6 @@
                           <columns>
                             <TableColumn fx:id="colTglLaporan" prefWidth="75.0" text="Tgl" />
                             <TableColumn fx:id="colNoTransaksiLaporan" prefWidth="75.0" text="No_Transaksi" />
-                              <TableColumn fx:id="colKdUser" prefWidth="75.0" text="Kd_User" />
                               <TableColumn fx:id="colKdBarangLaporan" prefWidth="75.0" text="Barang" />
                               <TableColumn fx:id="colHargaLaporan" prefWidth="75.0" text="Harga" />
                               <TableColumn fx:id="colJmlTerjualLaporan" prefWidth="75.0" text="JmlTerjual" />
