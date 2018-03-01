@@ -19,6 +19,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -204,28 +205,26 @@ public class I_LaporanController implements Initializable {
     }
 
     @FXML
-    private void btnBackAction(ActionEvent event) {
-    }
-
-    @FXML
     private void btnLihatLaporanTertinggiOnAction(ActionEvent event) {
-//        if (dpDari.getValue().isBefore(dpSampai.getValue())) {
-//            if (barangs != null) {
-//                barangs.clear();
-//                barangs.addAll(getBarangDao().showTopData(dpDari.getValue().
-//                        toString(), dpSampai.getValue().toString()));
-//            } else {
-//                getBarang(dpDari.getValue().
-//                        toString(),
-//                        dpSampai.getValue().toString());
-//                tableLaporanPenjualanTertinggi.refresh();
-//                tableLaporanPenjualanTertinggi.setItems(barangs);
-//            }
-//        } else {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setContentText("Date Range you entered is invalid");
-//            alert.showAndWait();
-//        }
+if (dpDari.getValue().isBefore(dpSampai.getValue())) {
+            if (barangs != null) {
+                barangs.clear();
+                barangs.addAll(getBarangDao().showTopData(dpDari.getValue().
+                        toString(), dpSampai.getValue().toString()));
+            } else {
+                getBarang(dpDari.getValue().
+                        toString(),
+                        dpSampai.getValue().toString());
+                tableLaporanPenjualanTertinggi.refresh();
+                tableLaporanPenjualanTertinggi.setItems(notaPenjualans);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Data yang dimasukkan tidak valid");
+            alert.showAndWait();
+}
+        
+        
     }
 
     private BarangDaoImpl barangDao;
@@ -238,12 +237,12 @@ public class I_LaporanController implements Initializable {
         return barangDao;
     }
 
-    public ObservableList<Barang> getBarang(String dari, String sampai) {
+    public ObservableList<Barang> getBarang(String dari, String selesai) {
         if (barangs == null) {
             barangs = FXCollections.observableArrayList();
-            barangs.addAll(getBarangDao().showTopData(dari, sampai));
+            barangs.addAll(getBarangDao().showTopData(dari, selesai));
         }
         return barangs;
-    }
+}
 
 }

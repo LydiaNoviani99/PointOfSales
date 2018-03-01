@@ -89,7 +89,7 @@
                         </TableView>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="4">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="5">
                      <children>
                         <Label text="Laporan Penjualan">
                            <font>
@@ -98,7 +98,6 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" onAction="#btnBackAction" text="Back" GridPane.columnIndex="4" />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="5" GridPane.rowIndex="4">
                      <children>
                         <Label prefHeight="17.0" prefWidth="34.0" text="Dari : " />
